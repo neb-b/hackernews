@@ -18,7 +18,12 @@ const Story = (props) => {
 
 const styles = StyleSheet.create({
   story: {
-    padding: 20
+    paddingTop: 20,
+    paddingBottom: 20,
+    marginLeft: 5,
+    marginRight: 5,
+    borderBottomWidth: 1,
+    borderColor: '#fff'
   },
   title: {
     color: '#f2f2f2',
