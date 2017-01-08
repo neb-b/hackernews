@@ -11,10 +11,10 @@ import ListOfStories from './list-of-stories'
 
 const Stories = ({ loading, stories, loadStories }) => {
   return (
-    <View style={loading ? styles.loading : ''}>
+    <View>
       {
         loading
-        ? <ActivityIndicator/>
+        ? <ActivityIndicator style={styles.spinner}/>
         : <ListOfStories loadStories={loadStories} stories={stories} />
       }
     </View>
@@ -22,10 +22,8 @@ const Stories = ({ loading, stories, loadStories }) => {
 }
 
 const styles = StyleSheet.create({
-  loading: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center'
+  spinner: {
+    paddingTop: 50
   }
 })
 

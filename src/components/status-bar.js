@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   statusBar: {
     height: 65,
     paddingTop: 25,
-    paddingLeft: 5,
+    paddingLeft: 7,
     backgroundColor: '#ff6600'
   },
   title: {
