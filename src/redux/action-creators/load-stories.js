@@ -22,7 +22,7 @@ export function loadStories () {
   return (dispatch) => {
     dispatch(onLoadStoriesRequest())
 
-    fetch(`${ROOT_URL}/beststories.json`)
+    fetch(`${ROOT_URL}/topstories.json`)
       .then((res) => res.json())
       .then((storiesIds) => {
         getStories(storiesIds)
