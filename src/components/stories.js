@@ -9,13 +9,19 @@ import {
 } from 'react-native'
 import ListOfStories from './list-of-stories'
 
-const Stories = ({ loading, stories, loadStories }) => {
+const Stories = (props) => {
+  const { loading, stories, loadStories, refreshing, refreshStories } = props
   return (
     <View>
       {
         loading
-        ? <ActivityIndicator style={styles.spinner} color='#f2f2f2'/>
-        : <ListOfStories loadStories={loadStories} stories={stories} />
+        ? <ActivityIndicator style={styles.spinner} color='#66a3b4'/>
+        : <ListOfStories
+            loadStories={loadStories}
+            stories={stories}
+            refreshing={refreshing}
+            loading={loading}
+            refreshStories={refreshStories}/>
       }
     </View>
   )

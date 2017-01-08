@@ -6,6 +6,7 @@ import {
   StyleSheet
 } from 'react-native'
 import { loadStories } from './redux/action-creators/load-stories'
+import { refreshStories } from './redux/action-creators/refresh-stories'
 import Layout from './layout'
 import StatusBar from './components/status-bar'
 
@@ -19,14 +20,14 @@ class App extends Component {
   }
 
   render() {
-    const { error, loading, stories } = this.props
+    const { error } = this.props
     return (
       <View style={styles.container}>
         {
           <StatusBar />
         }
         {error && <Text>There was an error</Text>}
-        <Layout loading={loading} stories={stories} loadStories={loadStories} />
+        <Layout {...this.props} />
       </View>
     )
   }
@@ -42,4 +43,4 @@ const mapStateToProps = (s) => {
   return {...s.stories}
 }
 
-export default connect(mapStateToProps, { loadStories })(App)
+export default connect(mapStateToProps, { loadStories, refreshStories })(App)

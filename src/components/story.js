@@ -8,7 +8,6 @@ import moment from 'moment'
 
 const Story = (props) => {
   const { title, time, score, kids } = props
-  console.log('props', props);
   return (
     <View style={styles.story}>
       <Text style={styles.title}>{title}</Text>
@@ -18,7 +17,7 @@ const Story = (props) => {
           <Text style={styles.score}>{score} points</Text>
         </View>
         <View style={styles.subRight}>
-          <Text style={styles.comments}>{kids.length} comments</Text>
+          <Text style={styles.comments}>{kids && kids.length || 0} comments</Text>
         </View>
       </View>
     </View>
@@ -57,7 +56,6 @@ const styles = StyleSheet.create({
   },
   comments: {
     padding: 15,
-    fontWeight: '700',
     color: '#f2f2f2',
   }
 })

@@ -1,17 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   View,
-  ScrollView,
-  StyleSheet
+  ListView,
+  StyleSheet,
+  RefreshControl
 } from 'react-native'
 import Story from './story'
 
-const ListOfStories = ({stories, loadStories}) => {
+const ListOfStories = ({ stories, refreshStories, refreshing }) => {
+  const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
   return (
     <View>
-      <ScrollView style={styles.scrollView}>
-        {stories.map((story) => <Story key={story.id} {...story} />)}
-      </ScrollView>
+      <ListView
+        style={styles.scrollView}
+        dataSource={ds.cloneWithRows(stories)}
+        renderRow={(story) => <Story key={story.id} {...story} />}
+        refreshControl={
+          <RefreshControl
+            onRefresh={refreshStories}
+            refreshing={refreshing}
+            tintColor='#66a3b4' />
+          }>
+      </ListView>
     </View>
   )
 }
