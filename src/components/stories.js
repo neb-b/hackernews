@@ -14,7 +14,7 @@ const Stories = ({ loading, stories, loadStories }) => {
     <View>
       {
         loading
-        ? <ActivityIndicator style={styles.spinner}/>
+        ? <ActivityIndicator style={styles.spinner} color='#f2f2f2'/>
         : <ListOfStories loadStories={loadStories} stories={stories} />
       }
     </View>
