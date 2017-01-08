@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { loadStories } from './redux/action-creators/load-stories'
 import Layout from './layout'
+// import StatusBar from './components/status-bar'
 
 class App extends Component {
   constructor(props) {
@@ -22,10 +23,10 @@ class App extends Component {
     return (
       <View style={styles.container}>
         {
-          // <NavBar />
+          // <StatusBar />
         }
         {error && <Text>There was an error</Text>}
-        <Layout loading={loading} stories={stories} />
+        <Layout loading={loading} stories={stories} loadStories={loadStories} />
       </View>
     )
   }

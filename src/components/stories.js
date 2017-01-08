@@ -9,14 +9,12 @@ import {
 } from 'react-native'
 import ListOfStories from './list-of-stories'
 
-const Stories = ({ loading, stories, loadStories }) => {
+const StoriesContainer = ({ loading, stories, loadStories }) => {
   return (
-    <View>
+    <View style={loading && styles.spinnerContainer}>
       {
         loading
-        ? (<View style={styles.spinnerContainer}>
-            <ActivityIndicator/>
-          </View>)
+        ? <ActivityIndicator color='#f1f1f1'/>
         : <ListOfStories loadStories={loadStories} stories={stories} />
       }
     </View>
@@ -25,15 +23,10 @@ const Stories = ({ loading, stories, loadStories }) => {
 
 const styles = StyleSheet.create({
   spinnerContainer: {
-    // flex: 1,
-    // // position: 'absolute',
-    // // top: 0,
-    // // bottom: 0,
-    // // right: 0,
-    // // left: 0,
-    // // height: 200,
-    // backgroundColor: 'red'
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 
-export default Stories
+export default StoriesContainer

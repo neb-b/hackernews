@@ -7,10 +7,10 @@ import {
 import Stories from './components/stories.container'
 
 const Layout = (props) => {
-  const { loading, stories } = props
+  const { loading, stories, loadStories } = props
   return (
     <View style={styles.layout}>
-      <Stories loading={loading} stories={stories} />
+      <Stories loading={loading} stories={stories} loadStories={loadStories}/>
     </View>
   )
 }
