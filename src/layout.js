@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet
 } from 'react-native'
-import Stories from './components/stories'
+import Stories from './components/stories.container'
 
 const Layout = (props) => {
   const { loading, stories } = props
@@ -17,7 +17,8 @@ const Layout = (props) => {
 
 const styles = StyleSheet.create({
   layout: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#333333'
   }
 })
 

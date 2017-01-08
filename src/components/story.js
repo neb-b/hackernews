@@ -11,7 +11,7 @@ const Story = (props) => {
 
   return (
     <View style={styles.story}>
-      <Text>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   )
 }
@@ -19,6 +19,10 @@ const Story = (props) => {
 const styles = StyleSheet.create({
   story: {
     padding: 20
+  },
+  title: {
+    color: '#f2f2f2',
+    fontSize: 16
   }
 })
 

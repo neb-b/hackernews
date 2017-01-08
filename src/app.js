@@ -21,6 +21,9 @@ class App extends Component {
     const { error, loading, stories } = this.props
     return (
       <View style={styles.container}>
+        {
+          // <NavBar />
+        }
         {error && <Text>There was an error</Text>}
         <Layout loading={loading} stories={stories} />
       </View>
@@ -28,15 +31,14 @@ class App extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+})
+
 const mapStateToProps = (s) => {
   return {...s.stories}
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15
-  }
-})
 
 export default connect(mapStateToProps, { loadStories })(App)
