@@ -5,20 +5,18 @@ import {
   Text,
   View
 } from 'react-native'
-import App from './components/app'
+import Router from './src/router'
 
 const hackernews = () => (
   <View style={styles.container}>
-    <App />
+    <Router />
   </View>
 )
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
   }
 })
 
