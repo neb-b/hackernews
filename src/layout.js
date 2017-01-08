@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet
 } from 'react-native'
-import Stories from './components/stories.container'
+import Stories from './components/stories'
 
 const Layout = (props) => {
   const { loading, stories, loadStories } = props
