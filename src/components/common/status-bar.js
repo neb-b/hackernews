@@ -10,20 +10,21 @@ const Nav = () => {
   return (
     <View style={styles.statusBar}>
       <StatusBar barStyle='light-content' />
-      <Text style={styles.title}>Hacker News</Text>
+      <Text style={styles.title}>Top Stories</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   statusBar: {
-    height: 65,
+    height: 64,
     paddingTop: 25,
     paddingLeft: 7,
-    backgroundColor: '#ff6600'
+    backgroundColor: '#1785a8'
   },
   title: {
     color: '#f2f2f2',
+    textAlign: 'center',
     fontSize: 20
   }
 })

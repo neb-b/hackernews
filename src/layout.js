@@ -3,10 +3,12 @@ import {
   View,
   StyleSheet
 } from 'react-native'
+import StatusBar from './components/common/status-bar'
 
 const Layout = ({children}) => {
   return (
     <View style={styles.layout}>
+      <StatusBar />
       {children}
     </View>
   )

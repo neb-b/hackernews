@@ -2,15 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   View,
-  Text,
-  StyleSheet
+  Text
 } from 'react-native'
 import { loadStories } from '../redux/action-creators/load-stories'
 import { refreshStories } from '../redux/action-creators/refresh-stories'
 import Stories from '../components/stories'
-import StatusBar from '../components/status-bar'
 
-class App extends Component {
+class StoriesView extends Component {
   constructor(props) {
     super(props)
   }
@@ -22,10 +20,7 @@ class App extends Component {
   render() {
     const { error } = this.props
     return (
-      <View style={styles.container}>
-        {
-          <StatusBar />
-        }
+      <View>
         {error && <Text>There was an error</Text>}
         <Stories {...this.props} />
       </View>
@@ -33,14 +28,8 @@ class App extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-})
-
 const mapStateToProps = (s) => {
   return {...s.stories}
 }
 
-export default connect(mapStateToProps, { loadStories, refreshStories })(App)
+export default connect(mapStateToProps, { loadStories, refreshStories })(StoriesView)

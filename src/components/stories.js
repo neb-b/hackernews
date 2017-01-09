@@ -7,7 +7,7 @@ import {
   ScrollView,
   StyleSheet
 } from 'react-native'
-import ListOfStories from './list-of-stories'
+import ListOfStories from './stories/list-of-stories'
 
 const Stories = (props) => {
   const { loading, stories, loadStories, refreshing, refreshStories } = props

@@ -44,16 +44,17 @@ const styles = StyleSheet.create({
   },
   time: {
     paddingTop: 5,
-    fontSize: 10,
+    fontSize: 14,
     color: '#adadad'
   },
   score: {
     paddingTop: 5,
-    fontSize: 12,
+    fontSize: 16,
     color: '#ff6600'
   },
   comments: {
-    padding: 15,
+    paddingTop: 10,
+    fontWeight: '700',
     color: '#66a3b4',
   }
 })
