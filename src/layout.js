@@ -6,9 +6,10 @@ import {
 import StatusBar from './components/common/status-bar'
 
 const Layout = ({children}) => {
+  const { props: { children: { props: { initialRoute: { title } } } } } = children
   return (
     <View style={styles.layout}>
-      <StatusBar />
+      <StatusBar title={title} />
       {children}
     </View>
   )

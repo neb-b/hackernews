@@ -6,11 +6,11 @@ import {
   StyleSheet
 } from 'react-native'
 
-const Nav = () => {
+const Nav = ({title}) => {
   return (
     <View style={styles.statusBar}>
       <StatusBar barStyle='light-content' />
-      <Text style={styles.title}>Top Stories</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   )
 }
