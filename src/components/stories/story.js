@@ -2,26 +2,42 @@ import React from 'react'
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  TouchableHighlight
 } from 'react-native'
 import moment from 'moment'
+import Thread from '../../connected/thread.connected'
 
 const Story = (props) => {
-  const { title, time, score, kids } = props
+  const { title, time, score, kids, navigator } = props
   const fromNow = moment(time * 1000).fromNow()
+
+  const thread = {
+    title: 'Comments',
+    name: 'Thread',
+    index: 1,
+    props
+  }
+
   return (
-    <View style={styles.story}>
-      <Text style={styles.title}>{title}</Text>
-      <View style={styles.sub}>
-        <View>
-          <Text style={styles.time}>{fromNow}</Text>
-          <Text style={styles.score}>{score} points</Text>
-        </View>
-        <View>
-          <Text style={styles.comments}>{kids && kids.length || 0} comments</Text>
+    <TouchableHighlight
+      style={styles.story}
+      underlayColor='#83cce0'
+      activeOpacity={.8}
+      onPress={() => navigator.push(thread)}>
+      <View>
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.sub}>
+          <View>
+            <Text style={styles.time}>{fromNow}</Text>
+            <Text style={styles.score}>{score} points</Text>
+          </View>
+          <View>
+            <Text style={styles.comments}>{kids && kids.length || 0} comments</Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableHighlight>
   )
 }
 

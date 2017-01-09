@@ -1,22 +1,24 @@
 import React from 'react'
-import { NavigatorIOS, StyleSheet } from 'react-native'
+import { Navigator, StyleSheet } from 'react-native'
 import { Provider } from 'react-redux'
 import store from './store'
+import App from './app'
 import Layout from './layout'
-import Stories from './connected/stories.connected'
 
 const Router = () => (
-  <Layout>
+  <App>
     <Provider store={store}>
-      <NavigatorIOS
+      <Navigator
         style={styles.navigator}
         initialRoute={{
-          component: Stories,
-          title: 'Top Stories'
+          title: 'Top Stories',
+          name: 'Stories',
+          index: 0
         }}
+        renderScene={(route, navigator) => <Layout route={route} navigator={navigator} {...route.props}/>}
         navigationBarHidden={true}/>
     </Provider>
-  </Layout>
+  </App>
 )
 
 const styles = StyleSheet.create({

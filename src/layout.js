@@ -1,16 +1,23 @@
 import React, { Component } from 'react'
 import {
   View,
+  Text,
   StyleSheet
 } from 'react-native'
-import StatusBar from './components/common/status-bar'
+import Stories from './connected/stories.connected'
+import Thread from './connected/thread.connected'
 
-const Layout = ({children}) => {
-  const { props: { children: { props: { initialRoute: { title } } } } } = children
+const components = {
+  Stories,
+  Thread
+}
+
+const Layout = (props) => {
+  const { navigator, route: { name } } = props
+  const Component = components[name]
   return (
     <View style={styles.layout}>
-      <StatusBar title={title} />
-      {children}
+      <Component navigator={navigator} {...props} />
     </View>
   )
 }

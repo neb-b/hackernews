@@ -10,7 +10,7 @@ import {
 import ListOfStories from './stories/list-of-stories'
 
 const Stories = (props) => {
-  const { loading, stories, loadStories, refreshing, refreshStories } = props
+  const { loading, stories, loadStories, refreshing, refreshStories, navigator } = props
   return (
     <View>
       {
@@ -24,7 +24,8 @@ const Stories = (props) => {
             stories={stories}
             refreshing={refreshing}
             loading={loading}
-            refreshStories={refreshStories}/>
+            refreshStories={refreshStories}
+            navigator={navigator}/>
       }
     </View>
   )
