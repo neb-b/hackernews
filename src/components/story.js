@@ -8,12 +8,13 @@ import moment from 'moment'
 
 const Story = (props) => {
   const { title, time, score, kids } = props
+  const fromNow = moment(time * 1000).fromNow()
   return (
     <View style={styles.story}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.sub}>
         <View>
-          <Text style={styles.time}>{time}</Text>
+          <Text style={styles.time}>{fromNow}</Text>
           <Text style={styles.score}>{score} points</Text>
         </View>
         <View>
@@ -30,6 +31,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingLeft: 10,
     paddingRight: 10,
+    borderBottomWidth: 1,
+    borderColor: '#66a3b430'
   },
   sub: {
     flexDirection: 'row',
