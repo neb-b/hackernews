@@ -15,7 +15,10 @@ const Stories = (props) => {
     <View>
       {
         loading
-        ? <ActivityIndicator style={styles.spinner} color='#66a3b4'/>
+        ? <ActivityIndicator
+            style={styles.spinner}
+            color='#66a3b4'
+            size='large'/>
         : <ListOfStories
             loadStories={loadStories}
             stories={stories}
@@ -29,7 +32,7 @@ const Stories = (props) => {
 
 const styles = StyleSheet.create({
   spinner: {
-    paddingTop: 50
+    paddingTop: 40
   }
 })
 

@@ -1,12 +1,15 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import store from './store'
-import App from './app'
+import Layout from './layout'
+import Stories from './connected/stories.connected'
 
 const Router = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <Layout>
+    <Provider store={store}>
+      <Stories />
+    </Provider>
+  </Layout>
 )
 
 export default Router

@@ -5,10 +5,10 @@ import {
   Text,
   StyleSheet
 } from 'react-native'
-import { loadStories } from './redux/action-creators/load-stories'
-import { refreshStories } from './redux/action-creators/refresh-stories'
-import Layout from './layout'
-import StatusBar from './components/status-bar'
+import { loadStories } from '../redux/action-creators/load-stories'
+import { refreshStories } from '../redux/action-creators/refresh-stories'
+import Stories from '../components/stories'
+import StatusBar from '../components/status-bar'
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class App extends Component {
           <StatusBar />
         }
         {error && <Text>There was an error</Text>}
-        <Layout {...this.props} />
+        <Stories {...this.props} />
       </View>
     )
   }
