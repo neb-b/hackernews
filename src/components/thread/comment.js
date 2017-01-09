@@ -6,13 +6,14 @@ import {
   TouchableHighlight
 } from 'react-native'
 import moment from 'moment'
+import HTMLView from 'react-native-htmlview'
 
 const Comment = (props) => {
   const { text } = props
 
   return (
     <View style={styles.comment}>
-      <Text style={styles.text}>{text}</Text>
+      <HTMLView value={text} style={styles.text} />
       <View style={styles.seperator} />
     </View>
   )
@@ -23,13 +24,12 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   text: {
-    fontSize: 18,
-    lineHeight: 30
+    fontSize: 18
   },
   seperator: {
     paddingTop: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#f96e15'
+    borderBottomColor: '#f96e1530'
   }
 })
 
