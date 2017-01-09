@@ -7,15 +7,19 @@ import {
   ScrollView,
   StyleSheet
 } from 'react-native'
-import ListOfStories from './stories/list-of-stories'
-import Title from './thread/title'
+import Head from './thread/head'
 
 const Thread = (props) => {
   console.log('thread', props);
-  const { title } = props
+  const { title, score, url, time, kids } = props
   return (
     <View>
-      <Title title={title} />
+      <Head
+        title={title}
+        score={score}
+        url={url}
+        time={time}
+        kids={kids}/>
     </View>
   )
 }
