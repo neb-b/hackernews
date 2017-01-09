@@ -8,10 +8,10 @@ import {
   StyleSheet
 } from 'react-native'
 import Head from './thread/head'
+import Comments from './thread/comments'
 
 const Thread = (props) => {
-  console.log('thread', props);
-  const { title, score, url, time, kids } = props
+  const { title, score, url, time, kids, comments, loading } = props
   return (
     <View>
       <Head
@@ -19,7 +19,12 @@ const Thread = (props) => {
         score={score}
         url={url}
         time={time}
-        kids={kids}/>
+        kids={kids} />
+      {
+        loading
+        ? <ActivityIndicator />
+        : <Comments comments={comments} />
+      }
     </View>
   )
 }

@@ -4,8 +4,7 @@ import {
   View,
   Text
 } from 'react-native'
-// import { loadStories } from '../redux/action-creators/load-stories'
-// import { refreshStories } from '../redux/action-creators/refresh-stories'
+import { loadComments } from '../redux/action-creators/load-comments'
 import Thread from '../components/thread'
 
 class ThreadView extends Component {
@@ -14,7 +13,8 @@ class ThreadView extends Component {
   }
 
   componentDidMount() {
-    // this.props.loadStories()
+    const { kids } = this.props
+    this.props.loadComments(kids)
   }
 
   render() {
@@ -28,8 +28,8 @@ class ThreadView extends Component {
   }
 }
 
-// const mapStateToProps = (s) => {
-//   return {...s.stories}
-// }
+const mapStateToProps = (s) => {
+  return {...s.thread}
+}
 
-export default ThreadView
+export default connect(mapStateToProps, { loadComments })(ThreadView)

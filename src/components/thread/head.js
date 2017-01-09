@@ -6,9 +6,8 @@ import {
   TouchableHighlight
 } from 'react-native'
 import moment from 'moment'
-import Thread from '../../connected/thread.connected'
 
-const Title = (props) => {
+const Head = (props) => {
   const { title, score, kids, time, url } = props
   const fromNow = moment(time * 1000).fromNow()
 
@@ -17,6 +16,7 @@ const Title = (props) => {
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.time}>{fromNow}</Text>
       <Text style={styles.score}>{score} points</Text>
+      <Text style={styles.comments}>{kids.length || 0} comments</Text>
     </View>
   )
 }
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Title
+export default Head
