@@ -1,10 +1,13 @@
-import Web from '../connected/web.connected'
+import Web from '../components/web'
 
 const getNextView = (url) => {
   if (url) {
     return {
       title: 'Hacker News',
-      component: Web
+      component: Web,
+      props: {
+        url
+      }
     }
   }
 }
