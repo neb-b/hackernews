@@ -51,6 +51,7 @@ const Story = (props) => {
             onPress={() => navigator.push({
               title: 'Comments',
               component: Thread,
+              index: 1,
               props: {
                 title,
                 time,

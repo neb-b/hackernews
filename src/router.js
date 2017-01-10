@@ -21,7 +21,8 @@ const Router = () => (
             Component={route.component}
             navigator={navigator}
             viewTitle={route.title}
-            index={route.index} />)
+            index={route.index}
+            {...route.props}/>)
       }}
       />
   </Provider>
