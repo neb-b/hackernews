@@ -9,11 +9,24 @@ import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 
 const Comment = (props) => {
-  const { text } = props
-
+  const { text, by, kids, time } = props
+  console.log('comment', by);
   return (
     <View style={styles.comment}>
       <HTMLView value={text} style={styles.text} />
+      <Text style={styles.info}>
+        {moment(time * 1000).fromNow()}
+        by {by}
+      </Text>
+      {
+        kids && kids.length && (
+          <View style={styles.viewComments}>
+            <Text style={styles.viewCommentsText}>
+              {kids.length} comments
+            </Text>
+          </View>
+        )
+      }
       <View style={styles.seperator} />
     </View>
   )
@@ -25,6 +38,22 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18
+  },
+  info: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    color: '#ff6300'
+  },
+  viewComments: {
+    marginTop: 10,
+    backgroundColor: '#66a3b4',
+    borderRadius: 5
+  },
+  viewCommentsText: {
+    alignSelf: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
+    color: '#fff'
   },
   seperator: {
     paddingTop: 10,

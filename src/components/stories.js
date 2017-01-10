@@ -10,7 +10,14 @@ import {
 import ListOfStories from './stories/list-of-stories'
 
 const Stories = (props) => {
-  const { loading, stories,loadStories, refreshing, refreshStories, navigator } = props
+  const {
+    loading,
+    stories,
+    loadStories,
+    refreshing,
+    refreshStories,
+    navigator
+  } = props
   return (
     <View>
       {

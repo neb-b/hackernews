@@ -9,9 +9,16 @@ import moment from 'moment'
 import Thread from '../../connected/thread.connected'
 
 const Story = (props) => {
-  const { title, time, score, kids, navigator } = props
-  const fromNow = moment(time * 1000).fromNow()
+  const {
+    title,
+    time,
+    score,
+    kids,
+    navigator,
+    descendants
+ } = props
 
+  const fromNow = moment(time * 1000).fromNow()
   const thread = {
     title: 'Comments',
     name: 'Thread',
@@ -33,7 +40,7 @@ const Story = (props) => {
             <Text style={styles.score}>{score} points</Text>
           </View>
           <View>
-            <Text style={styles.comments}>{kids && kids.length || 0} comments</Text>
+            <Text style={styles.comments}>{descendants} comments</Text>
           </View>
         </View>
       </View>
