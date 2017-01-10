@@ -18,6 +18,7 @@ const Stories = (props) => {
     refreshStories,
     navigator
   } = props
+  
   return (
     <View>
       {

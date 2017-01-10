@@ -10,7 +10,7 @@ import Web from '../web'
 
 const Head = (props) => {
   const { title, score, kids, time, url, descendants, navigator } = props
-  console.log('url', url);
+
   return (
     <TouchableHighlight
       style={styles.head}

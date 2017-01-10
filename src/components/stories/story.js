@@ -21,7 +21,7 @@ const Story = (props) => {
     url
  } = props
 
- //TODO: detect if url is hackernews
+ //TODO: detect if url is hackernews and navigate to Thread
 
   return (
     <TouchableHighlight

@@ -25,6 +25,7 @@ const Thread = (props) => {
 
   const headProps = { title, score, time, descendants, url }
   const threadItems = [headProps].concat(comments)
+
   const renderThread = (props, index) =>
     index === 0
     ? <Head key={0} navigator={navigator} {...headProps}/>
