@@ -5,8 +5,8 @@ import {
   StyleSheet,
   TouchableHighlight
 } from 'react-native'
-import moment from 'moment'
 import Thread from '../../connected/thread.connected'
+import fromNow from '../../helpers/from-now'
 
 const Story = (props) => {
   const {
@@ -17,7 +17,7 @@ const Story = (props) => {
     navigator,
     descendants
  } = props
-  const fromNow = moment(time * 1000).fromNow()
+
   const thread = {
     title: 'Comments',
     component: Thread,
@@ -40,7 +40,7 @@ const Story = (props) => {
         <Text style={styles.title}>{title}</Text>
         <View style={styles.sub}>
           <View>
-            <Text style={styles.time}>{fromNow}</Text>
+            <Text style={styles.time}>{fromNow(time)}</Text>
             <Text style={styles.score}>{score} points</Text>
           </View>
           <View>

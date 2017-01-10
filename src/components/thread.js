@@ -12,17 +12,22 @@ import Comment from './thread/comment'
 
 const Thread = (props) => {
   const {
+    loading,
+    comments,
+    // Below are passed from Stories view in view change
     title,
     time,
     score,
-    descendants,
-    comments,
-    loading
+    descendants
   } = props
 
   const headProps = { title, score, time, descendants }
   const threadItems = [headProps].concat(comments)
-  const renderThread = (props, index) => index === 0 ? <Head key={0} {...headProps}/> : <Comment key={props.id} {...props}/>
+  const renderThread = (props, index) =>
+    index === 0
+    ? <Head key={0} {...headProps}/>
+    : <Comment key={props.id} {...props} />
+
   return (
     <View>
       {

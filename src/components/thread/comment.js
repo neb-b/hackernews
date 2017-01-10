@@ -9,7 +9,7 @@ import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 
 const Comment = (props) => {
-  const { text, by, kids, time } = props
+  const { text, by, kids, time, score } = props
   return (
     <View style={styles.comment}>
       <HTMLView value={text} style={styles.text} />
@@ -45,14 +45,15 @@ const styles = StyleSheet.create({
   },
   viewComments: {
     marginTop: 10,
-    backgroundColor: '#66a3b4',
+    backgroundColor: '#fb7b13',
     borderRadius: 5
   },
   viewCommentsText: {
     alignSelf: 'center',
     paddingTop: 5,
     paddingBottom: 5,
-    color: '#fff'
+    color: '#fff',
+    fontWeight: '700'
   },
   seperator: {
     paddingTop: 20,
