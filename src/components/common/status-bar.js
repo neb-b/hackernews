@@ -6,16 +6,20 @@ import {
   StyleSheet
 } from 'react-native'
 
-const Nav = ({ title, navigator }) => {
+const Nav = ({ title, navigator, index  }) => {
   return (
     <View style={styles.statusBar}>
       <StatusBar barStyle='light-content' />
       <View style={styles.statusBarText}>
-        <Text
-          style={styles.text}
-          onPress={() => navigator.pop()}>B</Text>
+        {
+          index === 0
+          ? <View />
+          : <Text
+            style={styles.text}
+            onPress={() => navigator.pop()}>Back</Text>
+        }
         <Text style={styles.text}>{title}</Text>
-        <Text style={styles.text}>S</Text>
+        <View />
       </View>
     </View>
   )

@@ -15,12 +15,14 @@ const Router = () => (
         component: Stories,
         index: 0
       }}
-      renderScene={(route, navigator) => (
-        <View
-          Component={route.component}
-          navigator={navigator}
-          viewTitle={route.title}
-          {...route.props} />)}
+      renderScene={(route, navigator, index) => {
+        return(
+          <View
+            Component={route.component}
+            navigator={navigator}
+            viewTitle={route.title}
+            index={route.index} />)
+      }}
       />
   </Provider>
 )

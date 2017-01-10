@@ -19,6 +19,7 @@ const Head = (props) => {
       onPress={() => navigator.push({
         title: 'Hacker News',
         component: Web,
+        index: 2,
         props: {
           url
         }

@@ -31,6 +31,7 @@ const Story = (props) => {
       onPress={() => navigator.push({
         title: 'Hacker News',
         component: Web,
+        index: 1,
         props: {
           url
         }
