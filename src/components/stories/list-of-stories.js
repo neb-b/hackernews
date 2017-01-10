@@ -28,7 +28,7 @@ const ListOfStories = ({ stories, refreshStories, refreshing, navigator }) => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    // flex: 1
+    marginBottom: 64 //IOS statusBar height
   }
 })
 

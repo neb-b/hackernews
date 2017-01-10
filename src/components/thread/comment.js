@@ -10,7 +10,6 @@ import HTMLView from 'react-native-htmlview'
 
 const Comment = (props) => {
   const { text, by, kids, time } = props
-  console.log('comment', by);
   return (
     <View style={styles.comment}>
       <HTMLView value={text} style={styles.text} />
@@ -34,7 +33,7 @@ const Comment = (props) => {
 
 const styles = StyleSheet.create({
   comment: {
-    paddingBottom: 20,
+    padding: 10,
   },
   text: {
     fontSize: 18
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   seperator: {
-    paddingTop: 10,
+    paddingTop: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#f96e1530'
   }

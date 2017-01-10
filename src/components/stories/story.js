@@ -17,12 +17,17 @@ const Story = (props) => {
     navigator,
     descendants
  } = props
-
   const fromNow = moment(time * 1000).fromNow()
   const thread = {
     title: 'Comments',
     component: Thread,
-    props
+    props: {
+      title,
+      time,
+      score,
+      descendants,
+      kids
+    }
   }
 
   return (

@@ -4,33 +4,51 @@ import {
   Text,
   View,
   ActivityIndicator,
-  ScrollView,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from 'react-native'
 import Head from './thread/head'
-import Comments from './thread/comments'
+import Comment from './thread/comment'
 
 const Thread = (props) => {
-  const { title, score, url, time, kids, comments, loading } = props
+  const {
+    title,
+    time,
+    score,
+    descendants,
+    comments,
+    loading
+  } = props
+
+  const headProps = { title, score, time, descendants }
+  const threadItems = [headProps].concat(comments)
+  const renderThread = (props, index) => index === 0 ? <Head key={0} {...headProps}/> : <Comment key={props.id} {...props}/>
   return (
     <View>
-      <Head
-        title={title}
-        score={score}
-        url={url}
-        time={time}
-        kids={kids} />
       {
         loading
-        ? <ActivityIndicator />
-        : <Comments comments={comments} />
+        ? (<View>
+            <Head {...headProps} />
+            <ActivityIndicator
+              style={styles.spinner}
+              color='#66a3b4'
+              size='large'/>
+          </View>)
+        : (<ScrollView style={styles.scrollView}>
+            {threadItems.map(renderThread)}
+          </ScrollView>)
       }
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-
+  spinner: {
+    paddingTop: 40
+  },
+  scrollView: {
+    marginBottom: 64
+  }
 })
 
 export default Thread
