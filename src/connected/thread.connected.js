@@ -19,7 +19,6 @@ class ThreadView extends Component {
 
   render() {
     const { error } = this.props
-    console.log('thread', this.props);
     return (
       <View>
         <Thread {...this.props} />

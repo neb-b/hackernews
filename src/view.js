@@ -5,18 +5,17 @@ import {
 } from 'react-native'
 import StatusBar from './components/common/status-bar'
 
-const App = ({children}) => {
-  const { props: { children: { props: { initialRoute: { title } } } } } = children
+const App = ({ Component, viewTitle, ...props }) => {
   return (
-    <View style={styles.layout}>
-      <StatusBar title={title} />
-      {children}
+    <View style={styles.view}>
+      <StatusBar title={viewTitle} />
+      <Component {...props}/>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  layout: {
+  view: {
     flex: 1,
     backgroundColor: '#fbfbfb'
   }

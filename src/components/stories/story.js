@@ -21,8 +21,7 @@ const Story = (props) => {
   const fromNow = moment(time * 1000).fromNow()
   const thread = {
     title: 'Comments',
-    name: 'Thread',
-    index: 1,
+    component: Thread,
     props
   }
 

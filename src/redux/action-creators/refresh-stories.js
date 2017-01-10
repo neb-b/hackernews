@@ -12,7 +12,7 @@ const onRefreshStoriesError = createAction(REFRESH_STORIES_ERROR)
 
 const getStories = (ids) => {
   const fetchId = (id) => fetch(`${ROOT_URL}/item/${id}.json`)
-  return Promise.all(ids.map(fetchId))
+  return Promise.all(ids.slice(0, 20).map(fetchId))
     .then((responses) => (
       Promise.all(responses.map(res => res.json()))
     ))
