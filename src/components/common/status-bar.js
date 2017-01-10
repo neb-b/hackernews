@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     height: 64,
     paddingTop: 25,
     paddingLeft: 7,
-    backgroundColor: '#1785a8'
+    backgroundColor: '#0C6A5A'
   },
   title: {
     color: '#f2f2f2',

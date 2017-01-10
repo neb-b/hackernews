@@ -19,7 +19,7 @@ const ListOfStories = ({ stories, refreshStories, refreshing, navigator }) => {
           <RefreshControl
             onRefresh={refreshStories}
             refreshing={refreshing}
-            tintColor='#66a3b4' />
+            tintColor='#0C6A5A' />
           }>
       </ListView>
     </View>

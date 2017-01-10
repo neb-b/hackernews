@@ -12,7 +12,8 @@ const Router = () => (
       navigationBarHidden={true}
       initialRoute={{
         title: 'Top Stories',
-        component: Stories
+        component: Stories,
+        index: 0
       }}
       renderScene={(route, navigator) => (
         <View

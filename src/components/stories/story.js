@@ -7,6 +7,8 @@ import {
 } from 'react-native'
 import Thread from '../../connected/thread.connected'
 import fromNow from '../../helpers/from-now'
+import formatUrl from '../../helpers/format-url'
+import getNextView from '../../helpers/get-next-view'
 
 const Story = (props) => {
   const {
@@ -15,29 +17,21 @@ const Story = (props) => {
     score,
     kids,
     navigator,
-    descendants
+    descendants,
+    url
  } = props
 
-  const thread = {
-    title: 'Comments',
-    component: Thread,
-    props: {
-      title,
-      time,
-      score,
-      descendants,
-      kids
-    }
-  }
+  const nextView = getNextView()
 
   return (
     <TouchableHighlight
       style={styles.story}
-      underlayColor='#83cce0'
+      underlayColor='#53887f'
       activeOpacity={.8}
-      onPress={() => navigator.push(thread)}>
+      onPress={() => {}}>
       <View>
         <Text style={styles.title}>{title}</Text>
+        <Text style={styles.url}>{formatUrl(url)}</Text>
         <View style={styles.sub}>
           <View>
             <Text style={styles.time}>{fromNow(time)}</Text>
@@ -56,21 +50,24 @@ const styles = StyleSheet.create({
   story: {
     paddingTop: 30,
     paddingBottom: 20,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
     borderBottomWidth: 1,
     borderColor: '#66a3b430'
+  },
+  title: {
+    color: '#333333',
+    fontSize: 28
+  },
+  url: {
+    paddingTop: 15,
+    paddingBottom: 15
   },
   sub: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  title: {
-    color: '#333333',
-    fontSize: 22
-  },
   time: {
-    paddingTop: 5,
     fontSize: 14,
     color: '#adadad'
   },
@@ -80,9 +77,8 @@ const styles = StyleSheet.create({
     color: '#ff6600'
   },
   comments: {
-    paddingTop: 10,
-    fontWeight: '700',
-    color: '#66a3b4',
+    color: '#00A287',
+    fontWeight: '800'
   }
 })
 
