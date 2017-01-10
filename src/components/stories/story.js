@@ -71,7 +71,7 @@ const Story = (props) => {
 const styles = StyleSheet.create({
   story: {
     paddingTop: 30,
-    paddingBottom: 20,
+    paddingBottom: 30,
     paddingLeft: 15,
     paddingRight: 15,
     borderBottomWidth: 1,
