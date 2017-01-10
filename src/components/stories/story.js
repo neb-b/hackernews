@@ -5,10 +5,10 @@ import {
   StyleSheet,
   TouchableHighlight
 } from 'react-native'
+import Web from '../web'
 import Thread from '../../connected/thread.connected'
 import fromNow from '../../helpers/from-now'
 import formatUrl from '../../helpers/format-url'
-import getNextView from '../../helpers/get-next-view'
 
 const Story = (props) => {
   const {
@@ -21,14 +21,20 @@ const Story = (props) => {
     url
  } = props
 
-  const nextView = getNextView(url)
+ //TODO: detect if url is hackernews
 
   return (
     <TouchableHighlight
       style={styles.story}
       underlayColor='#53887f'
       activeOpacity={.8}
-      onPress={() => navigator.push(nextView)}>
+      onPress={() => navigator.push({
+        title: 'Hacker News',
+        component: Web,
+        props: {
+          url
+        }
+      })}>
       <View>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.url}>{formatUrl(url)}</Text>
@@ -37,9 +43,24 @@ const Story = (props) => {
             <Text style={styles.time}>{fromNow(time)}</Text>
             <Text style={styles.score}>{score} points</Text>
           </View>
-          <View>
+          <TouchableHighlight
+            style={styles.commentsContainer}
+            activeOpacity={.5}
+            underlayColor='#fbfbfb'
+            onPress={() => navigator.push({
+              title: 'Comments',
+              component: Thread,
+              props: {
+                title,
+                time,
+                score,
+                descendants,
+                kids,
+                url
+              }
+            })}>
             <Text style={styles.comments}>{descendants} comments</Text>
-          </View>
+          </TouchableHighlight>
         </View>
       </View>
     </TouchableHighlight>
@@ -75,6 +96,9 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     fontSize: 16,
     color: '#ff6600'
+  },
+  commentsContainer: {
+
   },
   comments: {
     color: '#00A287',
