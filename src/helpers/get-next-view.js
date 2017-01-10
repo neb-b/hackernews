@@ -1,18 +1,12 @@
-// const thread = {
-//   title: 'Comments',
-//   component: Thread,
-//   index: 1,
-//   props: {
-//     title,
-//     time,
-//     score,
-//     descendants,
-//     kids
-//   }
-// }
+import Web from '../connected/web.connected'
 
-const getNextView = () => {
-
+const getNextView = (url) => {
+  if (url) {
+    return {
+      title: 'Hacker News',
+      component: Web
+    }
+  }
 }
 
 export default getNextView

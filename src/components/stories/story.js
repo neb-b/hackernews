@@ -21,14 +21,14 @@ const Story = (props) => {
     url
  } = props
 
-  const nextView = getNextView()
+  const nextView = getNextView(url)
 
   return (
     <TouchableHighlight
       style={styles.story}
       underlayColor='#53887f'
       activeOpacity={.8}
-      onPress={() => {}}>
+      onPress={() => navigator.push(nextView)}>
       <View>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.url}>{formatUrl(url)}</Text>
