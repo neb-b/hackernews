@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-  View,
-  Text
-} from 'react-native'
-import { loadComments } from '../redux/action-creators/load-comments'
+import { View, Text } from 'react-native'
+import { loadComments, loadSubComments } from '../redux/action-creators/load-comments'
 import Thread from '../components/thread'
 
 class ThreadView extends Component {
@@ -32,4 +29,4 @@ const mapStateToProps = (s) => {
   return {...s.thread}
 }
 
-export default connect(mapStateToProps, { loadComments })(ThreadView)
+export default connect(mapStateToProps, { loadComments, loadSubComments })(ThreadView)

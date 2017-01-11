@@ -7,9 +7,22 @@ import {
 } from 'react-native'
 import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
+import MoreComments from './more-comments'
 
 const Comment = (props) => {
-  const { text, by, kids, time, score } = props
+  const {
+    text,
+    id,
+    by,
+    kids,
+    time,
+    score,
+    loadSubComments,
+    loadingSubComments,
+    subCommentsParent,
+    subComments
+  } = props
+
   return (
     <View style={styles.comment}>
       <HTMLView value={text} style={styles.text} />
@@ -17,15 +30,13 @@ const Comment = (props) => {
         {moment(time * 1000).fromNow()}
         by {by}
       </Text>
-      {
-        kids && kids.length && (
-          <View style={styles.viewComments}>
-            <Text style={styles.viewCommentsText}>
-              {kids.length} comments
-            </Text>
-          </View>
-        )
-      }
+      <MoreComments
+        brothers={kids}
+        parentId={id}
+        loadSubComments={loadSubComments}
+        loadingSubComments={loadingSubComments}
+        subCommentsParent={subCommentsParent}
+        subComments={subComments} />
       <View style={styles.seperator} />
     </View>
   )
@@ -42,18 +53,6 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     color: '#ff6300'
-  },
-  viewComments: {
-    marginTop: 10,
-    backgroundColor: '#fb7b13',
-    borderRadius: 5
-  },
-  viewCommentsText: {
-    alignSelf: 'center',
-    paddingTop: 5,
-    paddingBottom: 5,
-    color: '#fff',
-    fontWeight: '700'
   },
   seperator: {
     paddingTop: 20,

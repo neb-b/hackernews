@@ -20,31 +20,47 @@ const Thread = (props) => {
     score,
     descendants,
     url,
-    navigator
+    navigator,
+    loadSubComments,
+    loadingSubComments,
+    subCommentsParent,
   } = props
 
-  const headProps = { title, score, time, descendants, url }
-  const threadItems = [headProps].concat(comments)
+  const renderHead = () => (
+    <Head navigator={navigator}
+      key={0}
+      title={title}
+      score={score}
+      time={time}
+      descendants={descendants}
+      url={url} />
+  )
 
-  const renderThread = (props, index) =>
-    index === 0
-    ? <Head key={0} navigator={navigator} {...headProps}/>
-    : <Comment key={props.id} {...props} />
+  const renderComment = (comment) => (
+    <Comment
+      key={comment.id}
+      {...comment}
+      loadSubComments={loadSubComments}
+      loadingSubComments={loadingSubComments}
+      subCommentsParent={subCommentsParent} />
+  )
 
   return (
     <View>
       {
         loading
         ? (<View>
-            <Head {...headProps} />
+            {renderHead()}
             <ActivityIndicator
               style={styles.spinner}
               color='#66a3b4'
               size='large'/>
           </View>)
-        : (<ScrollView style={styles.scrollView}>
-            {threadItems.map(renderThread)}
-          </ScrollView>)
+        : (
+          <ScrollView style={styles.scrollView}>
+            {[renderHead(), comments.map(renderComment)]}
+          </ScrollView>
+        )
       }
     </View>
   )

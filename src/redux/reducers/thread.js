@@ -12,7 +12,8 @@ const initialState = {
   loading: true,
   refreshing: false,
   error: null,
-  comments: []
+  comments: [],
+  loadingSubComments: null //
 }
 
 export default handleActions({
@@ -20,7 +21,6 @@ export default handleActions({
   LOAD_COMMENTS_SUCCESS: (state, { payload }) => ({
     ...state,
     loading: false,
-    error: null,
     comments: payload
   }),
   LOAD_COMMENTS_ERROR: (state, { payload }) => ({
@@ -29,16 +29,31 @@ export default handleActions({
     error: payload
   }),
 
-  // REFRESH_COMMENTS_REQUEST: (state) => ({ ...state, refreshing: true, loading: false}),
-  // REFRESH_COMMENTS_SUCCESS: (state, { payload }) => ({
-  //   ...state,
-  //   refreshing: false,
-  //   error: null,
-  //   stories: payload
-  // }),
-  // REFRESH_COMMENTS_ERROR: (state, { payload }) => ({
-  //   ...state,
-  //   loading: false,
-  //   error: payload
-  // }),
+  LOAD_SUB_COMMENTS_REQUEST: (state, { payload }) => ({
+    ...state,
+    loadingSubComments: true,
+    subCommentsParent: payload
+  }),
+  LOAD_SUB_COMMENTS_SUCCESS: (state, { payload }) => {
+    const subComments = payload
+    const parent = subComments[0].parent
+
+    state.comments.forEach((comment) => {
+      if (comment.id === parent) {
+        comment.subComments = subComments
+      }
+    })
+
+    return {
+      ...state,
+      loadingSubComments: false,
+      comments: newComments
+    }
+  },
+  LOAD_SUB_COMMENTS_ERROR: (state, { payload }) => ({
+    ...state,
+    loadingSubComments: false,
+    error: payload
+  })
+
 }, initialState)
