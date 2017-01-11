@@ -38,16 +38,16 @@ export default handleActions({
     const subComments = payload
     const parent = subComments[0].parent
 
-    state.comments.forEach((comment) => {
+    const newComments = state.comments.map((comment) => {
       if (comment.id === parent) {
         comment.subComments = subComments
       }
+      return comment
     })
 
     return {
       ...state,
-      loadingSubComments: false,
-      comments: newComments
+      loadingSubComments: false
     }
   },
   LOAD_SUB_COMMENTS_ERROR: (state, { payload }) => ({

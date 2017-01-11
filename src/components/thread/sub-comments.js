@@ -9,7 +9,7 @@ import SubComment from './sub-comment'
 const SubComments = ({comments}) => (
   <View style={styles.subComments}>
     {
-      comments.map((comment) => <SubComment key={comment.key} {...comment} />)
+      comments.map((comment) => <SubComment key={comment.id} {...comment} />)
     }
   </View>
 )
