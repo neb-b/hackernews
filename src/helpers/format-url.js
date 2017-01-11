@@ -6,10 +6,14 @@ const formatUrl = (url) => {
       .join('')
       .split('/')[0]
   }
-  
-  return url.match('http://')
-  ? trimUrl(url, 7)
-  : trimUrl(url, 8)
+
+  if (url) {
+    return url.match('http://')
+    ? trimUrl(url, 7)
+    : trimUrl(url, 8)
+  }
+
+  return null
 }
 
 export default formatUrl

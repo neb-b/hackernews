@@ -18,12 +18,17 @@ const getComments = (ids) => {
     ))
 }
 
+// const maybeMoreComments = ({payload}) => {
+//   console.log('checking', payload)
+// }
+
 export function loadComments (commentIds) {
   return (dispatch) => {
     dispatch(onLoadCommentsRequest())
 
     getComments(commentIds)
       .then((comments) => dispatch(onLoadCommentsSuccess(comments)))
+      // .then(maybeMoreComments)
       .catch((err) => dispatch(onLoadCommentsError(err)))
   }
 }
