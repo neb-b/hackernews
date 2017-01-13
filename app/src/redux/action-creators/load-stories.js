@@ -10,21 +10,12 @@ const onLoadStoriesRequest = createAction(LOAD_STORIES_REQUEST)
 const onLoadStoriesSuccess = createAction(LOAD_STORIES_SUCCESS)
 const onLoadStoriesError = createAction(LOAD_STORIES_ERROR)
 
-const getStories = (ids) => {
-  const fetchId = (id) => fetch(`${ROOT_URL}/item/${id}.json`)
-  return Promise.all(ids.slice(0, 60).map(fetchId))
-    .then((responses) => (
-      Promise.all(responses.map(res => res.json()))
-    ))
-}
-
 export function loadStories () {
   return (dispatch) => {
     dispatch(onLoadStoriesRequest())
 
-    fetch(`${ROOT_URL}/topstories.json`)
+    fetch(`${ROOT_URL}/stories/top`)
       .then((res) => res.json())
-      .then((storiesIds) => getStories(storiesIds))
       .then((stories) => dispatch(onLoadStoriesSuccess(stories)))
       .catch((err) => dispatch(onLoadStoriesError(err)))
   }

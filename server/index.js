@@ -1,5 +1,13 @@
-const {send} = require('micro')
+'use strict'
+const express = require('express')
+const bodyParser = require('body-parser')
+const axios = require('axios')
+const Promise = require('bluebird')
+const app = express()
 
-module.exports = async function (req, res) {
-  send(res, 200, 'Ready!')
-}
+app.use(bodyParser.json())
+app.use('/stories', require('./routes/stories'))
+
+app.listen(3000, function () {
+  console.log('server listening')
+})

@@ -2,8 +2,7 @@ import React from 'react'
 import {
   View,
   Text,
-  StyleSheet,
-  TouchableHighlight
+  StyleSheet
 } from 'react-native'
 import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
@@ -44,7 +43,7 @@ const Comment = (props) => {
 
 const styles = StyleSheet.create({
   comment: {
-    padding: 10,
+    padding: 10
   },
   text: {
     fontSize: 18
