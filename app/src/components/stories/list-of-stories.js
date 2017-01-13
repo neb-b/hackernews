@@ -9,7 +9,7 @@ import Story from './story'
 
 const ListOfStories = ({ stories, refreshStories, refreshing, navigator }) => {
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-  
+
   return (
     <View>
       <ListView

@@ -18,7 +18,7 @@ const Stories = (props) => {
     refreshStories,
     navigator
   } = props
-  
+
   return (
     <View>
       {
@@ -28,7 +28,6 @@ const Stories = (props) => {
             color='#0C6A5A'
             size='large'/>
         : <ListOfStories
-            loadStories={loadStories}
             stories={stories}
             refreshing={refreshing}
             loading={loading}
