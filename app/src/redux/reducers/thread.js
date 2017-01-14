@@ -40,7 +40,7 @@ export default handleActions({
 
     const newComments = state.comments.map((comment) => {
       if (comment.id === parent) {
-        comment.subComments = subComments
+        comment.kids = subComments
       }
       return comment
     })

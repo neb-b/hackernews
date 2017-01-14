@@ -19,24 +19,36 @@ const Comment = (props) => {
     loadSubComments,
     loadingSubComments,
     subCommentsParent,
-    subComments
+    reply
   } = props
 
   return (
-    <View style={styles.comment}>
+    <View style={reply ? styles.reply : styles.comment}>
       <HTMLView value={text} style={styles.text} />
       <Text style={styles.info}>
         {moment(time * 1000).fromNow()}
         by {by}
       </Text>
-      <MoreComments
-        brothers={kids}
-        parentId={id}
-        loadSubComments={loadSubComments}
-        loadingSubComments={loadingSubComments}
-        subCommentsParent={subCommentsParent}
-        subComments={subComments} />
-      <View style={styles.seperator} />
+
+      {kids && kids.length && typeof kids[0] === 'number' && (
+        <MoreComments
+          kids={kids}
+          loadSubComments={loadSubComments}
+          loadingSubComments={loadingSubComments}
+          subCommentsParent={subCommentsParent}/>
+      )}
+
+      {kids && kids.length && typeof kids[0] === 'object' && (
+        kids.map((comment) => (
+          <Comment
+            key={comment.id}
+            {...comment}
+            loadSubComments={loadSubComments}
+            reply={true} />
+        ))
+      )}
+
+      {!reply && <View style={styles.seperator} />}
     </View>
   )
 }
@@ -44,6 +56,14 @@ const Comment = (props) => {
 const styles = StyleSheet.create({
   comment: {
     padding: 10
+  },
+  reply: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    borderLeftWidth: 1,
+    borderLeftColor: '#0C6A5A',
+    backgroundColor: '#ffdfc8'
   },
   text: {
     fontSize: 18

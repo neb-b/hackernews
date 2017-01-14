@@ -5,11 +5,10 @@ import {
   StyleSheet,
   TouchableHighlight
 } from 'react-native'
-import SubComments from './sub-comments'
 
 const MoreComments = (props) => {
   const {
-    brothers,
+    kids,
     loadSubComments,
     loadingSubComments,
     subCommentsParent,
@@ -19,25 +18,20 @@ const MoreComments = (props) => {
 
   return (
     <View>
-      {!subComments && brothers && brothers.length && (
-        <TouchableHighlight
-          underlayColor='#4e6c4c'
-          activeOpacity={loadingSubComments ? 1 : .6}
-          style={styles.viewComments}
-          onPress={() => !loadingSubComments && loadSubComments(parentId, brothers)}
-        >
-        <Text style={styles.viewCommentsText}>
-          {
-            loadingSubComments && parentId === subCommentsParent
-              ? 'Loading...'
-              : `${brothers.length} comments`
-          }
-        </Text>
-        </TouchableHighlight>
-      )}
-      {subComments && (
-          <SubComments comments={subComments} />
-      )}
+      <TouchableHighlight
+        underlayColor='#4e6c4c'
+        activeOpacity={loadingSubComments ? 1 : .6}
+        style={styles.viewComments}
+        onPress={() => !loadingSubComments && loadSubComments(parentId, kids)}
+      >
+      <Text style={styles.viewCommentsText}>
+        {
+          loadingSubComments && parentId === subCommentsParent
+            ? 'Loading...'
+            : `${kids.length} comments`
+        }
+      </Text>
+      </TouchableHighlight>
     </View>
   )
 }
@@ -46,7 +40,8 @@ const styles = StyleSheet.create({
   viewComments: {
     marginTop: 10,
     backgroundColor: '#fb7b13',
-    borderRadius: 5
+    borderRadius: 5,
+    marginRight: 5
   },
   viewCommentsText: {
     alignSelf: 'center',
