@@ -80,11 +80,13 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#333333',
-    fontSize: 28
+    fontSize: 30,
+    fontWeight: '900'
   },
   url: {
     paddingTop: 15,
-    paddingBottom: 15
+    paddingBottom: 15,
+    fontSize: 16
   },
   sub: {
     flexDirection: 'row',
@@ -99,11 +101,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#ff6600'
   },
-  commentsContainer: {
-
-  },
   comments: {
     color: '#00A287',
+    fontSize: 20,
     fontWeight: '800'
   }
 })
