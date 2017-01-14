@@ -17,14 +17,17 @@ const onLoadSubCommentsRequest = createAction(LOAD_SUB_COMMENTS_REQUEST)
 const onLoadSubCommentsSuccess = createAction(LOAD_SUB_COMMENTS_SUCCESS)
 const onLoadSubCommentsError = createAction(LOAD_SUB_COMMENTS_ERROR)
 
-const fetchComment = (id) => fetch(`${ROOT_URL}/item/${id}.json`)
-
-const getComments = (ids) => {
-  return Promise.all(ids.map(fetchComment))
-    .then((responses) => (
-      Promise.all(responses.map(res => res.json()))
-    ))
-}
+const fetchBuilder = (url, commentIds) => (
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ commentIds })
+  })
+  .then((res) => res.json())
+)
 
 export function loadComments (commentIds) {
   const url = `${ROOT_URL}/comments`
@@ -32,26 +35,20 @@ export function loadComments (commentIds) {
   return (dispatch) => {
     dispatch(onLoadCommentsRequest())
 
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ commentIds })
-    })
-      .then((res) => res.json())
-      .then((data) => dispatch(onLoadCommentsSuccess(data.comments)))
+    fetchBuilder(url, commentIds)
+      .then(({ comments }) => dispatch(onLoadCommentsSuccess(comments)))
       .catch((err) => dispatch(onLoadCommentsError(err)))
   }
 }
 
 export function loadSubComments (parentId, commentIds) {
+  const url = `${ROOT_URL}/comments/replies`
+
   return (dispatch) => {
     dispatch(onLoadSubCommentsRequest(parentId))
 
-    getSubComments(commentIds)
-      .then((comments) => dispatch(onLoadSubCommentsSuccess(comments)))
+    fetchBuilder(url, commentIds)
+      .then(({ comments }) => dispatch(onLoadSubCommentsSuccess(comments)))
       .catch((err) => dispatch(onLoadSubCommentsError(err)))
   }
 }

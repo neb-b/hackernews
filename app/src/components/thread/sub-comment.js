@@ -9,7 +9,6 @@ import HTMLView from 'react-native-htmlview'
 
 const SubComment = (props) => {
   const { text, time, by } = props
-  console.log('subComment', props);
   return (
     <View style={styles.subComment}>
       <HTMLView value={text} />
