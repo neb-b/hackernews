@@ -26,41 +26,27 @@ const getComments = (ids) => {
     ))
 }
 
-const getSubComments = (ids) => {
-  return Promise.all(ids.map(fetchComment))
-    .then((responses) => (
-      Promise.all(responses.map(res => res.json()))
-    ))
-    .then((comments) => {
-      const stillNeedToFetch = []
-      comments.forEach((comment) => {
-
-        if (comment.kids) {
-          stillNeedToFetch.push(comment.kids)
-        }
-      })
-
-      if (stillNeedToFetch.length) {
-
-      }
-
-      return comments
-    })
-}
-
 export function loadComments (commentIds) {
+  const url = `${ROOT_URL}/comments`
+
   return (dispatch) => {
     dispatch(onLoadCommentsRequest())
 
-    getComments(commentIds)
-      .then((comments) => dispatch(onLoadCommentsSuccess(comments)))
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ commentIds })
+    })
+      .then((res) => res.json())
+      .then((data) => dispatch(onLoadCommentsSuccess(data.comments)))
       .catch((err) => dispatch(onLoadCommentsError(err)))
   }
 }
 
 export function loadSubComments (parentId, commentIds) {
-
-
   return (dispatch) => {
     dispatch(onLoadSubCommentsRequest(parentId))
 

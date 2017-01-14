@@ -11,7 +11,7 @@ const fetchStories = (ids) => {
     .then((story) => story.data)
   )
 
-  return Promise.all(ids.map(fetchStory))
+  return Promise.all(ids.slice(0,30).map(fetchStory))
 }
 
 Router.get('/top', (req, res) => {
