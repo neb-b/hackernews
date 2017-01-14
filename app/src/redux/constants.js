@@ -1,4 +1,4 @@
-export const ROOT_URL = 'https://server-wheoqsnils.now.sh'
+export const ROOT_URL = 'http://localhost:3000'
 
 export const LOAD_STORIES_REQUEST = 'LOAD_STORIES_REQUEST'
 export const LOAD_STORIES_SUCCESS = 'LOAD_STORIES_SUCCESS'

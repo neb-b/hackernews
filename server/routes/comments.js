@@ -32,19 +32,4 @@ Router.post('/', (req, res) => {
     .catch((err) => res.send(err).status(409))
 })
 
-Router.post('/replies', (req, res) => {
-  const ids = req.body.commentIds
-  console.log('ids', ids);
-
-  fetchComments(ids)
-    .then((comments) => {
-      console.log('????????????????????????');
-      console.log('comments', comments);
-      //do parent/child sorting
-      res.send({comments}).status(200)
-    })
-    .catch((err) => res.send(err).status(409))
-})
-
-
 module.exports = Router

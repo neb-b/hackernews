@@ -8,6 +8,7 @@ import {
   LOAD_SUB_COMMENTS_ERROR,
   ROOT_URL
 } from '../constants'
+const URL = `${ROOT_URL}/comments`
 
 const onLoadCommentsRequest = createAction(LOAD_COMMENTS_REQUEST)
 const onLoadCommentsSuccess = createAction(LOAD_COMMENTS_SUCCESS)
@@ -30,24 +31,20 @@ const fetchBuilder = (url, commentIds) => (
 )
 
 export function loadComments (commentIds) {
-  const url = `${ROOT_URL}/comments`
-
   return (dispatch) => {
     dispatch(onLoadCommentsRequest())
 
-    fetchBuilder(url, commentIds)
+    fetchBuilder(URL, commentIds)
       .then(({ comments }) => dispatch(onLoadCommentsSuccess(comments)))
       .catch((err) => dispatch(onLoadCommentsError(err)))
   }
 }
 
 export function loadSubComments (parentId, commentIds) {
-  const url = `${ROOT_URL}/comments/replies`
-
   return (dispatch) => {
     dispatch(onLoadSubCommentsRequest(parentId))
 
-    fetchBuilder(url, commentIds)
+    fetchBuilder(URL, commentIds)
       .then(({ comments }) => dispatch(onLoadSubCommentsSuccess(comments)))
       .catch((err) => dispatch(onLoadSubCommentsError(err)))
   }
