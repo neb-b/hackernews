@@ -26,15 +26,19 @@ const Thread = (props) => {
     subCommentsParent,
   } = props
 
-  const renderHead = () => (
-    <Head navigator={navigator}
-      key={0}
-      title={title}
-      score={score}
-      time={time}
-      descendants={descendants}
-      url={url} />
-  )
+  const renderHead = () => {
+    console.log('rendering head');
+    return (
+      <Head
+        navigator={navigator}
+        key={0}
+        title={title}
+        score={score}
+        time={time}
+        descendants={descendants}
+        url={url} />
+    )
+  }
 
   const renderComment = (comment) => (
     <Comment

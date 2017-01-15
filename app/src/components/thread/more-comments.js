@@ -16,6 +16,8 @@ const MoreComments = (props) => {
     parentId
   } = props
 
+  const imLoading = loadingSubComments && parentId === subCommentsParent
+
   return (
     <View>
       <TouchableHighlight
@@ -25,10 +27,8 @@ const MoreComments = (props) => {
         onPress={() => !loadingSubComments && loadSubComments(parentId, kids)}
       >
       <Text style={styles.viewCommentsText}>
-        {
-          loadingSubComments && parentId === subCommentsParent
-            ? 'Loading...'
-            : `${kids.length} comments`
+        {imLoading && 'Loading...'}
+        {!imLoading && `${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`
         }
       </Text>
       </TouchableHighlight>
@@ -39,15 +39,17 @@ const MoreComments = (props) => {
 const styles = StyleSheet.create({
   viewComments: {
     marginTop: 10,
-    backgroundColor: '#fb7b13',
+    borderColor: '#ffa55c',
+    backgroundColor: '#fbfbfb',
+    borderWidth: 1,
     borderRadius: 5,
-    marginRight: 5
+    marginRight: 10
   },
   viewCommentsText: {
     alignSelf: 'center',
+    color: '#ffa55c',
     paddingTop: 5,
     paddingBottom: 5,
-    color: '#fff',
     fontWeight: '700'
   },
 })

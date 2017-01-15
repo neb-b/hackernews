@@ -12,13 +12,15 @@ const Nav = ({ title, navigator, index  }) => {
       <StatusBar barStyle='light-content' />
       <View style={styles.statusBarText}>
         {
-          index === 0
-          ? <View />
-          : <Text
-            style={styles.text}
-            onPress={() => navigator.pop()}>Back</Text>
+          index !== 0 && (
+            <Text
+              style={styles.text}
+              onPress={() => navigator.pop()}>
+              Back
+            </Text>
+          )
         }
-        <Text style={styles.text}>{title}</Text>
+        <Text style={[styles.text, styles.center]}>{title}</Text>
         <View />
       </View>
     </View>
@@ -35,11 +37,13 @@ const styles = StyleSheet.create({
   },
   statusBarText: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
   },
   text: {
     color: '#f2f2f2',
     fontSize: 20
+  },
+  center: {
+    paddingLeft: 200
   }
 })
 

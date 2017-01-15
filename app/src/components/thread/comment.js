@@ -8,27 +8,28 @@ import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 import MoreComments from './more-comments'
 
-const Comment = (props) => {
-  const {
-    text,
-    id,
-    by,
-    kids,
-    time,
-    score,
-    loadSubComments,
-    loadingSubComments,
-    subCommentsParent,
-    reply
-  } = props
-
-  return (
+const Comment = ({
+  text,
+  id,
+  by,
+  kids,
+  time,
+  score,
+  loadSubComments,
+  loadingSubComments,
+  subCommentsParent,
+  reply,
+  parent,
+  deleted
+}) => deleted ? null : (
     <View style={reply ? styles.reply : styles.comment}>
       <HTMLView value={text} style={styles.text} />
-      <Text style={styles.info}>
-        {moment(time * 1000).fromNow()}
-        by {by}
-      </Text>
+      {!deleted &&
+        <Text style={styles.info}>
+          {moment(time * 1000).fromNow()}
+          by {by}
+        </Text>
+      }
 
       {kids && kids.length && typeof kids[0] === 'number' && (
         <MoreComments
@@ -39,11 +40,12 @@ const Comment = (props) => {
       )}
 
       {kids && kids.length && typeof kids[0] === 'object' && (
-        kids.map((comment) => (
+        kids.map((comment) => !comment.deleted && (
           <Comment
             key={comment.id}
             {...comment}
             loadSubComments={loadSubComments}
+            parent={id}
             reply={true} />
         ))
       )}
@@ -51,14 +53,13 @@ const Comment = (props) => {
       {!reply && <View style={styles.seperator} />}
     </View>
   )
-}
 
 const styles = StyleSheet.create({
   comment: {
     padding: 10
   },
   reply: {
-    paddingTop: 5,
+    paddingTop: 10,
     paddingBottom: 5,
     paddingLeft: 10,
     borderLeftWidth: 1,
