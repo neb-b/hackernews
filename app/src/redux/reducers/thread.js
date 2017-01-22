@@ -8,6 +8,34 @@ import {
   // REFRESH_COMMENTS_ERROR
 } from '../constants'
 
+const updateComments = (comments, commentChain, replies) => {
+  console.log('HERE WE GO ________________');
+  console.log('comments', comments);
+  console.log('commentChain', commentChain);
+  console.log('replies', replies);
+
+  if (commentChain.length === 1) {
+    return comments.map((comment) => {
+      return comment.id === commentChain[0]
+        ? Object.assign(comment, { kids: replies })
+        : comment
+    })
+  } else {
+    console.log('not 1');
+      return comments.map((comment) => {
+        console.log('not 1 search', comment);
+        if (comment.id === commentChain[0]) {
+          console.log('found it');
+
+          const kids = updateComments(comment.kids, commentChain.slice(1, commentChain.length), replies)
+          return Object.assign(comment, { kids })
+        } else {
+          return comment
+        }
+      })
+  }
+}
+
 const initialState = {
   loading: true,
   refreshing: false,
@@ -34,19 +62,13 @@ export default handleActions({
     loadingSubComments: true,
     subCommentsParent: payload
   }),
-  LOAD_SUB_COMMENTS_SUCCESS: (state, { payload }) => {
-    const subComments = payload
-    const parent = subComments[0].parent
+  LOAD_SUB_COMMENTS_SUCCESS: (state, { payload: { commentChain, comments } }) => {
 
-    const newComments = state.comments.map((comment) => {
-      if (comment.id === parent) {
-        comment.kids = subComments
-      }
-      return comment
-    })
-
+    const newComments = updateComments(state.comments, commentChain, comments)
+    console.log('new comments', newComments);
     return {
       ...state,
+      comments: newComments,
       loadingSubComments: false
     }
   },

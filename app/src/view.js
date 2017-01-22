@@ -8,7 +8,7 @@ import StatusBar from './components/common/status-bar'
 const App = ({ Component, viewTitle, navigator, index, ...props }) => {
   return (
     <View style={styles.view}>
-      <StatusBar navigator={navigator} title={viewTitle} index={index} />
+      <StatusBar navigator={navigator} title={viewTitle} viewIndex={index} />
       <Component navigator={navigator} {...props}/>
     </View>
   )

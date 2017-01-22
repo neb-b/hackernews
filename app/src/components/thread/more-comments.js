@@ -13,10 +13,15 @@ const MoreComments = (props) => {
     loadingSubComments,
     subCommentsParent,
     subComments,
-    parentId
+    id,
+    parents
   } = props
 
-  const imLoading = loadingSubComments && parentId === subCommentsParent
+  const imLoading = loadingSubComments && id
+
+
+  console.log('parents');
+  // console.log('commentFamily', commentFamily);
 
   return (
     <View>
@@ -24,7 +29,7 @@ const MoreComments = (props) => {
         underlayColor='#4e6c4c'
         activeOpacity={loadingSubComments ? 1 : .6}
         style={styles.viewComments}
-        onPress={() => !loadingSubComments && loadSubComments(parentId, kids)}
+        onPress={() => {loadSubComments(parents || [id], kids)}}
       >
       <Text style={styles.viewCommentsText}>
         {imLoading && 'Loading...'}

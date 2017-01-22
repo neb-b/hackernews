@@ -27,6 +27,10 @@ const fetchBuilder = (url, commentIds) => (
     },
     body: JSON.stringify({ commentIds })
   })
+  .then((res) => {
+    console.log('RESPONSE');
+    return res
+  })
   .then((res) => res.json())
 )
 
@@ -40,12 +44,12 @@ export function loadComments (commentIds) {
   }
 }
 
-export function loadSubComments (parentId, commentIds) {
+export function loadSubComments (commentChain, commentIds) {
   return (dispatch) => {
-    dispatch(onLoadSubCommentsRequest(parentId))
+    dispatch(onLoadSubCommentsRequest(commentChain))
 
     fetchBuilder(URL, commentIds)
-      .then(({ comments }) => dispatch(onLoadSubCommentsSuccess(comments)))
+      .then(({ comments }) => dispatch(onLoadSubCommentsSuccess({commentChain, comments})))
       .catch((err) => dispatch(onLoadSubCommentsError(err)))
   }
 }

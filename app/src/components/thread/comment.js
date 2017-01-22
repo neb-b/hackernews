@@ -8,51 +8,62 @@ import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 import MoreComments from './more-comments'
 
-const Comment = ({
-  text,
-  id,
-  by,
-  kids,
-  time,
-  score,
-  loadSubComments,
-  loadingSubComments,
-  subCommentsParent,
-  reply,
-  parent,
-  deleted
-}) => deleted ? null : (
-    <View style={reply ? styles.reply : styles.comment}>
-      <HTMLView value={text} style={styles.text} />
-      {!deleted &&
-        <Text style={styles.info}>
-          {moment(time * 1000).fromNow()}
-          by {by}
-        </Text>
-      }
+const Comment = (props) => {
+  const {
+    text,
+    id,
+    by,
+    kids,
+    time,
+    score,
+    loadSubComments,
+    loadingSubComments,
+    subCommentsParent,
+    reply,
+    parent,
+    deleted,
+    parents
+  } = props
 
-      {kids && kids.length && typeof kids[0] === 'number' && (
-        <MoreComments
-          kids={kids}
-          loadSubComments={loadSubComments}
-          loadingSubComments={loadingSubComments}
-          subCommentsParent={subCommentsParent}/>
-      )}
+  if (reply) {
+    // console.log('parents', parents),
+    // console.log('id', id);
+  }
 
-      {kids && kids.length && typeof kids[0] === 'object' && (
-        kids.map((comment) => !comment.deleted && (
-          <Comment
-            key={comment.id}
-            {...comment}
+  return deleted ? null : (
+      <View style={reply ? styles.reply : styles.comment}>
+        <HTMLView value={text} style={styles.text} />
+        {!deleted &&
+          <Text style={styles.info}>
+            {moment(time * 1000).fromNow()}
+            by {by}
+          </Text>
+        }
+
+        {kids && kids.length && typeof kids[0] === 'number' && (
+          <MoreComments
+            kids={kids}
             loadSubComments={loadSubComments}
-            parent={id}
-            reply={true} />
-        ))
-      )}
+            loadingSubComments={loadingSubComments}
+            parents={parents}
+            id={id}/>
+        )}
 
-      {!reply && <View style={styles.seperator} />}
-    </View>
-  )
+        {kids && kids.length && typeof kids[0] === 'object' && (
+          kids.map((comment) => !comment.deleted && (
+            <Comment
+              key={comment.id}
+              {...comment}
+              loadSubComments={loadSubComments}
+              parents={parents && parent.length ? parents.push(id) : [id]}
+              reply={true} />
+          ))
+        )}
+
+        {!reply && <View style={styles.seperator} />}
+      </View>
+    )
+}
 
 const styles = StyleSheet.create({
   comment: {

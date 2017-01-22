@@ -5,24 +5,36 @@ import {
   Text,
   StyleSheet
 } from 'react-native'
+import { Col, Grid } from "react-native-easy-grid";
 
-const Nav = ({ title, navigator, index  }) => {
+
+const Nav = ({ title, navigator, viewIndex, settings  }) => {
   return (
     <View style={styles.statusBar}>
       <StatusBar barStyle='light-content' />
-      <View style={styles.statusBarText}>
-        {
-          index !== 0 && (
-            <Text
-              style={styles.text}
-              onPress={() => navigator.pop()}>
-              Back
-            </Text>
-          )
-        }
-        <Text style={[styles.text, styles.center]}>{title}</Text>
-        <View />
-      </View>
+      <Grid>
+        <Col>
+          {
+            viewIndex !== 0 && (
+              <Text
+                style={styles.text}
+                onPress={() => navigator.pop()}>
+                Back
+              </Text>
+            )
+          }
+        </Col>
+        <Col>
+          <Text style={[styles.text, styles.center]}>{title}</Text>
+        </Col>
+        <Col>
+          {
+            settings && (
+              <Text>Settings</Text>
+            )
+          }
+        </Col>
+      </Grid>
     </View>
   )
 }
@@ -35,15 +47,12 @@ const styles = StyleSheet.create({
     paddingRight: 7,
     backgroundColor: '#0C6A5A'
   },
-  statusBarText: {
-    flexDirection: 'row',
-  },
   text: {
     color: '#f2f2f2',
-    fontSize: 20
+    fontSize: 22
   },
   center: {
-    paddingLeft: 200
+    textAlign: 'center'
   }
 })
 

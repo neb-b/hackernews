@@ -21,13 +21,10 @@ const Thread = (props) => {
     descendants,
     url,
     navigator,
-    loadSubComments,
-    loadingSubComments,
-    subCommentsParent,
+    loadSubComments
   } = props
 
   const renderHead = () => {
-    console.log('rendering head');
     return (
       <Head
         navigator={navigator}
@@ -44,9 +41,7 @@ const Thread = (props) => {
     <Comment
       key={comment.id}
       {...comment}
-      loadSubComments={loadSubComments}
-      loadingSubComments={loadingSubComments}
-      subCommentsParent={subCommentsParent} />
+      loadSubComments={loadSubComments} />
   )
 
   return (
