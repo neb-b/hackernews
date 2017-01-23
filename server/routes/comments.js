@@ -9,7 +9,6 @@ const fetchComments = (ids) => {
   const fetchComment = (id) => (
     axios(`${ROOT_URL}/item/${id}.json`)
     .then((comment) => {
-      console.log('comment', comment.data);
       return comment.data
     })
     .catch((err) => console.log('err', err))
@@ -17,7 +16,6 @@ const fetchComments = (ids) => {
 
   return Promise.all(ids.map(fetchComment))
     .then((comments) => {
-      console.log('comments here', comments);
       return comments
     })
 }
