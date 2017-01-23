@@ -37,14 +37,17 @@ const Comment = (props) => {
   } = props
 
   return deleted ? null : (
-      <View style={reply ? styles.reply : styles.comment}>
-        <HTMLView value={text} style={styles.text} />
-        {!deleted &&
-          <Text style={styles.info}>
-            {moment(time * 1000).fromNow()}
-            by {by}
-          </Text>
-        }
+      <View style={reply ? styles.replyContainer : styles.commentContainer}>
+        {reply && <View style={styles.seperator} />}
+
+        <Text style={styles.info}>
+          {moment(time * 1000).fromNow()}
+          by {by}
+        </Text>
+
+        <View style={reply && styles.reply}>
+          <HTMLView value={text} style={styles.text} />
+        </View>
 
         {kids && kids.length && typeof kids[0] === 'number' && (
           <MoreComments
@@ -65,34 +68,34 @@ const Comment = (props) => {
               reply={true} />
           ))
         )}
-
-        {!reply && <View style={styles.seperator} />}
       </View>
     )
 }
 
 const styles = StyleSheet.create({
-  comment: {
-    padding: 10
+  commentContainer: {
+    marginLeft: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 30,
+    borderLeftWidth: 1,
+    borderLeftColor: '#0C6A5A',
   },
-  reply: {
-    paddingTop: 10,
-    paddingBottom: 5,
+  replyContainer: {
+    marginTop: 10,
     paddingLeft: 10,
     borderLeftWidth: 1,
     borderLeftColor: '#0C6A5A',
-    backgroundColor: '#ffdfc8'
   },
-  text: {
-    fontSize: 18
+  reply: {
+    paddingTop: 10
   },
   info: {
     paddingTop: 5,
     paddingBottom: 5,
-    color: '#ff6300'
+    color: '#9f9f9f'
   },
   seperator: {
-    paddingTop: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#f96e1530'
   }

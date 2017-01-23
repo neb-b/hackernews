@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#f2f2f2',
-    fontSize: 22
+    fontSize: 22,
+    overflow: 'visible'
   },
   center: {
     textAlign: 'center'

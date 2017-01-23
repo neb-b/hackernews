@@ -26,12 +26,12 @@ const Head = (props) => {
         }
       })}>
       <View>
-        <View style={styles.aboveTitle}>
+        <Text style={styles.title}>{title}</Text>
+
+        <View style={styles.siteTime}>
           <Text style={styles.url}>{formatUrl(url)}</Text>
           <Text style={styles.time}>{fromNow(time)}</Text>
         </View>
-
-        <Text style={styles.title}>{title}</Text>
 
         <View style={styles.belowTitle}>
           <Text style={styles.score}>{score} points</Text>
@@ -47,11 +47,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     paddingBottom: 20,
-    marginBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#a8a8a8'
+    marginBottom: 10
   },
-  aboveTitle: {
+  siteTime: {
     flexDirection: 'row',
   },
   url: {
@@ -64,8 +62,11 @@ const styles = StyleSheet.create({
     color: '#828282'
   },
   title: {
+    paddingTop: 10,
+    paddingBottom: 10,
     fontSize: 30,
-    paddingTop: 10
+    color: '#333333',
+    fontWeight: '900'
   },
   belowTitle: {
     flexDirection: 'row',

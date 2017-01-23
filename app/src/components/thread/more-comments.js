@@ -30,19 +30,15 @@ const MoreComments = ({
 
 const styles = StyleSheet.create({
   viewComments: {
-    marginTop: 10,
-    borderColor: '#ffa55c',
-    backgroundColor: '#fbfbfb',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginRight: 10
+    margin: 10
   },
   viewCommentsText: {
     alignSelf: 'center',
-    color: '#ffa55c',
+    color: '#1d1d1d',
     paddingTop: 5,
     paddingBottom: 5,
-    fontWeight: '700'
+    fontWeight: '700',
+    fontSize: 18
   },
 })
 
