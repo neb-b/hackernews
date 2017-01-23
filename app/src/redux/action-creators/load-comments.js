@@ -27,10 +27,6 @@ const fetchBuilder = (url, commentIds) => (
     },
     body: JSON.stringify({ commentIds })
   })
-  .then((res) => {
-    console.log('RESPONSE');
-    return res
-  })
   .then((res) => res.json())
 )
 
@@ -49,11 +45,9 @@ export function loadSubComments (id, parents, kids) {
   if (parents && parents.length) {
     commentChain = parents.slice()
     commentChain.push(id)
-    console.log('maybe?!!!', commentChain);
   } else {
     commentChain = [id]
   }
-  console.log('commentChain', commentChain);
 
   return (dispatch) => {
     dispatch(onLoadSubCommentsRequest(commentChain))

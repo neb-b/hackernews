@@ -6,29 +6,18 @@ import {
   TouchableHighlight
 } from 'react-native'
 
-const MoreComments = (props) => {
-  const {
-    kids,
-    loadSubComments,
-    id,
-    parents
-  } = props
-
-  // const imLoading = loadingSubComments && id
-
-
-  // console.log('parents', parents);
-  // console.log('commentFamily', commentFamily);
-
+const MoreComments = ({
+  kids,
+  loadSubComments,
+  id,
+  parents
+}) => {
   return (
     <View>
       <TouchableHighlight
         underlayColor='#4e6c4c'
         style={styles.viewComments}
-        onPress={() => {
-          console.log('REPLY PRESSED', props);
-          loadSubComments(id, parents, kids)
-        }}
+        onPress={() => loadSubComments(id, parents, kids)}
       >
       <Text style={styles.viewCommentsText}>
         {`${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`
