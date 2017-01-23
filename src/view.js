@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet
 } from 'react-native'
-import StatusBar from './components/common/status-bar'
+import StatusBar from './components/global/status-bar'
 
 const App = ({ Component, viewTitle, navigator, index, ...props }) => {
   return (

@@ -15,7 +15,7 @@ const MoreComments = ({
   return (
     <View>
       <TouchableHighlight
-        underlayColor='#4e6c4c'
+        underlayColor='#d97238'
         style={styles.viewComments}
         onPress={() => loadSubComments(id, parents, kids)}
       >
@@ -30,7 +30,8 @@ const MoreComments = ({
 
 const styles = StyleSheet.create({
   viewComments: {
-    margin: 10
+    margin: 10,
+    borderRadius: 10
   },
   viewCommentsText: {
     alignSelf: 'center',
