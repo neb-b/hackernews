@@ -10,9 +10,9 @@ import {
 
 const updateComments = (comments, commentChain, replies) => {
   console.log('HERE WE GO ________________');
-  console.log('comments', comments);
-  console.log('commentChain', commentChain);
-  console.log('replies', replies);
+  // console.log('comments', comments);
+  // console.log('commentChain', commentChain);
+  // console.log('replies', replies);
 
   if (commentChain.length === 1) {
     return comments.map((comment) => {
@@ -21,9 +21,9 @@ const updateComments = (comments, commentChain, replies) => {
         : comment
     })
   } else {
-    console.log('not 1');
+    console.log('ITS A NESTED REPLY');
       return comments.map((comment) => {
-        console.log('not 1 search', comment);
+        // console.log('not 1 search', comment);
         if (comment.id === commentChain[0]) {
           console.log('found it');
 
@@ -40,8 +40,9 @@ const initialState = {
   loading: true,
   refreshing: false,
   error: null,
-  comments: [],
-  loadingSubComments: null //
+  comments: [{
+    parents: []
+  }],
 }
 
 export default handleActions({

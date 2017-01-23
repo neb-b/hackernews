@@ -8,6 +8,17 @@ import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 import MoreComments from './more-comments'
 
+const getParents = (parents, id) => {
+  let commentChain = []
+
+  if (parents && parents.length) {
+    commentChain = parents
+  }
+
+  commentChain.push(id)
+  return commentChain
+}
+
 const Comment = (props) => {
   const {
     text,
@@ -25,11 +36,6 @@ const Comment = (props) => {
     parents
   } = props
 
-  if (reply) {
-    // console.log('parents', parents),
-    // console.log('id', id);
-  }
-
   return deleted ? null : (
       <View style={reply ? styles.reply : styles.comment}>
         <HTMLView value={text} style={styles.text} />
@@ -44,7 +50,6 @@ const Comment = (props) => {
           <MoreComments
             kids={kids}
             loadSubComments={loadSubComments}
-            loadingSubComments={loadingSubComments}
             parents={parents}
             id={id}/>
         )}
@@ -55,7 +60,8 @@ const Comment = (props) => {
               key={comment.id}
               {...comment}
               loadSubComments={loadSubComments}
-              parents={parents && parent.length ? parents.push(id) : [id]}
+              parentId={id}
+              parents={getParents(parents, id)}
               reply={true} />
           ))
         )}

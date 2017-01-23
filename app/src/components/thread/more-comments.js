@@ -10,30 +10,28 @@ const MoreComments = (props) => {
   const {
     kids,
     loadSubComments,
-    loadingSubComments,
-    subCommentsParent,
-    subComments,
     id,
     parents
   } = props
 
-  const imLoading = loadingSubComments && id
+  // const imLoading = loadingSubComments && id
 
 
-  console.log('parents');
+  // console.log('parents', parents);
   // console.log('commentFamily', commentFamily);
 
   return (
     <View>
       <TouchableHighlight
         underlayColor='#4e6c4c'
-        activeOpacity={loadingSubComments ? 1 : .6}
         style={styles.viewComments}
-        onPress={() => {loadSubComments(parents || [id], kids)}}
+        onPress={() => {
+          console.log('REPLY PRESSED', props);
+          loadSubComments(id, parents, kids)
+        }}
       >
       <Text style={styles.viewCommentsText}>
-        {imLoading && 'Loading...'}
-        {!imLoading && `${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`
+        {`${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`
         }
       </Text>
       </TouchableHighlight>
