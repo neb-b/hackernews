@@ -5,10 +5,10 @@ import {
 } from 'react-native'
 import StatusBar from './components/global/status-bar'
 
-const App = ({ Component, viewTitle, navigator, index, ...props }) => {
+const App = ({ Component, viewTitle, navigator, index, outside, ...props }) => {
   return (
     <View style={styles.view}>
-      <StatusBar navigator={navigator} title={viewTitle} viewIndex={index} />
+      <StatusBar navigator={navigator} title={viewTitle} viewIndex={index} outside={outside}/>
       <Component navigator={navigator} {...props}/>
     </View>
   )

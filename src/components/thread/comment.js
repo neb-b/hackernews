@@ -80,8 +80,6 @@ const styles = StyleSheet.create({
   commentContainer: {
     marginTop: 10,
     padding: 10,
-    borderLeftWidth: 1,
-    borderLeftColor: '#bbbbbb',
     backgroundColor: '#fcfcfc'
   },
   replyContainer: {

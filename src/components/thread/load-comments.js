@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5
   },
   viewCommentsText: {
-    color: '#1d1d1d',
+    color: '#125580',
     paddingTop: 5,
     paddingBottom: 5,
     fontWeight: '700',

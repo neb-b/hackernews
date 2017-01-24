@@ -46,23 +46,19 @@ const Thread = (props) => {
       commentThatsLoading={commentThatsLoading} />
   )
 
+  const renderComments = () => loading
+    ? <ActivityIndicator
+        key={1}
+        style={styles.spinner}
+        color='#125580'
+        size='large'/>
+    : comments.map(renderComment)
+
   return (
     <View>
-      {
-        loading
-        ? (<View>
-            {renderHead()}
-            <ActivityIndicator
-              style={styles.spinner}
-              color='#125580'
-              size='large'/>
-          </View>)
-        : (
-          <ScrollView style={styles.scrollView}>
-            {[renderHead(), comments.map(renderComment)]}
-          </ScrollView>
-        )
-      }
+      <ScrollView style={styles.scrollView}>
+        {[renderHead(), renderComments()]}
+      </ScrollView>
     </View>
   )
 }

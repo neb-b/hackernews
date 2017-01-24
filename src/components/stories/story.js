@@ -21,19 +21,18 @@ const Story = (props) => {
     url
  } = props
 
- //TODO: detect if url is hackernews and navigate to Thread
-
   return (
     <TouchableHighlight
       style={styles.story}
       underlayColor='#53887f'
       activeOpacity={.8}
       onPress={() => navigator.push({
-        title: 'Hacker News',
+        title: formatUrl(url),
         component: Web,
         index: 1,
         props: {
-          url
+          url,
+          outside: true
         }
       })}>
       <View>

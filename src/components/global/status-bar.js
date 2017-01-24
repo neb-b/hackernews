@@ -8,7 +8,7 @@ import {
 import { Col, Grid } from "react-native-easy-grid";
 
 
-const Nav = ({ title, navigator, viewIndex, settings  }) => {
+const Nav = ({ title, navigator, viewIndex, settings, outside  }) => {
   return (
     <View style={styles.statusBar}>
       <StatusBar barStyle='light-content' />
@@ -25,7 +25,7 @@ const Nav = ({ title, navigator, viewIndex, settings  }) => {
           }
         </Col>
         <Col>
-          <Text style={[styles.text, styles.center]}>{title}</Text>
+          <Text style={[styles.text, outside && styles.title]}>{title}</Text>
         </Col>
         <Col>
           {
@@ -49,11 +49,12 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#f2f2f2',
-    fontSize: 22,
-    overflow: 'visible'
+    fontSize: 22
   },
-  center: {
-    textAlign: 'center'
+  title: {
+    fontSize: 14,
+    textAlign: 'center',
+    paddingTop: 5
   }
 })
 
