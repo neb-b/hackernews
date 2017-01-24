@@ -54,7 +54,7 @@ const Thread = (props) => {
             {renderHead()}
             <ActivityIndicator
               style={styles.spinner}
-              color='#66a3b4'
+              color='#125580'
               size='large'/>
           </View>)
         : (

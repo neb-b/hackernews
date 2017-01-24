@@ -25,7 +25,7 @@ const Stories = (props) => {
         loading
         ? <ActivityIndicator
             style={styles.spinner}
-            color='#0C6A5A'
+            color='#125580'
             size='large'/>
         : <ListOfStories
             stories={stories}

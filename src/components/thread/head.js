@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     paddingBottom: 20,
-    marginBottom: 10
+    backgroundColor: '#fcfcfc'
   },
   siteTime: {
     flexDirection: 'row',
@@ -75,10 +75,10 @@ const styles = StyleSheet.create({
   },
   score: {
     fontSize: 18,
-    color: '#ff6600'
+    color: '#FF9C1F'
   },
   comments: {
-    color: '#00A287',
+    color: '#125580',
     fontSize: 18,
   },
 })

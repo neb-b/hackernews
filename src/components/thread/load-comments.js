@@ -6,7 +6,7 @@ import {
   TouchableHighlight
 } from 'react-native'
 
-const MoreComments = ({
+const LoadComments = ({
   kids,
   loadSubComments,
   id,
@@ -15,12 +15,12 @@ const MoreComments = ({
 }) => {
   const imLoading = commentThatsLoading === id
   return (
-    <View>
-      <TouchableHighlight
-        underlayColor='#d97238'
+    <TouchableHighlight
+        underlayColor='#dfdfdf'
+        activeOpacity={.5}
         style={styles.viewComments}
         onPress={() => loadSubComments(id, parents, kids)}
-      >
+    >
       <Text style={styles.viewCommentsText}>
         {
           imLoading
@@ -28,18 +28,17 @@ const MoreComments = ({
           : `${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`
         }
       </Text>
-      </TouchableHighlight>
-    </View>
+    </TouchableHighlight>
   )
 }
 
 const styles = StyleSheet.create({
   viewComments: {
-    margin: 10,
-    borderRadius: 10
+    borderRadius: 10,
+    paddingRight: 5,
+    paddingLeft: 5
   },
   viewCommentsText: {
-    alignSelf: 'center',
     color: '#1d1d1d',
     paddingTop: 5,
     paddingBottom: 5,
@@ -48,4 +47,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default MoreComments
+export default LoadComments

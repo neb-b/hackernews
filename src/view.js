@@ -17,7 +17,7 @@ const App = ({ Component, viewTitle, navigator, index, ...props }) => {
 const styles = StyleSheet.create({
   view: {
     flex: 1,
-    backgroundColor: '#fbfbfb'
+    backgroundColor: '#f5f5f5'
   }
 })
 

@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
-import MoreComments from './more-comments'
+import LoadComments from './load-comments'
 
 const getParents = (parents, id) => {
   let commentChain = []
@@ -39,67 +39,65 @@ const Comment = (props) => {
 
   return deleted ? null : (
       <View style={reply ? styles.replyContainer : styles.commentContainer}>
-        {reply && <View style={styles.seperator} />}
+        <View style={reply ? '' : styles.commentPadding}>
+          <View style={reply && styles.reply}>
+            <HTMLView value={text} style={styles.text} />
+          </View>
 
-        <Text style={styles.info}>
-          {moment(time * 1000).fromNow()}
-          by {by}
-        </Text>
+          <View style={styles.actions}>
+            <Text style={styles.info}>
+              {moment(time * 1000).fromNow()}
+              by {by}
+            </Text>
+            {kids && kids.length && typeof kids[0] === 'number' && (
+              <LoadComments
+                kids={kids}
+                loadSubComments={loadSubComments}
+                parents={parents}
+                id={id}
+                commentThatsLoading={commentThatsLoading}/>
+            )}
+          </View>
 
-        <View style={reply && styles.reply}>
-          <HTMLView value={text} style={styles.text} />
+
+          {kids && kids.length && typeof kids[0] === 'object' && (
+            kids.map((comment) => !comment.deleted && (
+              <Comment
+                key={comment.id}
+                {...comment}
+                loadSubComments={loadSubComments}
+                parentId={id}
+                parents={getParents(parents, id)}
+                reply={true} />
+            ))
+          )}
         </View>
-
-        {kids && kids.length && typeof kids[0] === 'number' && (
-          <MoreComments
-            kids={kids}
-            loadSubComments={loadSubComments}
-            parents={parents}
-            id={id}
-            commentThatsLoading={commentThatsLoading}/>
-        )}
-
-        {kids && kids.length && typeof kids[0] === 'object' && (
-          kids.map((comment) => !comment.deleted && (
-            <Comment
-              key={comment.id}
-              {...comment}
-              loadSubComments={loadSubComments}
-              parentId={id}
-              parents={getParents(parents, id)}
-              reply={true} />
-          ))
-        )}
       </View>
     )
 }
 
 const styles = StyleSheet.create({
   commentContainer: {
-    marginLeft: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 30,
+    marginTop: 10,
+    padding: 10,
     borderLeftWidth: 1,
-    borderLeftColor: '#0C6A5A',
+    borderLeftColor: '#bbbbbb',
+    backgroundColor: '#fcfcfc'
   },
   replyContainer: {
-    marginTop: 10,
+    marginTop: 20,
     paddingLeft: 10,
     borderLeftWidth: 1,
-    borderLeftColor: '#0C6A5A',
+    borderLeftColor: '#bbbbbb',
   },
-  reply: {
-    paddingTop: 10
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 5
   },
   info: {
     paddingTop: 5,
-    paddingBottom: 5,
     color: '#9f9f9f'
-  },
-  seperator: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#f96e1530'
   }
 })
 

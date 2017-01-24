@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     borderBottomWidth: 1,
-    borderColor: '#66a3b430'
+    backgroundColor: '#fcfcfc',
+    borderColor: '#dddddd'
   },
   title: {
     color: '#333333',
@@ -99,10 +100,10 @@ const styles = StyleSheet.create({
   score: {
     paddingTop: 5,
     fontSize: 16,
-    color: '#ff6600'
+    color: '#125580'
   },
   comments: {
-    color: '#00A287',
+    color: '#FF9C1F',
     fontSize: 20,
     fontWeight: '800'
   }
