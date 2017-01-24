@@ -24,7 +24,7 @@ const Story = (props) => {
   return (
     <TouchableHighlight
       style={styles.story}
-      underlayColor='#53887f'
+      underlayColor='#12558030'
       activeOpacity={.8}
       onPress={() => navigator.push({
         title: formatUrl(url),

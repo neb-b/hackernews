@@ -16,7 +16,6 @@ const Head = (props) => {
     <TouchableHighlight
       style={styles.head}
       underlayColor='#12558030'
-      activeOpacity={.8}
       onPress={() => navigator.push({
         title: formatUrl(url),
         component: Web,

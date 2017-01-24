@@ -39,11 +39,10 @@ const styles = StyleSheet.create({
     paddingLeft: 5
   },
   viewCommentsText: {
-    color: '#125580',
+    color: '#3FAFF7',
     paddingTop: 5,
     paddingBottom: 5,
-    fontWeight: '700',
-    fontSize: 18
+    fontSize: 16
   },
 })
 
