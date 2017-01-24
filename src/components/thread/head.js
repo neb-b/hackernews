@@ -15,14 +15,15 @@ const Head = (props) => {
   return (
     <TouchableHighlight
       style={styles.head}
-      underlayColor='#53887f'
+      underlayColor='#12558030'
       activeOpacity={.8}
       onPress={() => navigator.push({
-        title: 'Hacker News',
+        title: formatUrl(url),
         component: Web,
         index: 2,
         props: {
-          url
+          url,
+          outside: true
         }
       })}>
       <View>
@@ -75,11 +76,13 @@ const styles = StyleSheet.create({
   },
   score: {
     fontSize: 18,
-    color: '#FF9C1F'
+    color: '#FF9C1F',
+    fontWeight: '700'
   },
   comments: {
     color: '#125580',
     fontSize: 18,
+    fontWeight: '700'
   },
 })
 
