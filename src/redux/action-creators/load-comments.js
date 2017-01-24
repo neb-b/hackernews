@@ -50,7 +50,7 @@ export function loadSubComments (id, parents, kids) {
   }
 
   return (dispatch) => {
-    dispatch(onLoadSubCommentsRequest(commentChain))
+    dispatch(onLoadSubCommentsRequest(id))
 
     fetchBuilder(URL, kids)
       .then(({ comments }) => dispatch(onLoadSubCommentsSuccess({commentChain, comments})))

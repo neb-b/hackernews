@@ -33,7 +33,8 @@ const Comment = (props) => {
     reply,
     parent,
     deleted,
-    parents
+    parents,
+    commentThatsLoading
   } = props
 
   return deleted ? null : (
@@ -54,7 +55,8 @@ const Comment = (props) => {
             kids={kids}
             loadSubComments={loadSubComments}
             parents={parents}
-            id={id}/>
+            id={id}
+            commentThatsLoading={commentThatsLoading}/>
         )}
 
         {kids && kids.length && typeof kids[0] === 'object' && (

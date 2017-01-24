@@ -49,7 +49,7 @@ export default handleActions({
   LOAD_SUB_COMMENTS_REQUEST: (state, { payload }) => ({
     ...state,
     loadingSubComments: true,
-    subCommentsParent: payload
+    commentThatsLoading: payload
   }),
   LOAD_SUB_COMMENTS_SUCCESS: (state, { payload: { commentChain, comments } }) => {
     const newComments = updateComments(state.comments, commentChain, comments)

@@ -10,8 +10,10 @@ const MoreComments = ({
   kids,
   loadSubComments,
   id,
-  parents
+  parents,
+  commentThatsLoading
 }) => {
+  const imLoading = commentThatsLoading === id
   return (
     <View>
       <TouchableHighlight
@@ -20,7 +22,10 @@ const MoreComments = ({
         onPress={() => loadSubComments(id, parents, kids)}
       >
       <Text style={styles.viewCommentsText}>
-        {`${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`
+        {
+          imLoading
+          ? 'Loading...'
+          : `${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`
         }
       </Text>
       </TouchableHighlight>
