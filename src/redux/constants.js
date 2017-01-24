@@ -1,4 +1,6 @@
-export const ROOT_URL = 'http://192.168.1.11:3000'
+import { API_ENDPOINT } from 'react-native-dotenv'
+
+export const ROOT_URL = API_ENDPOINT
 
 export const LOAD_STORIES_REQUEST = 'LOAD_STORIES_REQUEST'
 export const LOAD_STORIES_SUCCESS = 'LOAD_STORIES_SUCCESS'

@@ -1,31 +1,32 @@
 {
-	"name": "hackernews",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"async": "^2.1.4",
-		"moment": "^2.17.1",
-		"react": "~15.4.0-rc.4",
-		"react-native": "0.40.0",
-		"react-native-easy-grid": "^0.1.8",
-		"react-native-htmlview": "^0.5.0",
-		"react-redux": "^5.0.1",
-		"redux": "^3.6.0",
-		"redux-actions": "^1.2.0",
-		"redux-logger": "^2.7.4",
-		"redux-promise": "^0.5.3",
-		"redux-thunk": "^2.1.0"
-	},
-	"devDependencies": {
-		"babel-jest": "18.0.0",
-		"jest": "18.1.0",
-		"react-test-renderer": "~15.4.0-rc.4"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "hackernews",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "async": "^2.1.4",
+    "moment": "^2.17.1",
+    "react": "~15.4.0-rc.4",
+    "react-native": "0.40.0",
+    "react-native-easy-grid": "^0.1.8",
+    "react-native-htmlview": "^0.5.0",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.2.0",
+    "redux-logger": "^2.7.4",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-jest": "18.0.0",
+    "jest": "18.1.0",
+    "react-native-dotenv": "0.0.3",
+    "react-test-renderer": "~15.4.0-rc.4"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }
