@@ -8,7 +8,7 @@ import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 import LoadComments from './load-comments'
 
-const getParents = (parents, id) => {
+const createChain = (parents, id) => {
   let commentChain = []
 
   if (parents && parents.length) {
@@ -37,6 +37,13 @@ const Comment = (props) => {
     commentThatsLoading
   } = props
 
+  const kidsLoaded = kids && kids.length && typeof kids[0] === 'object'
+
+  let commentChain
+  if (kidsLoaded) {
+    commentChain = createChain(parents, id)
+  }
+
   return deleted ? null : (
       <View style={reply ? styles.replyContainer : styles.commentContainer}>
         <View style={reply ? '' : styles.commentPadding}>
@@ -60,14 +67,14 @@ const Comment = (props) => {
           </View>
 
 
-          {kids && kids.length && typeof kids[0] === 'object' && (
+          { kidsLoaded && (
             kids.map((comment) => !comment.deleted && (
               <Comment
                 key={comment.id}
                 {...comment}
                 loadSubComments={loadSubComments}
                 parentId={id}
-                parents={getParents(parents, id)}
+                parents={commentChain || parents}
                 reply={true} />
             ))
           )}
