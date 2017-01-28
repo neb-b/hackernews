@@ -27,12 +27,12 @@ const Story = (props) => {
       underlayColor='#12558030'
       activeOpacity={.8}
       onPress={() => navigator.push({
-        title: formatUrl(url),
-        component: Web,
+        title: url ? formatUrl(url) : 'Comments',
+        component: url ? Web : Thread,
         index: 1,
         props: {
           url,
-          outside: true
+          outside: !!url
         }
       })}>
       <View>
