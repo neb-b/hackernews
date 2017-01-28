@@ -2,7 +2,8 @@ import React from 'react'
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  TouchableHighlight
 } from 'react-native'
 import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
@@ -34,7 +35,9 @@ const Comment = (props) => {
     parent,
     deleted,
     parents,
-    commentThatsLoading
+    commentThatsLoading,
+    toggleReplies,
+    showReplies
   } = props
 
   const kidsLoaded = kids && kids.length && typeof kids[0] === 'object'
@@ -45,7 +48,9 @@ const Comment = (props) => {
   }
 
   return deleted ? null : (
-      <View style={reply ? styles.replyContainer : styles.commentContainer}>
+      <TouchableHighlight
+        style={reply ? styles.replyContainer : styles.commentContainer}
+        onPress={() => kidsLoaded && toggleReplies(id, parents)}>
         <View style={reply ? '' : styles.commentPadding}>
           <View style={reply && styles.reply}>
             <HTMLView value={text} style={styles.text} />
@@ -66,8 +71,7 @@ const Comment = (props) => {
             )}
           </View>
 
-
-          { kidsLoaded && (
+          { kidsLoaded && showReplies && (
             kids.map((comment) => !comment.deleted && (
               <Comment
                 key={comment.id}
@@ -75,11 +79,12 @@ const Comment = (props) => {
                 loadSubComments={loadSubComments}
                 parentId={id}
                 parents={commentChain || parents}
-                reply={true} />
+                reply={true}
+                toggleReplies={toggleReplies} />
             ))
           )}
         </View>
-      </View>
+      </TouchableHighlight>
     )
 }
 

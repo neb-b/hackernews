@@ -9,10 +9,31 @@ import {
 } from '../constants'
 
 const initialState = {
-  loading: true,
+  loading: false,
   refreshing: false,
   error: null,
-  stories: []
+  stories: [{
+    title: "This is a news title",
+    time: Date.now(),
+    score: Math.floor(Math.random() * 100),
+    descendants: 20,
+    url: "https://www.google.com"
+  },
+  {
+    title: "This is a slightly longer, and more imformative news title",
+    time: Date.now(),
+    score: Math.floor(Math.random() * 100),
+    descendants: 20,
+    url: "https://www.google.com"
+  },
+  {
+    title: "Short title",
+    time: Date.now(),
+    score: Math.floor(Math.random() * 100),
+    descendants: 20,
+    url: "https://www.google.com"
+  }
+]
 }
 
 export default handleActions({

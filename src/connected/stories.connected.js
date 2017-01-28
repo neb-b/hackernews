@@ -14,7 +14,7 @@ class StoriesView extends Component {
   }
 
   componentDidMount() {
-    this.props.loadStories()
+    // this.props.loadStories()
   }
 
   render() {
