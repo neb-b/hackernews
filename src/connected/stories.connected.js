@@ -7,6 +7,7 @@ import {
 import { loadStories } from '../redux/action-creators/load-stories'
 import { refreshStories } from '../redux/action-creators/refresh-stories'
 import Stories from '../components/stories'
+import Error from '../components/global/error'
 
 class StoriesView extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class StoriesView extends Component {
     const { error } = this.props
     return (
       <View>
-        {error && <Text>There was an error</Text>}
+        {error && <Error refresh={loadStories} />}
         <Stories {...this.props} />
       </View>
     )
