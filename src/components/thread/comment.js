@@ -53,7 +53,6 @@ const Comment = ({
 
                 { kids && kids.length && typeof kids[0] === 'number' && (
                   <LoadComments
-                    props={props}
                     kids={kids}
                     loadSubComments={loadSubComments}
                     commentChain={commentChain}

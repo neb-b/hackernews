@@ -11,8 +11,7 @@ const LoadComments = ({
   loadSubComments,
   id,
   commentChain,
-  commentThatsLoading,
-  props
+  commentThatsLoading
 }) => {
   const imLoading = commentThatsLoading === id
   return (
