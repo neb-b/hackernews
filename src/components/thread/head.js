@@ -13,38 +13,42 @@ const Head = (props) => {
   const { title, score, kids, time, url, descendants, navigator } = props
 
   return (
-    <TouchableHighlight
-      style={styles.head}
-      underlayColor='#12558030'
-      onPress={() => navigator.push({
-        title: formatUrl(url),
-        component: Web,
-        index: 2,
-        props: {
-          url,
-          outside: true
-        }
-      })}>
-      <View>
-        <Text style={styles.title}>{title}</Text>
+    <View style={styles.headWrapper}>
+      <TouchableHighlight
+        style={styles.head}
+        underlayColor='#12558030'
+        onPress={() => navigator.push({
+          title: formatUrl(url),
+          component: Web,
+          index: 2,
+          props: {
+            url,
+            outside: true
+          }
+        })}>
+        <View>
+          <Text style={styles.title}>{title}</Text>
 
-        <View style={styles.siteTime}>
-          <Text style={styles.url}>{formatUrl(url)}</Text>
-          <Text style={styles.time}>{fromNow(time)}</Text>
-        </View>
+          <View style={styles.siteTime}>
+            <Text style={styles.url}>{formatUrl(url)}</Text>
+            <Text style={styles.time}>{fromNow(time)}</Text>
+          </View>
 
-        <View style={styles.belowTitle}>
-          <Text style={styles.score}>{score} points</Text>
-          <Text style={styles.comments}>{descendants} comments</Text>
+          <View style={styles.belowTitle}>
+            <Text style={styles.score}>{score} points</Text>
+            <Text style={styles.comments}>{descendants} comments</Text>
+          </View>
         </View>
-      </View>
-    </TouchableHighlight>
+      </TouchableHighlight>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  headWrapper: {
+    minHeight: 150
+  },
   head: {
-    flex: 1,
     padding: 10,
     paddingBottom: 20,
     backgroundColor: '#fcfcfc'

@@ -5,15 +5,14 @@ import {
   Text,
   StyleSheet
 } from 'react-native'
-import { Col, Grid } from "react-native-easy-grid";
 
 
 const Nav = ({ title, navigator, viewIndex, settings, outside  }) => {
   return (
-    <View style={styles.statusBar}>
+    <View style={styles.statusBarWrapper}>
       <StatusBar barStyle='light-content' />
-      <Grid>
-        <Col>
+      <View style={styles.statusBar}>
+        <View style={styles.nav}>
           {
             viewIndex !== 0 && (
               <Text
@@ -23,38 +22,49 @@ const Nav = ({ title, navigator, viewIndex, settings, outside  }) => {
               </Text>
             )
           }
-        </Col>
-        <Col>
+        </View>
+        <View>
           <Text style={[styles.text, outside && styles.title]}>{title}</Text>
-        </Col>
-        <Col>
+        </View>
+        <View style={styles.nav}>
           {
             settings && (
-              <Text>Settings</Text>
+              <Text style={[styles.text, styles.settings]}>Settings</Text>
             )
           }
-        </Col>
-      </Grid>
+        </View>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  statusBar: {
+  statusBarWrapper: {
     height: 64,
     paddingTop: 25,
     paddingLeft: 7,
     paddingRight: 7,
     backgroundColor: '#125580'
   },
+  statusBar: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  nav: {
+    width: 100
+  },
   text: {
     color: '#f2f2f2',
-    fontSize: 22
+    fontSize: 20
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     textAlign: 'center',
     paddingTop: 5
+  },
+  settings: {
+    textAlign: 'right'
   }
 })
 

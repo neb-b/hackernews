@@ -63,9 +63,7 @@ const initialState = {
   loading: true,
   refreshing: false,
   error: null,
-  comments: [{
-    showComment: true
-  }]
+  comments: []
 }
 
 export default handleActions({

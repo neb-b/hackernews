@@ -35,6 +35,7 @@ const LoadComments = ({
 const styles = StyleSheet.create({
   viewComments: {
     marginTop: 5,
+    marginBottom: 5,
     paddingRight: 5,
     paddingLeft: 5,
     borderRadius: 10,
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   viewCommentsText: {
     color: '#125580',
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 5,
     fontSize: 16,
     textAlign: 'center'
   },
