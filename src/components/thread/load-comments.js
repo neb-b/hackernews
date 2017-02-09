@@ -16,8 +16,8 @@ const LoadComments = ({
   const imLoading = commentThatsLoading === id
   return (
     <TouchableHighlight
-      underlayColor='#dfdfdf'
-      activeOpacity={.5}
+      underlayColor='#e7e6e6'
+      activeOpacity={.8}
       style={styles.viewComments}
       onPress={() => loadSubComments(id, commentChain, kids)}
     >
@@ -34,15 +34,18 @@ const LoadComments = ({
 
 const styles = StyleSheet.create({
   viewComments: {
-    borderRadius: 10,
+    marginTop: 5,
     paddingRight: 5,
-    paddingLeft: 5
+    paddingLeft: 5,
+    borderRadius: 10,
+    backgroundColor: '#fcfcfc'
   },
   viewCommentsText: {
     color: '#125580',
-    paddingTop: 5,
-    paddingBottom: 5,
-    fontSize: 16
+    paddingTop: 10,
+    paddingBottom: 10,
+    fontSize: 16,
+    textAlign: 'center'
   },
 })
 

@@ -36,13 +36,11 @@ const Comment = ({
         underlayColor='#12558030'
         activeOpacity={.8}
         onPress={() => toggleComment(id, commentChain)}>
-        <View style={reply ? '' : styles.commentPadding}>
-          <View style={styles.actions}>
-            <Text style={styles.info}>
-              {`${by} `}
-              {moment(time * 1000).fromNow()}
-            </Text>
-          </View>
+        <View style={[reply ? '' : styles.commentPadding, !showComment && styles.moarPadding]}>
+          <Text style={styles.info}>
+            {`${by} `}
+            {moment(time * 1000).fromNow()}
+          </Text>
 
           {
             showComment && !deleted && (
@@ -93,14 +91,12 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderLeftColor: '#bbbbbb',
   },
-  actions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 5
-  },
   info: {
-    paddingTop: 5,
     color: '#9f9f9f'
+  },
+  moarPadding: {
+    paddingTop: 10,
+    paddingBottom: 10
   }
 })
 
