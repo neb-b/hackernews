@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text } from 'react-native'
 import { loadComments, loadSubComments } from '../redux/action-creators/load-comments'
+import { refreshThread } from '../redux/action-creators/refresh-thread'
 import { toggleComment } from '../redux/action-creators/toggle-comment'
 import Thread from '../components/thread'
 
@@ -33,5 +34,5 @@ const mapStateToProps = (s) => {
 
 export default connect(
   mapStateToProps,
-  { loadComments, loadSubComments, toggleComment }
+  { loadComments, loadSubComments, toggleComment, refreshThread }
 )(ThreadView)

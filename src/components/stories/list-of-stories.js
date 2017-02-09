@@ -13,14 +13,14 @@ const ListOfStories = ({ stories, refreshStories, refreshing, navigator }) => {
   return (
     <View>
       <ListView
-        style={styles.scrollView}
+        style={styles.listView}
         dataSource={ds.cloneWithRows(stories)}
         renderRow={(story) => <Story key={story.id} {...story} navigator={navigator}/>}
         refreshControl={
           <RefreshControl
             onRefresh={refreshStories}
             refreshing={refreshing}
-            tintColor='#0C6A5A' />
+            tintColor='#12558060' />
           }>
       </ListView>
     </View>
@@ -28,7 +28,7 @@ const ListOfStories = ({ stories, refreshStories, refreshing, navigator }) => {
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
+  listView: {
     marginBottom: 64 //IOS statusBar height
   }
 })

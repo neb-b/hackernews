@@ -8,6 +8,8 @@ import {
   LOAD_SUB_COMMENTS_ERROR,
   ROOT_URL
 } from '../constants'
+import { fetchBuilder } from '../../helpers/fetch-builder'
+
 const URL = `${ROOT_URL}/comments`
 
 const onLoadCommentsRequest = createAction(LOAD_COMMENTS_REQUEST)
@@ -17,18 +19,6 @@ const onLoadCommentsError = createAction(LOAD_COMMENTS_ERROR)
 const onLoadSubCommentsRequest = createAction(LOAD_SUB_COMMENTS_REQUEST)
 const onLoadSubCommentsSuccess = createAction(LOAD_SUB_COMMENTS_SUCCESS)
 const onLoadSubCommentsError = createAction(LOAD_SUB_COMMENTS_ERROR)
-
-const fetchBuilder = (url, commentIds) => (
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ commentIds })
-  })
-  .then((res) => res.json())
-)
 
 export function loadComments (commentIds) {
   return (dispatch) => {

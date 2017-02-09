@@ -6,7 +6,8 @@ import {
   ActivityIndicator,
   StyleSheet,
   ScrollView,
-  ListView
+  ListView,
+  RefreshControl
 } from 'react-native'
 import Head from './thread/head'
 import Comment from './thread/comment'
@@ -23,7 +24,9 @@ const Thread = ({
   navigator,
   loadSubComments,
   commentThatsLoading,
-  toggleComment
+  toggleComment,
+  refreshThread,
+  refreshing
 }) => {
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
   const threadItems = [{title, score, time, descendants, url}].concat(comments)
@@ -71,7 +74,12 @@ const Thread = ({
         <ListView
           style={styles.listView}
           dataSource={ds.cloneWithRows(threadItems)}
-          renderRow={renderThreadRow} />
+          renderRow={renderThreadRow}refreshControl={
+            <RefreshControl
+              onRefresh={() => refreshThread(comments)}
+              refreshing={refreshing}
+              tintColor='#12558060' />
+            } />
       )}
     </View>
   )

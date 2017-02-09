@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fcfcfc'
   },
   replyContainer: {
-    marginTop: 20,
-    paddingLeft: 10,
+    marginTop: 30,
+    paddingLeft: 20,
     borderLeftWidth: 1,
     borderLeftColor: '#bbbbbb',
   },

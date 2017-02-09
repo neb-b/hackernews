@@ -3,6 +3,9 @@ import {
   LOAD_COMMENTS_REQUEST,
   LOAD_COMMENTS_SUCCESS,
   LOAD_COMMENTS_ERROR,
+  REFRESH_THREAD_REQUEST,
+  REFRESH_THREAD_SUCCESS,
+  REFRESH_THREAD_ERROR,
   TOGGLE_COMMENT
 } from '../constants'
 
@@ -112,5 +115,22 @@ export default handleActions({
       ...state,
       comments: newComments
     }
-  }
+  },
+
+  REFRESH_THREAD_REQUEST: (state) => ({
+    ...state,
+    refreshing: true,
+    loading: false
+  }),
+  REFRESH_THREAD_SUCCESS: (state, { payload }) => ({
+    ...state,
+    refreshing: false,
+    error: null,
+    stories: payload
+  }),
+  REFRESH_THREAD_ERROR: (state, { payload }) => ({
+    ...state,
+    loading: false,
+    error: payload
+  }),
 }, initialState)
