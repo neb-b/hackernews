@@ -40,20 +40,12 @@ export function loadComments (commentIds) {
   }
 }
 
-export function loadSubComments (id, parents, kids) {
-  let commentChain
-  if (parents && parents.length) {
-    commentChain = parents.slice()
-    commentChain.push(id)
-  } else {
-    commentChain = [id]
-  }
-
+export function loadSubComments (id, commentChain, kids) {
   return (dispatch) => {
     dispatch(onLoadSubCommentsRequest(id))
 
     fetchBuilder(URL, kids)
-      .then(({ comments }) => dispatch(onLoadSubCommentsSuccess({commentChain, comments})))
+      .then(({ comments }) => dispatch(onLoadSubCommentsSuccess({commentChain, comments: comments.map((comment) => Object.assign(comment, { commentChain }))})))
       .catch((err) => dispatch(onLoadSubCommentsError(err)))
   }
 }

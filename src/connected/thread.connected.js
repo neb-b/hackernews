@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text } from 'react-native'
 import { loadComments, loadSubComments } from '../redux/action-creators/load-comments'
-import { toggleReplies } from '../redux/action-creators/toggle-replies'
+import { toggleComment } from '../redux/action-creators/toggle-comment'
 import Thread from '../components/thread'
 
 class ThreadView extends Component {
@@ -11,8 +11,8 @@ class ThreadView extends Component {
   }
 
   componentDidMount() {
-    // const { kids } = this.props
-    // this.props.loadComments(kids)
+    const { kids } = this.props
+    this.props.loadComments(kids)
   }
 
   render() {
@@ -33,5 +33,5 @@ const mapStateToProps = (s) => {
 
 export default connect(
   mapStateToProps,
-  { loadComments, loadSubComments, toggleReplies }
+  { loadComments, loadSubComments, toggleComment }
 )(ThreadView)

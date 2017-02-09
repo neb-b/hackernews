@@ -10,16 +10,17 @@ const LoadComments = ({
   kids,
   loadSubComments,
   id,
-  parents,
-  commentThatsLoading
+  commentChain,
+  commentThatsLoading,
+  props
 }) => {
   const imLoading = commentThatsLoading === id
   return (
     <TouchableHighlight
-        underlayColor='#dfdfdf'
-        activeOpacity={.5}
-        style={styles.viewComments}
-        onPress={() => loadSubComments(id, parents, kids)}
+      underlayColor='#dfdfdf'
+      activeOpacity={.5}
+      style={styles.viewComments}
+      onPress={() => loadSubComments(id, commentChain, kids)}
     >
       <Text style={styles.viewCommentsText}>
         {

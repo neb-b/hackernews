@@ -23,7 +23,7 @@ const Thread = (props) => {
     navigator,
     loadSubComments,
     commentThatsLoading,
-    toggleReplies
+    toggleComment
   } = props
 
   const renderHead = () => {
@@ -45,7 +45,7 @@ const Thread = (props) => {
       {...comment}
       loadSubComments={loadSubComments}
       commentThatsLoading={commentThatsLoading}
-      toggleReplies={toggleReplies} />
+      toggleComment={toggleComment}/>
   )
 
   const renderComments = () => loading

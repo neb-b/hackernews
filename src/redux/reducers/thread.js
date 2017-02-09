@@ -3,40 +3,36 @@ import {
   LOAD_COMMENTS_REQUEST,
   LOAD_COMMENTS_SUCCESS,
   LOAD_COMMENTS_ERROR,
-  TOGGLE_REPLIES
+  TOGGLE_COMMENT
 } from '../constants'
 
-const updateComments = (comments, commentChain, replies) => {
-  if (commentChain.length === 1) {
-    return comments.map((comment) => {
-      return comment.id === commentChain[0]
-        ? Object.assign(comment, { kids: replies, showReplies: true })
-        : comment
-    })
-  } else {
-      return comments.map((comment) => {
-        if (comment.id === commentChain[0]) {
-          const kids = updateComments(comment.kids, commentChain.slice(1, commentChain.length), replies)
-          return Object.assign(comment, { kids })
-        } else {
-          return comment
-        }
-      })
-  }
-}
+const updateComments = (comments, commentChain, replies, newCommentChain) => {
+  let commentChainList = newCommentChain || commentChain
 
-const findCommentAndUpdate = (comments, commentChain, id) => {
-  if (!commentChain.length) {
+  if (commentChainList.length === 1) {
     return comments.map((comment) => {
-      return comment.id === id
-        ? Object.assign(comment, { showReplies: !comment.showReplies })
-        : comment
+      if (comment.id === commentChainList[0]) {
+        const childsCommentChain = commentChain.slice()
+        childsCommentChain.push(replies[0].id)
+
+        return Object.assign(comment, {
+            kids: replies.map((reply) => (
+              Object.assign(
+                reply, {
+                  showComment: true,
+                  commentChain: childsCommentChain
+                }
+              )))
+          })
+      } else {
+        return comment
+      }
     })
   } else {
     return comments.map((comment) => {
-      if (comment.id === commentChain[0]) {
-        const showReplies = findCommentAndUpdate(comment.kids, commentChain.slice(1, commentChain.length), id)
-        return Object.assign(comment, { showReplies })
+      if (comment.id === commentChainList[0]) {
+        const kids = updateComments(comment.kids, commentChain, replies, commentChainList.slice(1))
+        return Object.assign(comment, { kids })
       } else {
         return comment
       }
@@ -44,38 +40,32 @@ const findCommentAndUpdate = (comments, commentChain, id) => {
   }
 }
 
+const toggleViewComment = (comments, commentChain = [], id) => {
+  if (commentChain.length === 1) {
+    return comments.map((comment) => {
+      return comment.id === id
+        ? Object.assign(comment, { showComment: !comment.showComment })
+        : comment
+    })
+  } else {
+    return comments.map((comment) => {
+      if (comment.id === commentChain[0]) {
+        const showComment = toggleViewComment(comment.kids, commentChain.slice(1), id)
+        return Object.assign(comment, { showComment })
+      } else {
+        return comment
+      }
+    })
+  }
+}
 
 const initialState = {
-  loading: false,
+  loading: true,
   refreshing: false,
   error: null,
   comments: [{
-    parents: [],
-    text: "This is a comment",
-    id: 12345,
-    by: "my_username",
-    showReplies: true,
-    kids: [{
-      parent: 12345,
-      text: "This is a top level reply",
-      id: 54321,
-      by: "my_username_2",
-      showReplies: true,
-      kids: [{
-        parent: 54321,
-        text: "This is a reply to a reply",
-        id: 98765,
-        by: "my_username_3",
-        kids: null,
-        time: Date.now(),
-        score: Math.floor(Math.random() * 10).toString()
-      }],
-      time: Date.now(),
-      score: Math.floor(Math.random() * 10).toString()
-    }],
-    time: Date.now(),
-    score: Math.floor(Math.random() * 10).toString()
-  }],
+    showComment: true
+  }]
 }
 
 export default handleActions({
@@ -83,7 +73,13 @@ export default handleActions({
   LOAD_COMMENTS_SUCCESS: (state, { payload }) => ({
     ...state,
     loading: false,
-    comments: payload
+    comments: payload.map((comment) => (
+      Object.assign(
+        comment, {
+          showComment: true,
+          commentChain: [comment.id]
+        }))
+    )
   }),
   LOAD_COMMENTS_ERROR: (state, { payload }) => ({
     ...state,
@@ -97,11 +93,13 @@ export default handleActions({
     commentThatsLoading: payload
   }),
   LOAD_SUB_COMMENTS_SUCCESS: (state, { payload: { commentChain, comments } }) => {
+    console.log('LOAD_SUB_COMMENTS_SUCCESS', commentChain);
     const newComments = updateComments(state.comments, commentChain, comments)
     return {
       ...state,
       comments: newComments,
-      loadingSubComments: false
+      loadingSubComments: false,
+      commentThatsLoading: null
     }
   },
   LOAD_SUB_COMMENTS_ERROR: (state, { payload }) => ({
@@ -110,8 +108,8 @@ export default handleActions({
     error: payload
   }),
 
-  TOGGLE_REPLIES: (state, { payload: { id, parents }  }) => {
-    const newComments = findCommentAndUpdate(state.comments, parents, id)
+  TOGGLE_COMMENT: (state, { payload: { id, commentChain }  }) => {
+    const newComments = toggleViewComment(state.comments, commentChain, id)
     return {
       ...state,
       comments: newComments

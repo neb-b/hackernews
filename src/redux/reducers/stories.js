@@ -9,31 +9,10 @@ import {
 } from '../constants'
 
 const initialState = {
-  loading: false,
+  loading: true,
   refreshing: false,
   error: null,
-  stories: [{
-    title: "This is a news title",
-    time: Date.now(),
-    score: Math.floor(Math.random() * 100),
-    descendants: 20,
-    url: "https://www.google.com"
-  },
-  {
-    title: "This is a slightly longer, and more imformative news title",
-    time: Date.now(),
-    score: Math.floor(Math.random() * 100),
-    descendants: 20,
-    url: "https://www.google.com"
-  },
-  {
-    title: "Short title",
-    time: Date.now(),
-    score: Math.floor(Math.random() * 100),
-    descendants: 20,
-    url: "https://www.google.com"
-  }
-]
+  stories: []
 }
 
 export default handleActions({
@@ -50,7 +29,11 @@ export default handleActions({
     error: payload
   }),
 
-  REFRESH_STORIES_REQUEST: (state) => ({ ...state, refreshing: true, loading: false}),
+  REFRESH_STORIES_REQUEST: (state) => ({
+    ...state,
+    refreshing: true,
+    loading: false
+  }),
   REFRESH_STORIES_SUCCESS: (state, { payload }) => ({
     ...state,
     refreshing: false,

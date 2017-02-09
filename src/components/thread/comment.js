@@ -9,80 +9,74 @@ import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 import LoadComments from './load-comments'
 
-const createChain = (parents, id) => {
-  let commentChain = []
-
-  if (parents && parents.length) {
-    commentChain = parents
-  }
-
-  commentChain.push(id)
-  return commentChain
-}
-
-const Comment = (props) => {
-  const {
-    text,
-    id,
-    by,
-    kids,
-    time,
-    score,
-    loadSubComments,
-    loadingSubComments,
-    subCommentsParent,
-    reply,
-    parent,
-    deleted,
-    parents,
-    commentThatsLoading,
-    toggleReplies,
-    showReplies
-  } = props
-
+const Comment = ({
+  text,
+  id,
+  by,
+  kids,
+  time,
+  score,
+  loadSubComments,
+  loadingSubComments,
+  subCommentsParent,
+  reply,
+  parent,
+  deleted,
+  parents,
+  commentThatsLoading,
+  showComment,
+  commentChain,
+  toggleComment
+}) => {
   const kidsLoaded = kids && kids.length && typeof kids[0] === 'object'
-
-  let commentChain
-  if (kidsLoaded) {
-    commentChain = createChain(parents, id)
-  }
 
   return deleted ? null : (
       <TouchableHighlight
         style={reply ? styles.replyContainer : styles.commentContainer}
-        onPress={() => kidsLoaded && toggleReplies(id, parents)}>
+        underlayColor='#12558030'
+        activeOpacity={.8}
+        onPress={() => toggleComment(id, commentChain)}>
         <View style={reply ? '' : styles.commentPadding}>
-          <View style={reply && styles.reply}>
-            <HTMLView value={text} style={styles.text} />
-          </View>
-
           <View style={styles.actions}>
             <Text style={styles.info}>
+              {`${by} `}
               {moment(time * 1000).fromNow()}
-              by {by}
             </Text>
-            {kids && kids.length && typeof kids[0] === 'number' && (
-              <LoadComments
-                kids={kids}
-                loadSubComments={loadSubComments}
-                parents={parents}
-                id={id}
-                commentThatsLoading={commentThatsLoading}/>
-            )}
           </View>
 
-          { kidsLoaded && showReplies && (
-            kids.map((comment) => !comment.deleted && (
-              <Comment
-                key={comment.id}
-                {...comment}
-                loadSubComments={loadSubComments}
-                parentId={id}
-                parents={commentChain || parents}
-                reply={true}
-                toggleReplies={toggleReplies} />
-            ))
-          )}
+          {
+            showComment && !deleted && (
+              <View>
+                <View style={reply && styles.reply}>
+                  <HTMLView value={text} style={styles.text} />
+                </View>
+
+                { kids && kids.length && typeof kids[0] === 'number' && (
+                  <LoadComments
+                    props={props}
+                    kids={kids}
+                    loadSubComments={loadSubComments}
+                    commentChain={commentChain}
+                    id={id}
+                    commentThatsLoading={commentThatsLoading}/>
+                )}
+
+                { kidsLoaded && showComment && (
+                  kids.map((comment) => !comment.deleted && (
+                    <Comment
+                      key={comment.id}
+                      {...comment}
+                      loadSubComments={loadSubComments}
+                      parentId={id}
+                      reply={true}
+                      commentThatsLoading={commentThatsLoading}
+                      toggleComment={toggleComment}/>
+                  ))
+                )}
+              </View>
+            )
+          }
+          { deleted && <Text>deleted</Text>}
         </View>
       </TouchableHighlight>
     )
