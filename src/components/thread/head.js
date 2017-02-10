@@ -1,9 +1,9 @@
 import React from 'react'
 import {
-  View,
   Text,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
+  View
 } from 'react-native'
 import fromNow from '../../helpers/from-now'
 import Web from '../web'

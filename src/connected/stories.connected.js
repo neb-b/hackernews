@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  View,
-  Text
+  Text,
+  View
 } from 'react-native'
 import { loadStories } from '../redux/action-creators/load-stories'
 import { refreshStories } from '../redux/action-creators/refresh-stories'

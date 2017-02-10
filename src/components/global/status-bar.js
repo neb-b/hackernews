@@ -1,11 +1,10 @@
 import React from 'react'
 import {
-  View,
   StatusBar,
+  StyleSheet,
   Text,
-  StyleSheet
+  View
 } from 'react-native'
-
 
 const Nav = ({ title, navigator, viewIndex, settings, outside  }) => {
   return (

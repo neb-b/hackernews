@@ -1,9 +1,9 @@
 import React from 'react'
 import {
-  View,
-  Text,
   StyleSheet,
-  TouchableHighlight
+  Text,
+  TouchableHighlight,
+  View
 } from 'react-native'
 
 const LoadComments = ({

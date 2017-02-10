@@ -1,23 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  Text,
-  View,
   ActivityIndicator,
-  ScrollView,
-  StyleSheet
+  ListView,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View
 } from 'react-native'
-import ListOfStories from './stories/list-of-stories'
+import Story from './stories/story'
 
-const Stories = (props) => {
-  const {
-    loading,
-    stories,
-    loadStories,
-    refreshing,
-    refreshStories,
-    navigator
-  } = props
+const Stories = ({
+  loading,
+  stories,
+  loadStories,
+  refreshing,
+  refreshStories,
+  navigator
+}) => {
+  const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
   return (
     <View>
@@ -27,12 +28,17 @@ const Stories = (props) => {
             style={styles.spinner}
             color='#125580'
             size='large'/>
-        : <ListOfStories
-            stories={stories}
-            refreshing={refreshing}
-            loading={loading}
-            refreshStories={refreshStories}
-            navigator={navigator}/>
+        :  <ListView
+            style={styles.listView}
+            dataSource={ds.cloneWithRows(stories)}
+            renderRow={(story) => <Story key={story.id} {...story} navigator={navigator}/>}
+            refreshControl={
+              <RefreshControl
+                onRefresh={refreshStories}
+                refreshing={refreshing}
+                tintColor='#12558060' />
+              }>
+          </ListView>
       }
     </View>
   )
@@ -41,6 +47,9 @@ const Stories = (props) => {
 const styles = StyleSheet.create({
   spinner: {
     paddingTop: 40
+  },
+  listView: {
+    marginBottom: 64 //IOS statusBar height
   }
 })
 

@@ -5,6 +5,7 @@ import { loadComments, loadSubComments } from '../redux/action-creators/load-com
 import { refreshThread } from '../redux/action-creators/refresh-thread'
 import { toggleComment } from '../redux/action-creators/toggle-comment'
 import Thread from '../components/thread'
+import Error from '../components/global/error'
 
 class ThreadView extends Component {
   constructor(props) {
@@ -12,16 +13,16 @@ class ThreadView extends Component {
   }
 
   componentDidMount() {
-    const { kids } = this.props
-    this.props.loadComments(kids)
+    const { loadComments, kids } = this.props
+    loadComments(kids)
   }
 
   render() {
-    const { error } = this.props
+    const { error, loadComments, kids } = this.props
 
     return (
       <View>
-        {error && <Text>There was an error</Text>}
+        {error && <Error refresh={loadComments} refreshProps={kids} />}
         <Thread {...this.props}/>
       </View>
     )

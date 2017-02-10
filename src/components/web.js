@@ -1,9 +1,9 @@
 import React from 'react'
 import {
+  ActivityIndicator,
   Text,
   WebView,
-  StyleSheet,
-  ActivityIndicator
+  StyleSheet
 } from 'react-native'
 
 const Web = (props) => {

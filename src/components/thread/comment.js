@@ -1,9 +1,9 @@
 import React from 'react'
 import {
-  View,
-  Text,
   StyleSheet,
-  TouchableHighlight
+  Text,
+  TouchableHighlight,
+  View
 } from 'react-native'
 import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
@@ -30,7 +30,7 @@ const Comment = ({
 }) => {
   const kidsLoaded = kids && kids.length && typeof kids[0] === 'object'
 
-  return deleted ? null : (
+  return (
       <TouchableHighlight
         style={reply ? styles.replyContainer : styles.commentContainer}
         underlayColor='#12558030'

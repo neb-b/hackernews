@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  Text,
-  View,
   ActivityIndicator,
-  StyleSheet,
-  ScrollView,
   ListView,
-  RefreshControl
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
 } from 'react-native'
 import Head from './thread/head'
 import Comment from './thread/comment'
+import Dimensions from 'Dimensions'
+const SCREEN_HEIGHT = Dimensions.get('window').height
 
 const Thread = ({
   loading,
@@ -71,15 +73,17 @@ const Thread = ({
         </View>
       )}
       {!loading && (
-        <ListView
-          style={styles.listView}
-          dataSource={ds.cloneWithRows(threadItems)}
-          renderRow={renderThreadRow}refreshControl={
-            <RefreshControl
-              onRefresh={() => refreshThread(comments)}
-              refreshing={refreshing}
-              tintColor='#12558060' />
-            } />
+        <View style={styles.threadWrapper}>
+          <ListView
+            style={styles.listView}
+            dataSource={ds.cloneWithRows(threadItems)}
+            renderRow={renderThreadRow}refreshControl={
+              <RefreshControl
+                onRefresh={() => refreshThread(comments)}
+                refreshing={refreshing}
+                tintColor='#12558060' />
+              } />
+        </View>
       )}
     </View>
   )
@@ -88,6 +92,9 @@ const Thread = ({
 const styles = StyleSheet.create({
   spinner: {
     paddingTop: 40
+  },
+  threadWrapper: {
+    height: SCREEN_HEIGHT
   },
   listView: {
     marginBottom: 64

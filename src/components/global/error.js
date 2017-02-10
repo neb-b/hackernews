@@ -6,11 +6,13 @@ import {
   StyleSheet
 } from 'react-native'
 
-const Error = ({ refresh }) => (
+const Error = ({ refresh, refreshProps }) => (
   <View style={styles.errorWrapper}>
     <Text style={styles.errorText}>There was an error</Text>
     <TouchableHighlight
-      onPress={() => refresh()}
+      onPress={() => refresh(refreshProps)}
+      underlayColor='#ffb0b0'
+      activeOpacity={.8}
       style={styles.refresh}>
       <Text style={styles.refreshText}>Refresh</Text>
     </TouchableHighlight>
@@ -27,11 +29,14 @@ const styles = StyleSheet.create({
     color: '#f4f4f4'
   },
   refresh: {
-    paddingTop: 10
+    margin: 5,
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: '#f5f5f5'
   },
   refreshText: {
     textAlign: 'center',
-    color: '#ffffff'
+    color: '#c93e3e'
   }
 })
 

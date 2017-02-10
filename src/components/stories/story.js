@@ -10,17 +10,15 @@ import Thread from '../../connected/thread.connected'
 import fromNow from '../../helpers/from-now'
 import formatUrl from '../../helpers/format-url'
 
-const Story = (props) => {
-  const {
-    title,
-    time,
-    score,
-    kids,
-    navigator,
-    descendants,
-    url
- } = props
-
+const Story = ({
+  title,
+  time,
+  score,
+  kids,
+  navigator,
+  descendants,
+  url
+}) => {
   return (
     <TouchableHighlight
       style={styles.story}
@@ -41,7 +39,7 @@ const Story = (props) => {
         <View style={styles.sub}>
           <View>
             <Text style={styles.time}>{fromNow(time)}</Text>
-            <Text style={styles.score}>{score} points</Text>
+            <Text style={styles.score}>{score || 0} points</Text>
           </View>
           <TouchableHighlight
             style={styles.commentsContainer}
@@ -60,7 +58,7 @@ const Story = (props) => {
                 url
               }
             })}>
-            <Text style={styles.comments}>{descendants} comments</Text>
+            <Text style={styles.comments}>{descendants || 0} comments</Text>
           </TouchableHighlight>
         </View>
       </View>
