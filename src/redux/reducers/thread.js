@@ -132,8 +132,13 @@ export default handleActions({
   REFRESH_THREAD_SUCCESS: (state, { payload }) => ({
     ...state,
     refreshing: false,
-    error: null,
-    stories: payload
+    comments: payload.map((comment) => (
+      Object.assign(
+        comment, {
+          showComment: true,
+          commentChain: [comment.id]
+        }))
+    )
   }),
   REFRESH_THREAD_ERROR: (state, { payload }) => ({
     ...state,
