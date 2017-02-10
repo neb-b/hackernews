@@ -27,8 +27,7 @@ const styles = StyleSheet.create({
     color: '#f4f4f4'
   },
   refresh: {
-    paddingTop: 10,
-    textAlign: 'center'
+    paddingTop: 10
   },
   refreshText: {
     textAlign: 'center',

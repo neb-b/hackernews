@@ -9,38 +9,46 @@ import {
   TOGGLE_COMMENT
 } from '../constants'
 
-const updateComments = (comments, commentChain, replies, newCommentChain) => {
-  let commentChainList = newCommentChain || commentChain
+const appendReplies = (comments, commentChain, replies) => {
+  /*
+    recursively search through the comments in state
 
-  if (commentChainList.length === 1) {
-    return comments.map((comment) => {
-      if (comment.id === commentChainList[0]) {
-        const childsCommentChain = commentChain.slice()
-        childsCommentChain.push(replies[0].id)
+    travel down the comment tree until I find the comment
+      id at the end of the commentChain
 
-        return Object.assign(comment, {
-            kids: replies.map((reply) => (
-              Object.assign(
-                reply, {
-                  showComment: true,
-                  commentChain: childsCommentChain
-                }
-              )))
-          })
-      } else {
-        return comment
-      }
-    })
-  } else {
-    return comments.map((comment) => {
-      if (comment.id === commentChainList[0]) {
-        const kids = updateComments(comment.kids, commentChain, replies, commentChainList.slice(1))
-        return Object.assign(comment, { kids })
-      } else {
-        return comment
-      }
-    })
+    append the replies and attach the new comment chain to each new reply
+  */
+  const updateComments = (comments, commentChainCopy) => {
+    if (commentChainCopy.length === 1) {
+      return comments.map((comment) => {
+        if (comment.id === commentChainCopy[0]) {
+          return Object.assign(comment, {
+              kids: replies.map((reply) => (
+                  Object.assign(
+                    reply, {
+                      showComment: true,
+                      commentChain: commentChain.concat([reply.id])
+                    }
+                  ))
+              )
+            })
+        } else {
+          return comment
+        }
+      })
+    } else {
+      return comments.map((comment) => {
+        if (comment.id === commentChainCopy[0]) {
+          const kids = updateComments(comment.kids, commentChainCopy.slice(1))
+          return Object.assign(comment, { kids })
+        } else {
+          return comment
+        }
+      })
+    }
   }
+
+  return updateComments(comments, commentChain)
 }
 
 const toggleViewComment = (comments, commentChain = [], id) => {
@@ -94,8 +102,7 @@ export default handleActions({
     commentThatsLoading: payload
   }),
   LOAD_SUB_COMMENTS_SUCCESS: (state, { payload: { commentChain, comments } }) => {
-    console.log('LOAD_SUB_COMMENTS_SUCCESS', commentChain);
-    const newComments = updateComments(state.comments, commentChain, comments)
+    const newComments = appendReplies(state.comments, commentChain, comments)
     return {
       ...state,
       comments: newComments,
