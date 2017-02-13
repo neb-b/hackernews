@@ -30,8 +30,8 @@ const Head = (props) => {
           <Text style={styles.title}>{title}</Text>
 
           <View style={styles.siteTime}>
-            <Text style={styles.url}>{formatUrl(url)}</Text>
-            <Text style={styles.time}>{fromNow(time)}</Text>
+            <Text style={styles.url}>{url && formatUrl(url)}</Text>
+            <Text style={[styles.time, url && styles.leftPad]}>{fromNow(time)}</Text>
           </View>
 
           <View style={styles.belowTitle}>
@@ -60,10 +60,12 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   time: {
-    paddingLeft: 10,
     paddingTop: 2,
     fontSize: 16,
     color: '#828282'
+  },
+  leftPad: {
+    paddingLeft: 10,
   },
   title: {
     paddingTop: 10,

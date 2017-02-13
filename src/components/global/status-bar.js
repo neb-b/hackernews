@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   selectedOption: {
-    backgroundColor: '#bddbff'
+    backgroundColor: '#B8DDF5'
   }
 })
 
