@@ -21,7 +21,7 @@ const Stories = ({
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
   return (
-    <View>
+    <View style={styles.storiesWrapper}>
       {
         loading
         ? <ActivityIndicator
@@ -45,6 +45,9 @@ const Stories = ({
 }
 
 const styles = StyleSheet.create({
+  storiesWrapper: {
+    zIndex: 0
+  },
   spinner: {
     paddingTop: 40
   },

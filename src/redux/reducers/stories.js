@@ -16,7 +16,7 @@ const initialState = {
 }
 
 export default handleActions({
-  LOAD_STORIES_REQUEST: (state) => ({...state}),
+  LOAD_STORIES_REQUEST: (state) => ({...state, loading: true }),
   LOAD_STORIES_SUCCESS: (state, { payload }) => ({
     ...state,
     loading: false,

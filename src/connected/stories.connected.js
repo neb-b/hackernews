@@ -15,14 +15,15 @@ class StoriesView extends Component {
   }
 
   componentDidMount() {
-    this.props.loadStories()
+    const { filterSelected } = this.props
+    this.props.loadStories(filterSelected.endpoint)
   }
 
   render() {
-    const { error } = this.props
+    const { error, filterSelected } = this.props
     return (
       <View>
-        {error && <Error refresh={loadStories} />}
+        {error && <Error refresh={() => loadStories(filterSelected.endpoint)} />}
         <Stories {...this.props} />
       </View>
     )
@@ -30,7 +31,10 @@ class StoriesView extends Component {
 }
 
 const mapStateToProps = (s) => {
-  return {...s.stories}
+  return {
+    ...s.stories,
+    filterSelected: s.statusBar.filterSelected
+  }
 }
 
 export default connect(mapStateToProps, { loadStories, refreshStories })(StoriesView)

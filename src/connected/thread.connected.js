@@ -13,7 +13,7 @@ class ThreadView extends Component {
   }
 
   componentDidMount() {
-    const { loadComments, kids } = this.props
+    const { loadComments, kids = [] } = this.props
     loadComments(kids)
   }
 
