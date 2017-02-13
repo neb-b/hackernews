@@ -64,10 +64,9 @@ const Nav = ({ title,
                 <View style={styles.filterMenu}>
                   {
                     filterOptions.map((option) => (
-                      <View style={styles.optionWrapper}>
+                      <View style={styles.optionWrapper} key={option.endpoint}>
                         <TouchableHighlight
                           style={[styles.option, filterSelected.endpoint === option.endpoint && styles.selectedOption]}
-                          key={option.endpoint}
                           onPress={() => changeTopic(option)}
                           underlayColor='#12558030'
                           activeOpacity={.8}
