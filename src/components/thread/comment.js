@@ -9,7 +9,7 @@ import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 import LoadComments from './load-comments'
 import { globalStyles } from '../../styles.js'
-const { grey, darkGrey, white } = globalStyles
+const { lightGrey, darkGrey, white } = globalStyles
 
 const Comment = ({
   text,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     paddingLeft: 10,
     borderLeftWidth: 1,
-    borderLeftColor: grey,
+    borderLeftColor: lightGrey,
   },
   info: {
     color: darkGrey
