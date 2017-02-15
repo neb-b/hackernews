@@ -7,11 +7,14 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { globalStyles } from '../../styles.js'
+
+const { darkBlue, darkBlueUnderlay, white } = globalStyles
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = Dimensions.get('window').height
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const Nav = ({ title,
+const Navigation = ({ title,
   navigator,
   viewIndex,
   settings,
@@ -30,7 +33,7 @@ const Nav = ({ title,
         <View style={styles.navWidth}>
           { !isHome && (
               <Text
-                style={styles.text}
+                style={styles.navText}
                 onPress={() => navigator.pop()}>
                 Back
               </Text>
@@ -40,20 +43,20 @@ const Nav = ({ title,
         { isHome ? (
             <TouchableHighlight
               onPress={toggleFilter}
-              underlayColor='#12558030'
+              underlayColor={darkBlueUnderlay}
               activeOpacity={.8}
               style={[styles.toggleFilter]}>
               <View style={{flexDirection: 'row'}}>
-                <Text style={[styles.text]}>{filterSelected.title}</Text>
+                <Text style={[styles.navText]}>{filterSelected.title}</Text>
                 <Icon
                   name={filterToggled ? 'chevron-up' : 'chevron-down'}
                   style={styles.icon}
                   size={20}
-                  color="#f1f1f1" />
+                  color={white} />
               </View>
             </TouchableHighlight>
           )
-          : <Text style={[styles.text, outside && styles.title]}>{title}</Text>
+          : <Text style={[styles.navText, outside && styles.url]}>{title}</Text>
         }
 
         {
@@ -68,7 +71,7 @@ const Nav = ({ title,
                         <TouchableHighlight
                           style={[styles.option, filterSelected.endpoint === option.endpoint && styles.selectedOption]}
                           onPress={() => changeTopic(option)}
-                          underlayColor='#12558030'
+                          underlayColor={darkBlueUnderlay}
                           activeOpacity={.8}
                           >
                           <Text>{option.title}</Text>
@@ -84,7 +87,7 @@ const Nav = ({ title,
         <View style={styles.navWidth}>
           {
             settings && (
-              <Text style={[styles.text, styles.settings]}>Settings</Text>
+              <Text style={[styles.navText, styles.settings]}>Settings</Text>
             )
           }
         </View>
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     paddingLeft: 7,
     paddingRight: 7,
-    backgroundColor: '#125580'
+    backgroundColor: darkBlue
   },
   statusBar: {
     flex: 1,
@@ -110,14 +113,14 @@ const styles = StyleSheet.create({
   navWidth: {
     width: 100
   },
-  text: {
-    color: '#f2f2f2',
+  navText: {
+    color: white,
     fontSize: 20
   },
-  title: {
-    fontSize: 14,
+  url: {
+    paddingTop: 5,
     textAlign: 'center',
-    paddingTop: 5
+    fontSize: 14
   },
   settings: {
     textAlign: 'right'
@@ -131,16 +134,13 @@ const styles = StyleSheet.create({
     height: HEIGHT - 64,
     width: WIDTH,
     marginTop: 38,
-    marginLeft: -7, //TODO: this is bad
+    marginLeft: -7,
     backgroundColor: '#6e6e6e30'
   },
   filterMenu: {
     width: 150,
     marginTop: 1,
     marginLeft: (WIDTH / 2) - 75,
-    backgroundColor: '#fbfbfb',
-  },
-  optionWrapper: {
     backgroundColor: '#fbfbfb',
   },
   option: {
@@ -151,4 +151,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Nav
+export default Navigation

@@ -20,14 +20,9 @@ class StoriesView extends Component {
 
   render() {
     const { error, filterSelected, loadStories } = this.props
-    console.log('stories', this.props);
     return (
       <View>
-        {error && <Error refresh={() => {
-          console.log('loading', filterSelected)
-          loadStories(filterSelected.endpoint)
-        }}/>
-    }
+        {error && <Error refresh={() => loadStories(filterSelected.endpoint)}/>}
         <Stories {...this.props} />
       </View>
     )

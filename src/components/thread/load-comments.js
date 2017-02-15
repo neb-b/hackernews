@@ -5,6 +5,8 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
+import { globalStyles } from '../../styles.js'
+const { darkBlue, white } = globalStyles
 
 const LoadComments = ({
   kids,
@@ -39,10 +41,10 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     paddingLeft: 5,
     borderRadius: 10,
-    backgroundColor: '#fcfcfc'
+    backgroundColor: white
   },
   viewCommentsText: {
-    color: '#125580',
+    color: darkBlue,
     paddingTop: 10,
     paddingBottom: 10,
     fontSize: 16,

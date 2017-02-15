@@ -8,6 +8,8 @@ import {
 import fromNow from '../../helpers/from-now'
 import Web from '../web'
 import formatUrl from '../../helpers/format-url'
+import { globalStyles } from '../../styles.js'
+const { darkBlue, black, darkGrey, orange, white } = globalStyles
 
 const Head = (props) => {
   const { title, score, kids, time, url, descendants, navigator } = props
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   head: {
     padding: 10,
     paddingBottom: 20,
-    backgroundColor: '#fcfcfc'
+    backgroundColor: white
   },
   siteTime: {
     flexDirection: 'row',
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
   time: {
     paddingTop: 2,
     fontSize: 16,
-    color: '#828282'
+    color: darkGrey
   },
   leftPad: {
     paddingLeft: 10,
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     fontSize: 30,
-    color: '#333333',
+    color: black,
     fontWeight: '900'
   },
   belowTitle: {
@@ -81,11 +83,11 @@ const styles = StyleSheet.create({
   },
   score: {
     fontSize: 18,
-    color: '#FF9C1F',
+    color: orange,
     fontWeight: '700'
   },
   comments: {
-    color: '#125580',
+    color: darkBlue,
     fontSize: 18,
     fontWeight: '700'
   },

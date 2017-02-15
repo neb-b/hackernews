@@ -8,6 +8,8 @@ import {
 import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 import LoadComments from './load-comments'
+import { globalStyles } from '../../styles.js'
+const { darkGrey, white } = globalStyles
 
 const Comment = ({
   text,
@@ -83,16 +85,16 @@ const styles = StyleSheet.create({
   commentContainer: {
     marginTop: 10,
     padding: 10,
-    backgroundColor: '#fcfcfc'
+    backgroundColor: white
   },
   replyContainer: {
     marginTop: 30,
     paddingLeft: 20,
     borderLeftWidth: 1,
-    borderLeftColor: '#bbbbbb',
+    borderLeftColor: darkGrey,
   },
   info: {
-    color: '#9f9f9f'
+    color: darkGrey
   },
   moarPadding: {
     paddingTop: 10,

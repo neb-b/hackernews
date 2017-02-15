@@ -5,6 +5,8 @@ import {
   TouchableHighlight,
   StyleSheet
 } from 'react-native'
+import { globalStyles } from '../../styles.js'
+const { red, white } = globalStyles
 
 const Error = ({ refresh }) => (
   <View style={styles.errorWrapper}>
@@ -22,21 +24,21 @@ const Error = ({ refresh }) => (
 const styles = StyleSheet.create({
   errorWrapper: {
     padding: 10,
-    backgroundColor: '#c93e3e'
+    backgroundColor: red
   },
   errorText: {
     textAlign: 'center',
-    color: '#f4f4f4'
+    color: white
   },
   refresh: {
     margin: 5,
     padding: 5,
     borderRadius: 5,
-    backgroundColor: '#f5f5f5'
+    backgroundColor: white
   },
   refreshText: {
     textAlign: 'center',
-    color: '#c93e3e'
+    color: red
   }
 })
 

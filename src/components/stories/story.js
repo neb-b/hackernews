@@ -9,6 +9,8 @@ import Web from '../web'
 import Thread from '../../connected/thread.connected'
 import fromNow from '../../helpers/from-now'
 import formatUrl from '../../helpers/format-url'
+import { globalStyles } from '../../styles.js'
+const { darkBlueUnderlay, darkBlue, black, grey, lightGrey, orange, white } = globalStyles
 
 const Story = ({
   title,
@@ -22,26 +24,25 @@ const Story = ({
   return (
     <TouchableHighlight
       style={styles.story}
-      underlayColor='#12558030'
+      underlayColor={darkBlueUnderlay}
       activeOpacity={.8}
       onPress={() => {
-        console.log('pressed', url);
         navigator.push({
-        title: url ? formatUrl(url) : 'Comments',
-        component: url ? Web : Thread,
-        index: 1,
-        props: {
-          url,
-          outside: !!url,
-          title,
-          time,
-          score,
-          descendants,
-          kids,
-          loading: false
-        }
-      })
-    }
+          title: url ? formatUrl(url) : 'Comments',
+          component: url ? Web : Thread,
+          index: 1,
+          props: {
+            url,
+            outside: !!url,
+            title,
+            time,
+            score,
+            descendants,
+            kids,
+            loading: false
+          }
+        })
+      }
     }>
       <View>
         <Text style={styles.title}>{title}</Text>
@@ -54,7 +55,7 @@ const Story = ({
           <TouchableHighlight
             style={styles.commentsContainer}
             activeOpacity={.5}
-            underlayColor='#fbfbfb'
+            underlayColor={white}
             onPress={() => navigator.push({
               title: 'Comments',
               component: Thread,
@@ -83,11 +84,11 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     borderBottomWidth: 1,
-    backgroundColor: '#fcfcfc',
-    borderColor: '#dddddd'
+    backgroundColor: white,
+    borderColor: lightGrey
   },
   title: {
-    color: '#333333',
+    color: black,
     fontSize: 30,
     fontWeight: '900'
   },
@@ -102,15 +103,15 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 14,
-    color: '#adadad'
+    color: grey
   },
   score: {
     paddingTop: 5,
     fontSize: 16,
-    color: '#125580'
+    color: darkBlue
   },
   comments: {
-    color: '#FF9C1F',
+    color: orange,
     fontSize: 20,
     fontWeight: '800'
   }
