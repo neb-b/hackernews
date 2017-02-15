@@ -4,8 +4,7 @@ import {
   Text,
   View
 } from 'react-native'
-import { loadStories } from '../redux/action-creators/load-stories'
-import { refreshStories } from '../redux/action-creators/refresh-stories'
+import { loadStories, refreshStories } from '../redux/action-creators/stories'
 import Stories from '../components/stories'
 import Error from '../components/global/error'
 
@@ -20,10 +19,15 @@ class StoriesView extends Component {
   }
 
   render() {
-    const { error, filterSelected } = this.props
+    const { error, filterSelected, loadStories } = this.props
+    console.log('stories', this.props);
     return (
       <View>
-        {error && <Error refresh={() => loadStories(filterSelected.endpoint)} />}
+        {error && <Error refresh={() => {
+          console.log('loading', filterSelected)
+          loadStories(filterSelected.endpoint)
+        }}/>
+    }
         <Stories {...this.props} />
       </View>
     )

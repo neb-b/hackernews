@@ -16,7 +16,11 @@ const initialState = {
 }
 
 export default handleActions({
-  LOAD_STORIES_REQUEST: (state) => ({...state, loading: true }),
+  LOAD_STORIES_REQUEST: (state) => ({...state,
+    loading: true,
+    refreshing: false,
+    error: null
+   }),
   LOAD_STORIES_SUCCESS: (state, { payload }) => ({
     ...state,
     loading: false,
@@ -26,13 +30,15 @@ export default handleActions({
   LOAD_STORIES_ERROR: (state, { payload }) => ({
     ...state,
     loading: false,
+    refreshing: false,
     error: payload
   }),
 
   REFRESH_STORIES_REQUEST: (state) => ({
     ...state,
     refreshing: true,
-    loading: false
+    loading: false,
+    error: null
   }),
   REFRESH_STORIES_SUCCESS: (state, { payload }) => ({
     ...state,
@@ -43,6 +49,7 @@ export default handleActions({
   REFRESH_STORIES_ERROR: (state, { payload }) => ({
     ...state,
     loading: false,
+    refreshing: false,
     error: payload
   }),
 }, initialState)

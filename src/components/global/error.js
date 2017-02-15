@@ -6,11 +6,11 @@ import {
   StyleSheet
 } from 'react-native'
 
-const Error = ({ refresh, refreshProps }) => (
+const Error = ({ refresh }) => (
   <View style={styles.errorWrapper}>
     <Text style={styles.errorText}>There was an error</Text>
     <TouchableHighlight
-      onPress={() => refresh(refreshProps)}
+      onPress={refresh}
       underlayColor='#ffb0b0'
       activeOpacity={.8}
       style={styles.refresh}>

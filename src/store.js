@@ -8,7 +8,8 @@ import reducer from './redux/reducers'
 const logger = createLogger()
 const store = createStore(
   reducer,
-  applyMiddleware(thunk)
+  applyMiddleware(thunk, promise, logger)
+  // applyMiddleware(thunk)
 )
 
 export default store

@@ -18,7 +18,12 @@ const initialState = {
 }
 
 export default handleActions({
-  LOAD_COMMENTS_REQUEST: (state) => ({...state, loading: true, error: null}),
+  LOAD_COMMENTS_REQUEST: (state) => ({
+    ...state,
+    loading: true,
+    refresing:false,
+    error: null
+  }),
   LOAD_COMMENTS_SUCCESS: (state, { payload }) => ({
     ...state,
     loading: false,
@@ -67,8 +72,7 @@ export default handleActions({
 
   REFRESH_THREAD_REQUEST: (state) => ({
     ...state,
-    refreshing: true,
-    loading: false
+    refreshing: true
   }),
   REFRESH_THREAD_SUCCESS: (state, { payload }) => ({
     ...state,
@@ -84,6 +88,7 @@ export default handleActions({
   REFRESH_THREAD_ERROR: (state, { payload }) => ({
     ...state,
     loading: false,
+    refreshing: false,
     error: payload
   }),
 }, initialState)

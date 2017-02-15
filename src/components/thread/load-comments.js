@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   viewCommentsText: {
     color: '#125580',
     paddingTop: 10,
-    paddingBottom: 5,
+    paddingBottom: 10,
     fontSize: 16,
     textAlign: 'center'
   },

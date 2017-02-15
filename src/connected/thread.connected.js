@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text } from 'react-native'
-import { loadComments, loadSubComments } from '../redux/action-creators/load-comments'
-import { refreshThread } from '../redux/action-creators/refresh-thread'
-import { toggleComment } from '../redux/action-creators/toggle-comment'
+import { loadComments,
+  loadSubComments,
+  refreshThread,
+  toggleComment
+} from '../redux/action-creators/thread'
 import Thread from '../components/thread'
 import Error from '../components/global/error'
 
@@ -22,7 +24,7 @@ class ThreadView extends Component {
 
     return (
       <View>
-        {error && <Error refresh={loadComments} refreshProps={kids} />}
+        {error && <Error refresh={() => loadComments(kids)} />}
         <Thread {...this.props}/>
       </View>
     )
