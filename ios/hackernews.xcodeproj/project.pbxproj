@@ -968,6 +968,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 348S7987BH;
 				INFOPLIST_FILE = hackernews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

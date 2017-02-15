@@ -6,10 +6,14 @@ import createLogger from 'redux-logger'
 import reducer from './redux/reducers'
 
 const logger = createLogger()
+
+const middleware = __DEV__
+  ? applyMiddleware(thunk, promise, logger)
+  : applyMiddleware(thunk)
+
 const store = createStore(
   reducer,
-  applyMiddleware(thunk, promise, logger)
-  // applyMiddleware(thunk)
+  middleware
 )
 
 export default store
