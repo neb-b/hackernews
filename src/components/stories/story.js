@@ -20,12 +20,26 @@ const Story = ({
   url,
   openSafari
 }) => {
+  const threadView = {
+    title: 'Comments',
+    component: Thread,
+    index: 1,
+    props: {
+      title,
+      time,
+      score,
+      descendants,
+      kids,
+      url
+    }
+  }
+
   return (
     <TouchableHighlight
       style={styles.story}
       underlayColor={darkBlueUnderlay}
       activeOpacity={.8}
-      onPress={() => openSafari(url)}>
+      onPress={() => url ? openSafari(url) : navigator.push(threadView)}>
       <View>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.url}>{formatUrl(url)}</Text>
@@ -38,19 +52,7 @@ const Story = ({
             style={styles.commentsContainer}
             activeOpacity={.5}
             underlayColor={white}
-            onPress={() => navigator.push({
-              title: 'Comments',
-              component: Thread,
-              index: 1,
-              props: {
-                title,
-                time,
-                score,
-                descendants,
-                kids,
-                url
-              }
-            })}>
+            onPress={() => navigator.push(threadView)}>
             <Text style={styles.comments}>{descendants || 0} comments</Text>
           </TouchableHighlight>
         </View>
