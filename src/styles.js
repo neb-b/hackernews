@@ -3,7 +3,7 @@ export const  globalStyles = {
   darkBlueUnderlay: '#12558030',
   white: '#FCFCFC',
   red: '#C93E3E',
-  orange: '#FF9C1F',
+  orange: '#FF651F',
   black: '#333333',
   lightGrey: '#DDDDDD',
   darkGrey: '#8E8E8E',

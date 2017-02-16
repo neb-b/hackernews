@@ -49,10 +49,7 @@ const Thread = ({
   const renderThreadRow = (threadItem) => {
     return (
       threadItem.title
-      ? <Head
-          key={0}
-          {...threadItem}
-          navigator={navigator} />
+      ? renderHead()
       : <Comment
           key={threadItem.id}
           {...threadItem}
