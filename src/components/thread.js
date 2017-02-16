@@ -55,7 +55,8 @@ const Thread = ({
           {...threadItem}
           loadSubComments={loadSubComments}
           commentThatsLoading={commentThatsLoading}
-          toggleComment={toggleComment} />
+          toggleComment={toggleComment}
+          openSafari={openSafari} />
     )
   }
 

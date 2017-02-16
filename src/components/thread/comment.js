@@ -28,7 +28,8 @@ const Comment = ({
   commentThatsLoading,
   showComment,
   commentChain,
-  toggleComment
+  toggleComment,
+  openSafari
 }) => {
   const kidsLoaded = kids && kids.length && typeof kids[0] === 'object'
 
@@ -48,7 +49,10 @@ const Comment = ({
             showComment && !deleted && (
               <View>
                 <View style={reply && styles.reply}>
-                  <HTMLView value={text} style={styles.text} />
+                  <HTMLView
+                    value={text}
+                    onLinkPress={(url) => openSafari(url)}
+                    style={styles.text} />
                 </View>
 
                 { kids && kids.length && typeof kids[0] === 'number' && (
