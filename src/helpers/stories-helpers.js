@@ -1,5 +1,6 @@
-const formatUrl = (url) => {
+import moment from 'moment'
 
+export const  formatUrl = (url) => {
   const trimUrl = (str, start) => {
     return str.split('')
       .slice(start, str.length)
@@ -16,4 +17,6 @@ const formatUrl = (url) => {
   return null
 }
 
-export default formatUrl
+export const fromNow = (time) => {
+  return moment(time * 1000).fromNow()
+}

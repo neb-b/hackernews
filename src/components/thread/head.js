@@ -5,29 +5,25 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
-import fromNow from '../../helpers/from-now'
-import Web from '../web'
-import formatUrl from '../../helpers/format-url'
+import { formatUrl, fromNow } from '../../helpers/stories-helpers'
 import { globalStyles } from '../../styles.js'
 const { darkBlue, black, darkGrey, orange, white } = globalStyles
 
-const Head = (props) => {
-  const { title, score, kids, time, url, descendants, navigator } = props
-
+const Head = ({
+  title,
+  score,
+  kids,
+  time,
+  url,
+  descendants,
+  openSafari
+}) => {
   return (
     <View style={styles.headWrapper}>
       <TouchableHighlight
         style={styles.head}
         underlayColor='#12558030'
-        onPress={() => navigator.push({
-          title: formatUrl(url),
-          component: Web,
-          index: 2,
-          props: {
-            url,
-            outside: true
-          }
-        })}>
+        onPress={() => openSafari(url)}>
         <View>
           <Text style={styles.title}>{title}</Text>
 

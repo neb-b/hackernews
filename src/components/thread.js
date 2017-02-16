@@ -28,7 +28,8 @@ const Thread = ({
   commentThatsLoading,
   toggleComment,
   refreshThread,
-  refreshing
+  refreshing,
+  openSafari
 }) => {
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
   const threadItems = [{title, score, time, descendants, url}].concat(comments)
@@ -41,7 +42,8 @@ const Thread = ({
       score={score}
       time={time}
       descendants={descendants}
-      url={url} />
+      url={url}
+      openSafari={openSafari} />
   )
 
   const renderThreadRow = (threadItem) => {

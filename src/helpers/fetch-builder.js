@@ -1,4 +1,4 @@
-export const fetchBuilder = (url, commentIds) => (
+export const postJson = (url, commentIds) => (
   fetch(url, {
     method: 'POST',
     headers: {

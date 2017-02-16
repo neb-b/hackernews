@@ -16,7 +16,8 @@ const Stories = ({
   loadStories,
   refreshing,
   refreshStories,
-  navigator
+  navigator,
+  openSafari
 }) => {
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
@@ -31,7 +32,7 @@ const Stories = ({
         :  <ListView
             style={styles.listView}
             dataSource={ds.cloneWithRows(stories)}
-            renderRow={(story) => <Story key={story.id} {...story} navigator={navigator}/>}
+            renderRow={(story) => <Story key={story.id} {...story} navigator={navigator} openSafari={openSafari}/>}
             refreshControl={
               <RefreshControl
                 onRefresh={refreshStories}

@@ -8,6 +8,7 @@ import { loadComments,
 } from '../redux/action-creators/thread'
 import Thread from '../components/thread'
 import Error from '../components/global/error'
+import SafariView from 'react-native-safari-view'
 
 class ThreadView extends Component {
   constructor(props) {
@@ -19,13 +20,18 @@ class ThreadView extends Component {
     loadComments(kids)
   }
 
+  _openSafari(url) {
+    SafariView.isAvailable()
+      .then(SafariView.show({ url }))
+  }
+
   render() {
     const { error, loadComments, kids } = this.props
 
     return (
       <View>
         {error && <Error refresh={() => loadComments(kids)} />}
-        <Thread {...this.props}/>
+        <Thread {...this.props} openSafari={this._openSafari}/>
       </View>
     )
   }

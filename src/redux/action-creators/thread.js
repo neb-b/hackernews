@@ -12,7 +12,7 @@ import {
   TOGGLE_COMMENT,
   ROOT_URL
 } from '../constants'
-import { fetchBuilder } from '../../helpers/fetch-builder'
+import { postJson } from '../../helpers/fetch-builder'
 const URL = `${ROOT_URL}/comments`
 
 const onLoadCommentsRequest = createAction(LOAD_COMMENTS_REQUEST)
@@ -33,7 +33,7 @@ export function loadComments (commentIds) {
   return (dispatch) => {
     dispatch(onLoadCommentsRequest())
 
-    fetchBuilder(URL, commentIds)
+    postJson(URL, commentIds)
       .then(({ comments }) => dispatch(onLoadCommentsSuccess(comments)))
       .catch((err) => dispatch(onLoadCommentsError(err)))
   }
@@ -43,7 +43,7 @@ export function loadSubComments (id, commentChain, kids) {
   return (dispatch) => {
     dispatch(onLoadSubCommentsRequest(id))
 
-    fetchBuilder(URL, kids)
+    postJson(URL, kids)
       .then(({ comments }) => dispatch(onLoadSubCommentsSuccess({commentChain, comments: comments.map((comment) => Object.assign(comment, { commentChain }))})))
       .catch((err) => dispatch(onLoadSubCommentsError(err)))
   }
@@ -55,7 +55,7 @@ export function refreshThread (comments) {
   return (dispatch) => {
     dispatch(onRefreshThreadRequest())
 
-    fetchBuilder(URL, trimmedComments)
+    postJson(URL, trimmedComments)
       .then(({ comments }) => dispatch(onRefreshThreadSuccess(comments)))
       .catch((err) => dispatch(onRefreshThreadError(err)))
   }

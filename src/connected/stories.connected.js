@@ -7,6 +7,7 @@ import {
 import { loadStories, refreshStories } from '../redux/action-creators/stories'
 import Stories from '../components/stories'
 import Error from '../components/global/error'
+import SafariView from 'react-native-safari-view'
 
 class StoriesView extends Component {
   constructor(props) {
@@ -18,12 +19,18 @@ class StoriesView extends Component {
     this.props.loadStories(filterSelected.endpoint)
   }
 
+  _openSafari(url) {
+    SafariView.isAvailable()
+      .then(SafariView.show({ url }))
+      .catch((err) => console.log('err', err))
+  }
+
   render() {
     const { error, filterSelected, loadStories } = this.props
     return (
       <View>
         {error && <Error refresh={() => loadStories(filterSelected.endpoint)}/>}
-        <Stories {...this.props} />
+        <Stories {...this.props} openSafari={this._openSafari}/>
       </View>
     )
   }

@@ -5,10 +5,8 @@ import {
   StyleSheet,
   TouchableHighlight
 } from 'react-native'
-import Web from '../web'
 import Thread from '../../connected/thread.connected'
-import fromNow from '../../helpers/from-now'
-import formatUrl from '../../helpers/format-url'
+import { formatUrl, fromNow } from '../../helpers/stories-helpers'
 import { globalStyles } from '../../styles.js'
 const { darkBlueUnderlay, darkBlue, black, grey, lightGrey, orange, white } = globalStyles
 
@@ -19,31 +17,15 @@ const Story = ({
   kids,
   navigator,
   descendants,
-  url
+  url,
+  openSafari
 }) => {
   return (
     <TouchableHighlight
       style={styles.story}
       underlayColor={darkBlueUnderlay}
       activeOpacity={.8}
-      onPress={() => {
-        navigator.push({
-          title: url ? formatUrl(url) : 'Comments',
-          component: url ? Web : Thread,
-          index: 1,
-          props: {
-            url,
-            outside: !!url,
-            title,
-            time,
-            score,
-            descendants,
-            kids,
-            loading: false
-          }
-        })
-      }
-    }>
+      onPress={() => openSafari(url)}>
       <View>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.url}>{formatUrl(url)}</Text>
