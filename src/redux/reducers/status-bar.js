@@ -23,7 +23,7 @@ const initialState = {
     title: 'AskHN'
   },
   {
-    endpoint: 'showStories',
+    endpoint: 'showstories',
     title: 'ShowHN'
   },
   {
