@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import { formatUrl, fromNow } from '../../helpers/stories-helpers'
 import { globalStyles } from '../../styles.js'
-const { darkBlue, black, darkGrey, orange, white } = globalStyles
+const { darkBlue, lightBlack, blackUnderlay, darkBlueUnderlay, blue, black, mediumGrey, orange, white, darkBackground, veryLightGrey } = globalStyles
 
 const Head = ({
   title,
@@ -16,25 +16,26 @@ const Head = ({
   time,
   url,
   descendants,
-  openSafari
+  openSafari,
+  isDark
 }) => {
   return (
     <View style={styles.headWrapper}>
       <TouchableHighlight
-        style={styles.head}
-        underlayColor='#12558030'
+        style={[styles.head, isDark && styles.darkHead]}
+        underlayColor={isDark ? blackUnderlay : darkBlueUnderlay}
         onPress={() => openSafari(url)}>
         <View>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={[styles.title, isDark && styles.darkTitle]}>{title}</Text>
 
           <View style={styles.siteTime}>
-            <Text style={styles.url}>{url && formatUrl(url)}</Text>
+            <Text style={[styles.url, isDark && styles.darkUrl]}>{url && formatUrl(url)}</Text>
             <Text style={[styles.time, url && styles.leftPad]}>{fromNow(time)}</Text>
           </View>
 
           <View style={styles.belowTitle}>
-            <Text style={styles.score}>{score} points</Text>
-            <Text style={styles.comments}>{descendants} comments</Text>
+            <Text style={[styles.score]}>{score} points</Text>
+            <Text style={[styles.comments, isDark && styles.darkComments]}>{descendants} comments</Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -51,16 +52,22 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     backgroundColor: white
   },
+  darkHead: {
+    backgroundColor: lightBlack
+  },
   siteTime: {
     flexDirection: 'row',
   },
   url: {
     fontSize: 18
   },
+  darkUrl: {
+    color: blue
+  },
   time: {
     paddingTop: 2,
     fontSize: 16,
-    color: darkGrey
+    color: mediumGrey
   },
   leftPad: {
     paddingLeft: 10,
@@ -72,6 +79,9 @@ const styles = StyleSheet.create({
     color: black,
     fontWeight: '900'
   },
+  darkTitle: {
+    color: veryLightGrey
+  },
   belowTitle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -81,6 +91,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: orange,
     fontWeight: '700'
+  },
+  darkComments: {
+    color: veryLightGrey
   },
   comments: {
     color: darkBlue,

@@ -8,13 +8,15 @@ import {
   View
 } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Settings from '../../connected/settings.connected'
 import { globalStyles } from '../../styles.js'
 
-const { darkBlue, darkBlueUnderlay, white } = globalStyles
+const { darkBlue, blue, lightGrey, black, mediumBlack, orangeUnderlay, darkBlueUnderlay, darkGrey, white, lightBlack, veryLightGrey, blackUnderlay } = globalStyles
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = Dimensions.get('window').height
 
-const Navigation = ({ title,
+const Navigation = ({
+  title,
   navigator,
   viewIndex,
   settings,
@@ -23,31 +25,34 @@ const Navigation = ({ title,
   toggleFilter,
   changeTopic,
   filterSelected,
-  filterOptions
+  filterOptions,
+  isDark
 }) => {
   const isHome = viewIndex === 0
+  const showSettings = title !== 'Settings'
+
   return (
-    <View style={styles.statusBarWrapper}>
+    <View style={[styles.statusBarWrapper, isDark && styles.darkStatusBar]}>
       <StatusBar barStyle='light-content' />
       <View style={styles.statusBar}>
         <View style={styles.navWidth}>
           { !isHome && (
               <Text
-                style={styles.navText}
+                style={[styles.navText, isDark && styles.darkNavText]}
                 onPress={() => navigator.pop()}>
                 Back
               </Text>
           )}
         </View>
 
-        { isHome ? (
+        {isHome ? (
             <TouchableHighlight
               onPress={toggleFilter}
-              underlayColor={darkBlueUnderlay}
+              underlayColor={isDark ? blackUnderlay : darkBlueUnderlay}
               activeOpacity={.8}
               style={[styles.toggleFilter]}>
               <View style={{flexDirection: 'row'}}>
-                <Text style={[styles.navText]}>{filterSelected.title}</Text>
+                <Text style={[styles.navText, isDark && styles.darkNavText]}>{filterSelected.title}</Text>
                 <Icon
                   name={filterToggled ? 'chevron-up' : 'chevron-down'}
                   style={styles.icon}
@@ -56,40 +61,64 @@ const Navigation = ({ title,
               </View>
             </TouchableHighlight>
           )
-          : <Text style={[styles.navText, outside && styles.url]}>{title}</Text>
+          : <Text style={[styles.navText, outside && styles.url, isDark && styles.darkNavText]}>{title}</Text>
         }
 
-        {
-          filterToggled && (
-              <TouchableHighlight
-                onPress={toggleFilter}
-                style={[styles.filterActiveOverlay]}>
-                <View style={styles.filterMenu}>
-                  {
-                    filterOptions.map((option) => (
-                      <View style={styles.optionWrapper} key={option.endpoint}>
-                        <TouchableHighlight
-                          style={[styles.option, filterSelected.endpoint === option.endpoint && styles.selectedOption]}
-                          onPress={() => changeTopic(option)}
-                          underlayColor={darkBlueUnderlay}
-                          activeOpacity={.8}
-                          >
-                          <Text>{option.title}</Text>
-                        </TouchableHighlight>
-                      </View>
-                    ))
+        {filterToggled && (
+          <TouchableHighlight
+            onPress={toggleFilter}
+            underlayColor={isDark ? mediumBlack : lightGrey}
+            style={[styles.filterActiveOverlay]}>
+            <View style={[styles.filterMenu, isDark && styles.darkFilterMenu]}>
+              {
+                filterOptions.map((option) => {
+                  let selectedStyle
+                  if (filterSelected.endpoint === option.endpoint) {
+                    selectedStyle = isDark ? styles.darkSelectedOption : styles.selectedOption
                   }
-                </View>
-              </TouchableHighlight>
-          )
-        }
+
+                  return (
+                    <View style={[styles.optionWrapper, isDark && styles.darkOptionWrapper]} key={option.endpoint}>
+                      <TouchableHighlight
+                        style={[
+                          styles.option,
+                          selectedStyle
+                        ]}
+                        onPress={() => changeTopic(option)}
+                        underlayColor={isDark ? blackUnderlay : darkBlueUnderlay}
+                        activeOpacity={.8}
+                        >
+                        <Text style={isDark && styles.darkOption}>{option.title}</Text>
+                      </TouchableHighlight>
+                    </View>
+                  )
+                })
+              }
+            </View>
+          </TouchableHighlight>
+        )}
 
         <View style={styles.navWidth}>
-          {
-            settings && (
-              <Text style={[styles.navText, styles.settings]}>Settings</Text>
-            )
-          }
+          {showSettings && isHome && (
+            <TouchableHighlight
+              underlayColor={isDark ? blackUnderlay : darkBlueUnderlay}
+              activeOpacity={.8}
+              onPress={() => {
+                filterToggled && toggleFilter()
+                navigator.push({
+                    title: 'Settings',
+                    component: Settings,
+                    index: viewIndex + 1
+                  })
+              }}
+            >
+              <Icon
+                name='dots-vertical'
+                style={styles.settings}
+                size={20}
+                color={isDark ? veryLightGrey : white} />
+            </TouchableHighlight>
+          )}
         </View>
       </View>
     </View>
@@ -105,6 +134,9 @@ const styles = StyleSheet.create({
     paddingRight: 7,
     backgroundColor: darkBlue
   },
+  darkStatusBar: {
+    backgroundColor: black
+  },
   statusBar: {
     flex: 1,
     flexDirection: 'row',
@@ -116,6 +148,9 @@ const styles = StyleSheet.create({
   navText: {
     color: white,
     fontSize: 20
+  },
+  darkNavText: {
+    color: veryLightGrey
   },
   url: {
     paddingTop: 5,
@@ -131,23 +166,36 @@ const styles = StyleSheet.create({
   },
   filterActiveOverlay: {
     position: 'absolute',
-    height: HEIGHT - 64,
+    height: HEIGHT,
     width: WIDTH,
     marginTop: 38,
     marginLeft: -7,
-    backgroundColor: '#6e6e6e30'
+    backgroundColor: blackUnderlay
   },
   filterMenu: {
     width: 150,
     marginTop: 1,
     marginLeft: (WIDTH / 2) - 75,
-    backgroundColor: '#fbfbfb',
+    backgroundColor: white,
+  },
+  darkFilterMenu: {
+    backgroundColor: darkGrey
   },
   option: {
-    padding: 20,
+    padding: 20
+  },
+  darkOption: {
+    color: veryLightGrey
   },
   selectedOption: {
-    backgroundColor: '#B8DDF5'
+    backgroundColor: orangeUnderlay
+  },
+  darkSelectedOption: {
+    backgroundColor: lightBlack
+  },
+  settings: {
+    alignSelf: 'flex-end',
+    paddingTop: 5
   }
 })
 

@@ -1,6 +1,7 @@
 import { API_ENDPOINT } from 'react-native-dotenv'
 
 export const ROOT_URL = API_ENDPOINT
+// export const ROOT_URL = "http://localhost:3000"
 
 export const LOAD_STORIES_REQUEST = 'LOAD_STORIES_REQUEST'
 export const LOAD_STORIES_SUCCESS = 'LOAD_STORIES_SUCCESS'
@@ -25,3 +26,7 @@ export const LOAD_SUB_COMMENTS_ERROR = 'LOAD_SUB_COMMENTS_ERROR'
 export const TOGGLE_COMMENT = "TOGGLE_COMMENT"
 export const TOGGLE_FILTER = "TOGGLE_FILTER"
 export const CHANGE_TOPIC = "CHANGE_TOPIC"
+
+export const LOAD_SETTINGS = "LOAD_SETTINGS"
+export const UPDATE_SETTINGS_ERROR = "UPDATE_SETTINGS_ERROR"
+export const UPDATE_SETTINGS_SUCCESS = "UPDATE_SETTINGS_SUCCESS"

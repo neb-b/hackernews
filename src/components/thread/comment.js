@@ -9,7 +9,7 @@ import moment from 'moment'
 import HTMLView from 'react-native-htmlview'
 import LoadComments from './load-comments'
 import { globalStyles } from '../../styles.js'
-const { lightGrey, darkGrey, white } = globalStyles
+const { lightGrey, mediumGrey, white, darkBlueUnderlay, lightBlack, veryLightGrey, blackUnderlay, darkBackground } = globalStyles
 
 const Comment = ({
   text,
@@ -29,14 +29,15 @@ const Comment = ({
   showComment,
   commentChain,
   toggleComment,
-  openSafari
+  openSafari,
+  isDark
 }) => {
   const kidsLoaded = kids && kids.length && typeof kids[0] === 'object'
 
   return (
       <TouchableHighlight
-        style={reply ? styles.replyContainer : styles.commentContainer}
-        underlayColor='#12558030'
+        style={reply ? [styles.replyContainer, isDark && styles.darkReply] : [styles.commentContainer, isDark && styles.darkComment]}
+        underlayColor={isDark ? blackUnderlay : darkBlueUnderlay}
         activeOpacity={.8}
         onPress={() => toggleComment(id, commentChain)}>
         <View style={[reply ? '' : styles.commentPadding, !showComment && styles.moarPadding]}>
@@ -48,11 +49,11 @@ const Comment = ({
           {
             showComment && !deleted && (
               <View>
-                <View style={reply && styles.reply}>
+                <View style={[reply && styles.reply]}>
                   <HTMLView
-                    value={text}
+                    value={`<p>${text}</p>`}
                     onLinkPress={(url) => openSafari(url)}
-                    style={styles.text} />
+                    stylesheet={isDark ? darkStyles : styles} />
                 </View>
 
                 { kids && kids.length && typeof kids[0] === 'number' && (
@@ -61,7 +62,8 @@ const Comment = ({
                     loadSubComments={loadSubComments}
                     commentChain={commentChain}
                     id={id}
-                    commentThatsLoading={commentThatsLoading}/>
+                    commentThatsLoading={commentThatsLoading}
+                    isDark={isDark} />
                 )}
 
                 { kidsLoaded && showComment && (
@@ -73,7 +75,8 @@ const Comment = ({
                       parentId={id}
                       reply={true}
                       commentThatsLoading={commentThatsLoading}
-                      toggleComment={toggleComment}/>
+                      toggleComment={toggleComment}
+                      isDark={isDark} />
                   ))
                 )}
               </View>
@@ -91,18 +94,34 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: white
   },
+  darkComment: {
+    backgroundColor: lightBlack
+  },
   replyContainer: {
     marginTop: 30,
     paddingLeft: 10,
     borderLeftWidth: 1,
     borderLeftColor: lightGrey,
   },
+  darkReply: {
+    borderLeftColor: mediumGrey
+  },
+  dark: {
+    color: lightGrey
+  },
   info: {
-    color: darkGrey
+    color: mediumGrey,
+    paddingBottom: 5
   },
   moarPadding: {
     paddingTop: 10,
     paddingBottom: 10
+  }
+})
+
+const darkStyles = StyleSheet.create({
+  p: {
+    color: veryLightGrey
   }
 })
 

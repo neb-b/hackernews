@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   ActivityIndicator,
+  Dimensions,
   ListView,
   RefreshControl,
   ScrollView,
@@ -11,7 +12,8 @@ import {
 } from 'react-native'
 import Head from './thread/head'
 import Comment from './thread/comment'
-import Dimensions from 'Dimensions'
+import { globalStyles } from '../styles'
+const { mediumBlack, mediumGrey, darkBlue } = globalStyles
 const SCREEN_HEIGHT = Dimensions.get('window').height
 
 const Thread = ({
@@ -29,7 +31,8 @@ const Thread = ({
   toggleComment,
   refreshThread,
   refreshing,
-  openSafari
+  openSafari,
+  isDark
 }) => {
   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
   const threadItems = [{title, score, time, descendants, url}].concat(comments)
@@ -43,7 +46,8 @@ const Thread = ({
       time={time}
       descendants={descendants}
       url={url}
-      openSafari={openSafari} />
+      openSafari={openSafari}
+      isDark={isDark} />
   )
 
   const renderThreadRow = (threadItem) => {
@@ -56,24 +60,25 @@ const Thread = ({
           loadSubComments={loadSubComments}
           commentThatsLoading={commentThatsLoading}
           toggleComment={toggleComment}
-          openSafari={openSafari} />
+          openSafari={openSafari}
+          isDark={isDark} />
     )
   }
 
   return (
-    <View>
+    <View style={[styles.threadWrapper, isDark && styles.darkBackground]}>
       {loading && (
-        <View>
+        <View style={[styles.loadingThread, isDark && styles.darkLoading]}>
           {renderHead()}
           <ActivityIndicator
               key={1}
               style={styles.spinner}
-              color='#125580'
+              color={isDark ? mediumGrey : darkBlue}
               size='large' />
         </View>
       )}
       {!loading && (
-        <View style={styles.threadWrapper}>
+        <View>
           <ListView
             style={styles.listView}
             dataSource={ds.cloneWithRows(threadItems)}
@@ -81,7 +86,7 @@ const Thread = ({
               <RefreshControl
                 onRefresh={() => refreshThread(comments)}
                 refreshing={refreshing}
-                tintColor='#12558060' />
+                tintColor={isDark ? mediumGrey : darkBlue} />
               } />
         </View>
       )}
@@ -90,11 +95,20 @@ const Thread = ({
 }
 
 const styles = StyleSheet.create({
+  loadingThread: {
+    flex: 1
+  },
+  darkLoading: {
+    backgroundColor: mediumBlack
+  },
   spinner: {
     paddingTop: 40
   },
   threadWrapper: {
     height: SCREEN_HEIGHT
+  },
+  darkBackground: {
+    backgroundColor: mediumBlack
   },
   listView: {
     marginBottom: 64

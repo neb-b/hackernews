@@ -26,11 +26,12 @@ class StoriesView extends Component {
   }
 
   render() {
-    const { error, filterSelected, loadStories } = this.props
+    const { error, filterSelected, loadStories, settings } = this.props
+    const isDark = settings[0].active //darkmode
     return (
       <View>
         {error && <Error refresh={() => loadStories(filterSelected.endpoint)}/>}
-        <Stories {...this.props} openSafari={this._openSafari}/>
+        <Stories {...this.props} openSafari={this._openSafari} isDark={isDark}/>
       </View>
     )
   }
@@ -39,7 +40,8 @@ class StoriesView extends Component {
 const mapStateToProps = (s) => {
   return {
     ...s.stories,
-    filterSelected: s.statusBar.filterSelected
+    filterSelected: s.statusBar.filterSelected,
+    settings: s.settings.settings
   }
 }
 

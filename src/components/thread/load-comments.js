@@ -6,24 +6,24 @@ import {
   View
 } from 'react-native'
 import { globalStyles } from '../../styles.js'
-const { darkBlue, white } = globalStyles
+const { darkBlue, white, blackUnderlay, darkBlueUnderlay, lightBlack, orange } = globalStyles
 
 const LoadComments = ({
   kids,
   loadSubComments,
   id,
   commentChain,
-  commentThatsLoading
+  commentThatsLoading,
+  isDark
 }) => {
   const imLoading = commentThatsLoading === id
   return (
     <TouchableHighlight
-      underlayColor='#e7e6e6'
-      activeOpacity={.8}
-      style={styles.viewComments}
+      underlayColor={isDark ? blackUnderlay : darkBlueUnderlay}
+      style={[styles.viewComments, isDark && styles.darkViewComments]}
       onPress={() => loadSubComments(id, commentChain, kids)}
     >
-      <Text style={styles.viewCommentsText}>
+      <Text style={[styles.viewCommentsText, isDark && styles.darkViewCommentsText]}>
         {
           imLoading
           ? 'Loading...'
@@ -43,6 +43,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: white
   },
+  darkViewComments: {
+    backgroundColor: lightBlack
+  },
   viewCommentsText: {
     color: darkBlue,
     paddingTop: 10,
@@ -50,6 +53,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center'
   },
+  darkViewCommentsText: {
+    color: orange
+  }
 })
 
 export default LoadComments

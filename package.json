@@ -2,7 +2,7 @@
   "name": "hackernews",
   "version": "1.0.2",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
     "async": "^2.1.4",
@@ -16,6 +16,7 @@
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-actions": "^1.2.0",
+    "redux-async-initial-state": "^0.2.0",
     "redux-logger": "^2.7.4",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0"

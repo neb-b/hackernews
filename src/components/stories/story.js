@@ -8,7 +8,7 @@ import {
 import Thread from '../../connected/thread.connected'
 import { formatUrl, fromNow } from '../../helpers/stories-helpers'
 import { globalStyles } from '../../styles.js'
-const { darkBlueUnderlay, darkBlue, black, grey, lightGrey, orange, white } = globalStyles
+const { darkBlueUnderlay, mediumGrey, lightBlackUnderlay, darkBackgroundUnderlay, darkBlue, black, grey, lightGrey, orange, white, blackUnderlay, darkBackground, veryLightGrey, lightBlack, blue } = globalStyles
 
 const Story = ({
   title,
@@ -18,7 +18,8 @@ const Story = ({
   navigator,
   descendants,
   url,
-  openSafari
+  openSafari,
+  isDark
 }) => {
   const threadView = {
     title: 'Comments',
@@ -36,22 +37,22 @@ const Story = ({
 
   return (
     <TouchableHighlight
-      style={styles.story}
-      underlayColor={darkBlueUnderlay}
+      style={[styles.story, isDark && styles.darkStory]}
+      underlayColor={isDark ? blackUnderlay : darkBlueUnderlay}
       activeOpacity={.8}
       onPress={() => url ? openSafari(url) : navigator.push(threadView)}>
       <View>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.url}>{formatUrl(url)}</Text>
+        <Text style={[styles.title, isDark && styles.darkTitle]}>{title}</Text>
+        <Text style={[styles.url, isDark && styles.darkUrl]}>{formatUrl(url)}</Text>
         <View style={styles.sub}>
           <View>
             <Text style={styles.time}>{fromNow(time)}</Text>
-            <Text style={styles.score}>{score || 0} points</Text>
+            <Text style={[styles.score, isDark && styles.darkScore]}>{score || 0} points</Text>
           </View>
           <TouchableHighlight
             style={styles.commentsContainer}
             activeOpacity={.5}
-            underlayColor={white}
+            underlayColor={isDark ? lightBlackUnderlay : white}
             onPress={() => navigator.push(threadView)}>
             <Text style={styles.comments}>{descendants || 0} comments</Text>
           </TouchableHighlight>
@@ -71,15 +72,25 @@ const styles = StyleSheet.create({
     backgroundColor: white,
     borderColor: lightGrey
   },
+  darkStory: {
+    backgroundColor: lightBlack,
+    borderColor: mediumGrey
+  },
   title: {
     color: black,
     fontSize: 30,
     fontWeight: '900'
   },
+  darkTitle: {
+    color: veryLightGrey
+  },
   url: {
     paddingTop: 15,
     paddingBottom: 15,
     fontSize: 16
+  },
+  darkUrl: {
+    color: blue
   },
   sub: {
     flexDirection: 'row',
@@ -93,6 +104,9 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     fontSize: 16,
     color: darkBlue
+  },
+  darkScore: {
+    color: veryLightGrey
   },
   comments: {
     color: orange,

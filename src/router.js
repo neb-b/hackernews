@@ -1,14 +1,14 @@
 import React from 'react'
-import { Navigator, StyleSheet } from 'react-native'
+import { Navigator } from 'react-native'
 import { Provider } from 'react-redux'
 import store from './store'
+import App from './app'
 import View from './view'
 import Stories from './connected/stories.connected'
 
 const Router = () => (
   <Provider store={store}>
     <Navigator
-      style={styles.navigator}
       navigationBarHidden={true}
       initialRoute={{
         title: 'Top Stories',
@@ -17,21 +17,18 @@ const Router = () => (
       }}
       renderScene={(route, navigator, index) => {
         return(
-          <View
-            Component={route.component}
-            navigator={navigator}
-            viewTitle={route.title}
-            index={route.index}
-            {...route.props}/>)
-      }}
+          <App>
+            <View
+              Component={route.component}
+              navigator={navigator}
+              viewTitle={route.title}
+              index={route.index}
+              {...route.props} />
+          </App>
+          )
+        }}
       />
   </Provider>
 )
-
-const styles = StyleSheet.create({
-  navigator: {
-    flex: 1
-  }
-})
 
 export default Router

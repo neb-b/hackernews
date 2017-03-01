@@ -3179,6 +3179,10 @@ redux-actions@^1.2.0:
     lodash "^4.13.1"
     reduce-reducers "^0.1.0"
 
+redux-async-initial-state@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/redux-async-initial-state/-/redux-async-initial-state-0.2.0.tgz#1992bc03acca193339a390da0a9eaf96fb5d7014"
+
 redux-logger@^2.7.4:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-2.7.4.tgz#891e5d29e7f111d08b5781a237b9965b5858c7f8"

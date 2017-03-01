@@ -26,19 +26,23 @@ class ThreadView extends Component {
   }
 
   render() {
-    const { error, loadComments, kids } = this.props
+    const { error, loadComments, kids, settings } = this.props
+    const isDark = settings[0].active //darkmode
 
     return (
       <View>
         {error && <Error refresh={() => loadComments(kids)} />}
-        <Thread {...this.props} openSafari={this._openSafari}/>
+        <Thread {...this.props} openSafari={this._openSafari} isDark={isDark}/>
       </View>
     )
   }
 }
 
 const mapStateToProps = (s) => {
-  return {...s.thread}
+  return {
+    ...s.thread,
+    settings: s.settings.settings
+  }
 }
 
 export default connect(
