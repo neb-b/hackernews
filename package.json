@@ -1,0 +1,33 @@
+{
+  "name": "hackernews",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "lint": "eslint --fix ./src/**.js"
+  },
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-native": "0.42.3",
+    "react-native-safari-view": "^2.0.0",
+    "react-native-vector-icons": "^4.0.0",
+    "react-navigation": "^1.0.0-beta.7",
+    "react-redux": "^5.0.3",
+    "react-router-native": "^4.0.0-beta.8",
+    "redux": "^3.6.0",
+    "redux-actions": "^2.0.1",
+    "redux-logger": "^3.0.0",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.0",
+    "eslint": "2.7.0",
+    "eslint-plugin-react": "4.3.0",
+    "eslint-plugin-react-native": "1.0.0",
+    "redux-devtools": "^3.3.2",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.2.0",
+    "remote-redux-devtools": "^0.5.7"
+  }
+}
