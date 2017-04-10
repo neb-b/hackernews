@@ -10,20 +10,22 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { formatUrl, fromNow } from '../../helpers/story-helpers'
 
 const Story = ({
-  navigator,
   story,
   isSavedView,
-  saveStory
+  saveAction,
+  navigator
 }) => {
   const {
     title,
     time,
     score,
     descendants,
-    url
+    url,
+    saved
   } = story
-  return (
 
+
+  return (
       <View style={styles.story}>
         <Text style={[styles.title]}>{title}</Text>
         <Text style={[styles.url]}>{formatUrl(url)}</Text>
@@ -33,13 +35,15 @@ const Story = ({
             <Text style={styles.time}>{fromNow(time)}</Text>
             <Text style={[styles.score]}>{score || 0} points</Text>
           </View>
+          <Button onPress={() => navigator.push({title: 'Comments'})}>
+            <Text style={styles.comments}>{descendants || 0} comments</Text>
+          </Button>
 
-          <Button onPress={() => saveStory(story)}>
-              <Text style={styles.comments}>{descendants || 0} comments</Text>
+          <Button onPress={() => saveAction(story)}>
               <Icon
-                name={'clock'}
+                name={saved ? 'folder-remove' : 'clock' }
                 size={20}
-                color={'black'} />
+                color={saved ? '#ff6b6b' : 'black'} />
           </Button>
         </View>
       </View>

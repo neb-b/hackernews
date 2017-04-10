@@ -7,10 +7,10 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from './generic/button'
-import SavedStories from '../connected/stories.connected'
-import Stories from '../connected/saved-stories.connected'
+import Stories from '../connected/stories.connected'
+import SavedStories from '../connected/saved-stories.connected'
 
-const TabBar = ({changeView, viewingStories}) => {
+const TabBar = ({changeView, viewingStories, navigator}) => {
   return (
     <TabBarIOS
       translucent
@@ -22,7 +22,7 @@ const TabBar = ({changeView, viewingStories}) => {
         title="Read it later"
         selected={!viewingStories}
         onPress={() => viewingStories && changeView()}>
-        <SavedStories />
+        <SavedStories navigator={navigator} />
       </Icon.TabBarItemIOS>
 
       <Icon.TabBarItemIOS
@@ -30,7 +30,7 @@ const TabBar = ({changeView, viewingStories}) => {
         title='Stories'
         selected={viewingStories}
         onPress={() => !viewingStories && changeView()}>
-        <Stories />
+        <Stories navigator={navigator} />
       </Icon.TabBarItemIOS>
 
     </TabBarIOS>

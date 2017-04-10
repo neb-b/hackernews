@@ -1,11 +1,11 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import store from './store'
-import ConnectedApp from './app.connected'
+import AppView from './app.container'
 
 const App = () => (
   <Provider store={store}>
-    <ConnectedApp />
+    <AppView />
   </Provider>
 )
 

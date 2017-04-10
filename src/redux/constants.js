@@ -1,4 +1,5 @@
-export const ROOT_URL = "http://localhost:3000"
+// export const ROOT_URL = 'http://localhost:3000'
+export const ROOT_URL = 'http://192.168.1.16:3000'
 
 export const LOAD_SETTINGS_SUCCESS = 'LOAD_SETTINGS_SUCCESS'
 export const LOAD_SETTINGS_ERROR = 'LOAD_SETTINGS_ERROR'
@@ -15,3 +16,6 @@ export const FETCH_SAVED_STORIES_ERROR = 'FETCH_SAVED_STORIES_ERROR'
 
 export const SAVE_STORY_SUCCESS = 'SAVE_STORY_SUCCESS'
 export const SAVE_STORY_ERROR = 'SAVE_STORY_ERROR'
+
+export const UN_SAVE_STORY_SUCCESS = 'UN_SAVE_STORY_SUCCESS'
+export const UN_SAVE_STORY_ERROR = 'UN_SAVE_STORY_ERROR'

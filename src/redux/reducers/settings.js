@@ -2,7 +2,9 @@ import { handleActions } from 'redux-actions'
 import {
   LOAD_SETTINGS_SUCCESS,
   LOAD_SETTINGS_ERROR,
-  CHANGE_VIEW
+  CHANGE_VIEW,
+  SAVE_STORY_SUCCESS,
+  UN_SAVE_STORY_SUCCESS
 } from '../constants'
 import getTitle from '../../helpers/get-title'
 
@@ -30,7 +32,8 @@ export default handleActions({
     return ({
       ...state,
       loading: false,
-      settings: payload.settings
+      settings: payload.settings,
+      savedStoryIds: payload.savedStoryIds
     })
   },
   LOAD_SETTINGS_ERROR: (state, {payload}) => ({
@@ -39,7 +42,6 @@ export default handleActions({
     loading: false
   }),
   CHANGE_VIEW: (state, {payload}) => {
-    console.log('state', state);
     const { viewingStories, topics: { currentlySelected } } = state
 
     const title = getTitle(!state.viewingStories, currentlySelected)
@@ -48,5 +50,18 @@ export default handleActions({
       viewingStories: !state.viewingStories,
       title
     })
-  }
+  },
+  SAVE_STORY_SUCCESS: (state, {payload}) => {
+    return ({
+      ...state,
+      savedStoryIds: payload.savedStoryIds
+    })
+  },
+  UN_SAVE_STORY_SUCCESS: (state, {payload}) => {
+    return ({
+      ...state,
+      savedStoryIds: payload.savedStoryIds
+    })
+  },
+
 }, initialState)

@@ -4,16 +4,16 @@ import TopicFilter from './stories/topic-filter'
 import List from './generic/list'
 import Story from './stories/story'
 
-const Stories = ({isSavedView, stories, saveStory, unSaveStory, navigator}) => {
-  console.log('navigator', navigator);
+const Stories = ({savedStories, unSaveStory, navigator}) => {
   return (
     <View style={[styles.stories]}>
       <List
-        data={stories}
+        data={savedStories}
         renderItem={({item: story}) => (
           <Story
+            saved
             story={story}
-            saveAction={story.saved ? unSaveStory : saveStory}
+            saveAction={unSaveStory}
             navigator={navigator} />
         )}/>
     </View>

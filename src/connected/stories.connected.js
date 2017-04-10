@@ -1,27 +1,33 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { loadStories, loadSavedStories, saveStory } from '../redux/action-creators/stories'
-import SavedStories from '../containers/saved-stories.container'
+import { saveStory, unSaveStory } from '../redux/action-creators/stories'
+import Stories from '../components/stories'
 
-const SavedStoriesWrapper = (props) => {
+const StoriesWrapper = (props) => {
   const {
     saveStory,
-    loadSavedStories,
-    savedStories,
+    unSaveStory,
+    stories,
+    navigator,
     settings: { isSavedView, topics, savedStoryIds }
   } = props
 
   return (
-    <SavedStories {...savedStories} savedStoryIds={savedStoryIds} loadSavedStories={loadSavedStories}/>
+    <Stories
+      {...stories}
+      topics={topics}
+      unSaveStory={unSaveStory}
+      saveStory={saveStory}
+      navigator={navigator} />
   )
 }
 
 const mapStateToProps = (s) => ({
   settings: s.settings,
-  savedStories: s.savedStories
+  stories: s.stories
 })
 
 export default connect(mapStateToProps, {
-  loadStories, loadSavedStories, saveStory
-})(SavedStoriesWrapper)
+  saveStory, unSaveStory
+})(StoriesWrapper)
