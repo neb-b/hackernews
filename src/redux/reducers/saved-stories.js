@@ -17,7 +17,7 @@ const initialState = {
 export default handleActions({
   LOAD_SETTINGS_SUCCESS: (state, {payload}) => {
     const savedStories = payload.initialStories.savedStories || []
-    const newStories = payload.initialStories.savedStories.map((story) => Object.assign(story, { saved: true }))
+    const newStories = savedStories.map((story) => Object.assign(story, { saved: true }))
 
     return ({
       ...state,

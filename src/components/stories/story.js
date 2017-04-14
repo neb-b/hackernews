@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableHighlight
 } from 'react-native'
+import Link from '../generic/link'
 import Button from '../generic/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { formatUrl, fromNow } from '../../helpers/story-helpers'
@@ -13,7 +14,8 @@ const Story = ({
   story,
   isSavedView,
   saveAction,
-  navigator
+  navigator,
+  viewIndex
 }) => {
   const {
     title,
@@ -23,8 +25,6 @@ const Story = ({
     url,
     saved
   } = story
-
-
   return (
       <View style={styles.story}>
         <Text style={[styles.title]}>{title}</Text>
@@ -35,15 +35,20 @@ const Story = ({
             <Text style={styles.time}>{fromNow(time)}</Text>
             <Text style={[styles.score]}>{score || 0} points</Text>
           </View>
-          <Button onPress={() => navigator.push({title: 'Comments'})}>
+          <Link
+            to='Thread'
+            linkProps={story}
+            navigator={navigator}
+            viewIndex={viewIndex}
+          >
             <Text style={styles.comments}>{descendants || 0} comments</Text>
-          </Button>
+          </Link>
 
           <Button onPress={() => saveAction(story)}>
-              <Icon
-                name={saved ? 'folder-remove' : 'clock' }
-                size={20}
-                color={saved ? '#ff6b6b' : 'black'} />
+            <Icon
+              name={saved ? 'folder-remove' : 'clock' }
+              size={20}
+              color={saved ? '#ff6b6b' : 'black'} />
           </Button>
         </View>
       </View>

@@ -8,7 +8,7 @@ const Stories = ({savedStories, unSaveStory, navigator}) => {
   return (
     <View style={[styles.stories]}>
       <List
-        data={savedStories}
+        items={savedStories}
         renderItem={({item: story}) => (
           <Story
             saved

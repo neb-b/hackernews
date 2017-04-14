@@ -4,7 +4,8 @@ import {
   LOAD_SETTINGS_ERROR,
   CHANGE_VIEW,
   SAVE_STORY_SUCCESS,
-  UN_SAVE_STORY_SUCCESS
+  UN_SAVE_STORY_SUCCESS,
+  CHANGE_TOPIC_REQUEST
 } from '../constants'
 import getTitle from '../../helpers/get-title'
 
@@ -15,7 +16,7 @@ const initialState = {
   title: 'Top Stories',
   topics: {
     currentlySelected: 'topstories',
-    available: ['topstories', 'beststories', 'jobstories']
+    available: ['topstories', 'askstories', 'showstories', 'beststories', 'jobstories']
   },
   savedStoryIds: [],
   settings: {
@@ -28,12 +29,12 @@ const initialState = {
 }
 
 export default handleActions({
-  LOAD_SETTINGS_SUCCESS: (state, {payload}) => {
+  LOAD_SETTINGS_SUCCESS: (state, {payload: { settings, savedStoryIds = []}}) => {
     return ({
       ...state,
       loading: false,
-      settings: payload.settings,
-      savedStoryIds: payload.savedStoryIds
+      settings: settings,
+      savedStoryIds: savedStoryIds
     })
   },
   LOAD_SETTINGS_ERROR: (state, {payload}) => ({
@@ -43,8 +44,9 @@ export default handleActions({
   }),
   CHANGE_VIEW: (state, {payload}) => {
     const { viewingStories, topics: { currentlySelected } } = state
+    const newViewingStoriesBool = !state.viewingStories
 
-    const title = getTitle(!state.viewingStories, currentlySelected)
+    const title =  newViewingStoriesBool ? getTitle(currentlySelected) : 'Read it later'
     return ({
       ...state,
       viewingStories: !state.viewingStories,
@@ -63,5 +65,9 @@ export default handleActions({
       savedStoryIds: payload.savedStoryIds
     })
   },
-
+  CHANGE_TOPIC_REQUEST: (state, {payload: { newTopic }}) => ({
+    ...state,
+    title: getTitle(newTopic),
+    topics: { available: state.topics.available, currentlySelected: newTopic }
+  })
 }, initialState)

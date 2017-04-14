@@ -2,29 +2,49 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Dimensions, View, Text, StyleSheet } from 'react-native'
 import StatusBar from './components/status-bar'
-import TabBarLayout from './components/tab-bar'
+import TabLayout from './components/tab-layout'
 
 const window = Dimensions.get('window')
 const HEIGHT = window.height
 const WIDTH = window.width
 
 const Layout = (props) => {
-  const {viewingStories, changeView, topics, title, navigator, overwriteTitle} = props
-console.log('navigator', navigator);
+  const {
+    viewingStories,
+    changeView,
+    topics,
+    title,
+    navigator,
+    isHome,
+    component: NewView,
+    viewIndex,
+    linkProps,
+    stories,
+    savedStories,
+    changeTopic
+  } = props
+
+console.log('layout', props
+);
   return (
     <View style={styles.layout}>
-      <StatusBar style={styles.statusBar} title={overwriteTitle || title} navigator={navigator} />
-      {
-        !overwriteTitle
-        ? <TabBarLayout
+      <StatusBar style={styles.statusBar} title={title} navigator={navigator} isHome={isHome} />
+      {isHome && (
+        <TabLayout
           style={styles.actionBar}
           navigator={navigator}
+          stories={stories}
+          savedStories={savedStories}
           title={title}
+          topics={topics}
           changeView={changeView}
-          viewingStories={viewingStories} />
-        : <Text>Comments</Text>
-      }
-
+          viewingStories={viewingStories}
+          viewIndex={viewIndex}
+          changeTopic={changeTopic} />
+      )}
+      {!isHome &&  (
+        <NewView {...linkProps} />
+      )}
     </View>
   )
 }
@@ -41,7 +61,8 @@ const styles = StyleSheet.create({
     width: WIDTH
   },
   content: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'white'
   },
   statusBar: {
     alignSelf: 'flex-start'

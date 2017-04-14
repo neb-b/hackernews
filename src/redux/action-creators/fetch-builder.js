@@ -1,6 +1,6 @@
 import { ROOT_URL } from '../constants'
 
-export const getJson = (endpoint, topic = '', query = '') => {
+export const getJson = (endpoint, topic, query = '') => {
   let url = `${ROOT_URL}/${endpoint}`
   url += topic ? `/${topic}` : ''
   url += query ? `?${query}` : ''
@@ -13,4 +13,8 @@ export const getJson = (endpoint, topic = '', query = '') => {
     }
   })
   .then((res) => res.json())
+  .then((storyObj) => {
+    // TODO: only send stories when being called by changeTopic
+    return storyObj
+  })
 }

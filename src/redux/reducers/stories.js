@@ -1,13 +1,14 @@
 import { handleActions } from 'redux-actions'
 import {
   LOAD_SETTINGS_SUCCESS,
-
   FETCH_TOPIC_STORIES_REQUEST,
   FETCH_TOPIC_STORIES_SUCCESS,
   FETCH_TOPIC_STORIES_ERROR,
-
   SAVE_STORY_SUCCESS,
-  UN_SAVE_STORY_SUCCESS
+  UN_SAVE_STORY_SUCCESS,
+  CHANGE_TOPIC_REQUEST,
+  CHANGE_TOPIC_SUCCESS,
+  CHANGE_TOPIC_ERROR
 } from '../constants'
 
 const initialState = {
@@ -87,5 +88,14 @@ export default handleActions({
       ...state,
       stories: newStories
     })
-  }
+  },
+  CHANGE_TOPIC_REQUEST: (state) => ({
+    ...state,
+    loading: true
+  }),
+  CHANGE_TOPIC_SUCCESS: (state, { payload: { stories }}) => ({
+    ...state,
+    loading: false,
+    stories
+  })
 }, initialState)

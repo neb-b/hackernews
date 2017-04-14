@@ -1,36 +1,46 @@
 import React, { Component } from 'react'
-import { connect, Provider } from 'react-redux'
-import { fetchInitialData, changeView } from './redux/action-creators/settings'
 import { Text, View, Navigator } from 'react-native'
+import { connect, Provider } from 'react-redux'
+import { fetchInitialData, changeView, changeTopic } from './redux/action-creators/settings'
 import SplashScreen from './components/generic/splash'
 import Layout from './layout'
 
 class App extends Component {
-  constructor () {
-    super()
-  }
-
   componentDidMount () {
     const {fetchInitialData, topics: { currentlySelected }} = this.props
     fetchInitialData(currentlySelected)
   }
 
   render () {
-    const {loading} = this.props
-
+    const {loading, title} = this.props
+    
     return (
       <View style={{flex: 1}}>
         {loading && <SplashScreen />}
         {!loading && (
           <Navigator
-            renderScene={(route = {}, navigator) => (
-              <Layout {...this.props} navigator={navigator} route={route} overwriteTitle={route.title}/>
-            )} />
+            initialRoute={{index: 0}}
+            renderScene={(route = {}, navigator) => {
+              const { component, title: routeTitle, index, linkProps } = route
+              return(
+                <Layout
+                  {...this.props}
+                  navigator={navigator}
+                  component={component}
+                  title={routeTitle || title}
+                  viewIndex={index}
+                  isHome={!index}
+                  linkProps={linkProps}/>
+              )
+            }} />
         )}
       </View>
     )
   }
 }
 
-const mapStateToProps = (s) => ({...s.settings})
-export default connect(mapStateToProps, { fetchInitialData, changeView })(App)
+const mapStateToProps = ({settings, stories, savedStories}) => ({
+   ...settings, stories, savedStories
+ })
+
+export default connect(mapStateToProps, { fetchInitialData, changeView, changeTopic })(App)

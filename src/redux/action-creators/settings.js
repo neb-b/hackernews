@@ -3,13 +3,20 @@ import { createAction } from 'redux-actions'
 import {
   LOAD_SETTINGS_SUCCESS,
   LOAD_SETTINGS_ERROR,
-  CHANGE_VIEW
+  CHANGE_VIEW,
+  CHANGE_TOPIC_REQUEST,
+  CHANGE_TOPIC_SUCCESS,
+  CHANGE_TOPIC_ERROR
 } from '../constants'
 import { getJson } from './fetch-builder'
 
 const onLoadSettingsSuccess = createAction(LOAD_SETTINGS_SUCCESS)
 const onLoadSettingsError = createAction(LOAD_SETTINGS_ERROR)
 const onChangeView = createAction(CHANGE_VIEW)
+
+const onChangeTopicRequest = createAction(CHANGE_TOPIC_REQUEST)
+const onChangeTopicSuccess = createAction(CHANGE_TOPIC_SUCCESS)
+const onChangeTopicError = createAction(CHANGE_TOPIC_ERROR)
 
 export const fetchInitialData = (selectedTopic) => {
   return (dispatch) => {
@@ -26,21 +33,32 @@ export const fetchInitialData = (selectedTopic) => {
         }
 
         getJson('stories', selectedTopic, query)
-          .then((initialStorearies = []) => {
+          .then((initialStories = []) => {
             dispatch(onLoadSettingsSuccess({ settings, initialStories }))
           })
           .catch((err) => {
-            console.log('err', err);
-            dispatch(onLoadSettingsError({ settings, err}))
+            dispatch(onLoadSettingsError(err))
           })
       })
       .catch((err) => {
-        console.log('err', err);
         dispatch(onLoadSettingsError(err))
       })
   }
 }
 
-export function changeView (title) {
-  return (dispatch) => dispatch(onChangeView(title))
+export function changeView () {
+  return (dispatch) => dispatch(onChangeView())
+}
+
+export function changeTopic (newTopic) {
+  return (dispatch) => {
+    dispatch(onChangeTopicRequest({newTopic}))
+
+    getJson('stories', newTopic)
+      .then(({ stories }) => {
+        console.log('stories?', stories);
+        dispatch(onChangeTopicSuccess({stories}))
+      })
+      .catch((err) => dispatch(onChangeTopicError(err)))
+  }
 }

@@ -2,17 +2,19 @@ import React from 'react'
 import {
   FlatList,
   RefreshControl,
-  StyleSheet,
   View
 } from 'react-native'
 
-
-const List = ({data, renderItem}) => {
+const List = ({items, renderItem, header: Header}) => {
   return (
-    <FlatList
-      keyExtractor={(item) => item.id}
-      data={data}
-      renderItem={renderItem} />
+    <View>
+      <FlatList
+        keyExtractor={(item) => item.id}
+        ListHeaderComponent={Header}
+        renderItem={renderItem}
+        data={items}
+      />
+  </View>
   )
 }
 

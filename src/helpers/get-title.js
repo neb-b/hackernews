@@ -1,9 +1,11 @@
-export default function getTitle (viewingStories, topicSelected) {
-  const titles = {
-    topstories: 'Top Stories',
-    beststories: 'Best Stories',
-    jobstories: 'Job Stories'
-  }
+export const titles = {
+  topstories: 'Top Stories',
+  beststories: 'Best Stories',
+  jobstories: 'Jobs',
+  askstories: 'AskHN',
+  showstories: 'ShowHN'
+}
 
-  return viewingStories ? titles[topicSelected] : 'Read it later'
+export default function getTitle (topicSelected) {
+  return titles[topicSelected]
 }
