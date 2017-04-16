@@ -13,10 +13,11 @@ const Thread = ({
   descendants,
   saved,
   saveAction,
-  story
+  story,
+  openSafari
 }) => {
   return (
-    <View style={styles.container}>
+    <Button _style={styles.container} onPress={() => openSafari(url)}>
       <Text bold size={32}>{title}</Text>
       <View style={styles.row}>
         <View>
@@ -33,7 +34,7 @@ const Thread = ({
           </Button>
         </View>
       </View>
-    </View>
+    </Button>
   )
 }
 

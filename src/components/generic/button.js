@@ -24,9 +24,10 @@ const Button = ({
         paddedRight && styles.paddedRight,
         paddedTop && styles.paddedTop,
         paddedBottom && styles.paddedBottom,
-        height && {height}
+        height && {height},
+        _style && _style
       ]}>
-        <View style={_style}>
+        <View>
           {children}
         </View>
     </TouchableHighlight>
@@ -59,16 +60,16 @@ const styles = StyleSheet.create({
     padding: 10
   },
   paddedLeft: {
-    padding: 10
+    paddingLeft: 10
   },
   paddedRight: {
-    padding: 10
+    paddingRight: 10
   },
   paddedTop: {
-    padding: 10
+    paddingTop: 10
   },
   paddedBottom: {
-    padding: 10
+    paddingBottom: 10
   }
 })
 

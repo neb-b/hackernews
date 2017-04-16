@@ -97,7 +97,6 @@ class Comment extends Component  {
 
 const styles = StyleSheet.create({
   comment: {
-    marginTop: 30,
     padding: 10,
   },
   commentBody: {

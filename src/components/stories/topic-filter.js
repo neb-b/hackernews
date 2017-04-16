@@ -18,12 +18,14 @@ class TopicFilter extends Component {
     const { currentlySelected } = topics
 
     return (
-      <View style={styles.filter}>
+      <View>
         <Button
           _style={styles.button}
           onPress={() => this.setState({isCollapsed: !this.state.isCollapsed})}>
-          <Text>{titles[topics.currentlySelected]}</Text>
-          <Icon name={this.state.isCollapsed ? 'chevron-up' : 'chevron-down'} size={20} color={'black'}/>
+          <View style={styles.buttonText}>
+            <Text>{titles[topics.currentlySelected]}</Text>
+            <Icon name={this.state.isCollapsed ? 'chevron-up' : 'chevron-down'} size={20} color={'black'}/>
+          </View>
         </Button>
         <Collapsible collapsed={this.state.isCollapsed}>
           <View>
@@ -42,7 +44,10 @@ class TopicFilter extends Component {
 }
 
 const styles = StyleSheet.create({
-  button: {
+  container: {
+    flexDirection: 'row'
+  },
+  buttonText: {
     alignSelf: 'flex-end',
     flexDirection: 'row',
     padding: 5

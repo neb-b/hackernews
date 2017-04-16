@@ -15,7 +15,8 @@ const Thread = ({
   loadReplies,
   toggleComment,
   saveStory,
-  unSaveStory
+  unSaveStory,
+  openSafari
 }) => {
   const {
     saved,
@@ -35,8 +36,10 @@ const Thread = ({
       descendants={descendants}
       saved={saved}
       saveAction={saved ? unSaveStory : saveStory}
-      story={story} />
+      story={story}
+      openSafari={openSafari} />
   )
+
   return (
     <View style={styles.thread}>
       {loading && _renderHead()}
