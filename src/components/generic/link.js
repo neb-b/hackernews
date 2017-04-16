@@ -8,7 +8,7 @@ const getScene = (title, linkProps) => {
   }
 
   return {
-    title,
+    title: 'Comments',
     linkProps,
     component: components[title]
   }
