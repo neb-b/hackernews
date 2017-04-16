@@ -1,7 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { TouchableHighlight, View, StyleSheet } from 'react-native'
 
 const Button = ({
+  _style,
+  height,
   children,
   onPress,
   paddedLeft,
@@ -10,8 +13,6 @@ const Button = ({
   paddedBottom,
   padded,
   flex,
-  row,
-  column
 }) => {
   return (
     <TouchableHighlight
@@ -23,19 +24,21 @@ const Button = ({
         paddedRight && styles.paddedRight,
         paddedTop && styles.paddedTop,
         paddedBottom && styles.paddedBottom,
-        flex && styles.flex,
-        row && styles.row,
-        column && styles.column
+        height && {height}
       ]}>
-      <View style={[styles.button]}>
-        {children}
-      </View>
+        <View style={_style}>
+          {children}
+        </View>
     </TouchableHighlight>
   )
 }
 
 Button.defaultProps = {
   row: true
+}
+
+Button.propTypes = {
+  row: PropTypes.bool
 }
 
 const styles = StyleSheet.create({

@@ -1,10 +1,10 @@
 import React from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   TouchableHighlight
 } from 'react-native'
+import Text from '../generic/text'
 import Link from '../generic/link'
 import Button from '../generic/button'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -27,11 +27,12 @@ const Story = ({
     saved
   } = story
   return (
-    <Button flex column onPress={() => openSafari(url)}>
+    <Button onPress={() => openSafari(url)}>
       <View style={styles.story}>
         <View style={[styles.row, styles.level1]}>
-          <Text style={[styles.title]}>{title}</Text>
+          <Text bold size={32} _style={[styles.title]}>{title}</Text>
           <Button
+            height={40}
             paddedLeft
             onPress={() => saveAction(story)}>
             <Icon
@@ -45,17 +46,17 @@ const Story = ({
           <View>
             <Text style={[styles.url]}>{formatUrl(url)}</Text>
             <Text style={styles.time}>{fromNow(time)}</Text>
-            <Text style={[styles.score]}>{score || 0} points</Text>
+            <Text size={18} style={[styles.score]}>{score || 0} points</Text>
           </View>
           <View style={styles.commentsContainer}>
             <Link
-              style={styles.comments}
+              _style={styles.comments}
               to='Thread'
               linkProps={story}
               navigator={navigator}
               viewIndex={viewIndex}
               >
-              <Text>{descendants || 0} comments</Text>
+              <Text bold size={18}>{descendants || 0} comments</Text>
             </Link>
           </View>
         </View>
@@ -84,8 +85,6 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     flexWrap: 'wrap',
-    fontSize: 32,
-    // fontWeight: '700',
   },
   saveAction: {
     paddingLeft: 20
@@ -94,7 +93,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   comments: {
-    alignSelf: 'flex-end'
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingBottom: 10
+
   }
 })
 

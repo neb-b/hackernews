@@ -14,12 +14,12 @@ const getScene = (title, linkProps) => {
   }
 }
 
-const Link = ({navigator, children, to: newView, viewIndex, linkProps}) => (
+const Link = ({navigator, children, to: newView, viewIndex, linkProps, _style}) => (
   <TouchableHighlight
     onPress={() => navigator.push(
       Object.assign({}, getScene(newView, linkProps), { index: viewIndex + 1})
     )}>
-    <View>
+    <View style={_style}>
       {children}
     </View>
   </TouchableHighlight>

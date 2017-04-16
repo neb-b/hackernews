@@ -25,7 +25,6 @@ const TabBarLayout = ({
   refreshSavedStories,
   openSafari
 }) => {
-  console.log('openSafari', openSafari);
   return (
     <TabBarIOS
       translucent

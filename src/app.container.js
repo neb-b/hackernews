@@ -6,7 +6,6 @@ import { refreshStories, refreshSavedStories, saveStory, unSaveStory } from './r
 import SplashScreen from './components/generic/splash'
 import Layout from './layout'
 import SafariView from 'react-native-safari-view'
-console.log('safar', SafariView);
 
 class App extends Component {
   componentDidMount () {
@@ -15,7 +14,6 @@ class App extends Component {
   }
 
   openSafari(url) {
-    console.log('open', url);
     SafariView.isAvailable()
       .then(SafariView.show({
         url,

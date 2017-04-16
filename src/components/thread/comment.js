@@ -12,8 +12,7 @@ class Comment extends Component  {
     super(props)
 
     this.state = {
-      expanded: true,
-      animation: new Animated.Value()
+      expanded: true
      }
   }
 
@@ -51,7 +50,7 @@ class Comment extends Component  {
                     stylesheet={htmlStyles}
                   />
 
-                  <View onLayout={this._setMinHeight.bind(this)}>
+                  <View>
                     <Text style={[styles.commentInfo]}>
                       {`${by} `}
                       {moment(time * 1000).fromNow()}
