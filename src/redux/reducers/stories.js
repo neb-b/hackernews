@@ -95,7 +95,8 @@ export default handleActions({
   },
   CHANGE_TOPIC_REQUEST: (state) => ({
     ...state,
-    loading: true
+    loading: true,
+    stories: []
   }),
   CHANGE_TOPIC_SUCCESS: (state, { payload: { stories }}) => ({
     ...state,

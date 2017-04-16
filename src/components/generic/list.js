@@ -8,9 +8,8 @@ import {
 
 const List = ({items, renderItem, refresh, refreshing, header: Header}) => {
   return (
-    <View>
+    <View style={styles.list}>
       <FlatList
-        style={styles.list}
         onRefresh={refresh}
         refreshing={refreshing}
         keyExtractor={(item) => item.id}

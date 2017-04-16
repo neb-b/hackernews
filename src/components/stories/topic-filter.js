@@ -10,11 +10,13 @@ class TopicFilter extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {isCollapsed: true}
+    this.state = { isCollapsed: true }
   }
 
   render () {
     const { topics, changeTopic } = this.props
+    const { currentlySelected } = topics
+
     return (
       <View style={styles.filter}>
         <Button
@@ -24,11 +26,11 @@ class TopicFilter extends Component {
           <Icon name={this.state.isCollapsed ? 'chevron-up' : 'chevron-down'} size={20} color={'black'}/>
         </Button>
         <Collapsible collapsed={this.state.isCollapsed}>
-          <View style={styles.dropdown}>
+          <View>
             {topics.available.map((topic) => (
               <View key={topic}>
-                <Button padded onPress={() => changeTopic(topic)}>
-                  <Text _style={styles.topic} size={20} bold>{titles[topic]}</Text>
+                <Button padded onPress={() => topic !== currentlySelected ?  changeTopic(topic) : this.setState({isCollapsed: true})}>
+                  <Text _style={[styles.topic, topic === currentlySelected && styles.selected]} size={20} bold>{titles[topic]}</Text>
                 </Button>
               </View>
             ))}
@@ -39,22 +41,17 @@ class TopicFilter extends Component {
   }
 }
 
-const FILTER_HEIGHT = 20
-
 const styles = StyleSheet.create({
-
   button: {
     alignSelf: 'flex-end',
     flexDirection: 'row',
     padding: 5
   },
-  dropdown: {
-    backgroundColor: 'white',
-    paddingBottom: 10,
-    // height: 300
-  },
   topic: {
     textAlign: 'right'
+  },
+  selected: {
+    color: '#e24820'
   }
 })
 
