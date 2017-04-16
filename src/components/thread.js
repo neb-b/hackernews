@@ -17,11 +17,21 @@ const Thread = ({
   fetchingReplies,
   fetchingRepliesFor,
   loadReplies,
-  toggleComment
+  toggleComment,
+  saved,
+  saveStory,
+  unSaveStory
 }) => {
 
   const _renderHead = () => (
-    <Head title={title} score={score} time={time} url={url} descendants={descendants}/>
+    <Head
+      title={title}
+      score={score}
+      time={time}
+      url={url}
+      descendants={descendants}
+      saved={saved}
+      saveAction={saved ? unSaveStory : saveStory} />
   )
   return (
     <View style={styles.thread}>

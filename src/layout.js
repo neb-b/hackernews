@@ -15,7 +15,9 @@ const Layout = (props) => {
     isHome,
     component: NewView,
     linkProps,
-    openSafari
+    openSafari,
+    saveStory,
+    unSaveStory
   } = props
 
   return (
@@ -26,7 +28,7 @@ const Layout = (props) => {
         <TabLayout style={styles.tabLayout} {...props} />
       )}
       {!isHome &&  (
-        <NewView {...linkProps} openSafari={openSafari} />
+        <NewView {...linkProps} openSafari={openSafari} unSaveStory={unSaveStory} saveStory={saveStory} />
       )}
     </View>
   )

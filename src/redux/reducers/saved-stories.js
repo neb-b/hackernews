@@ -33,15 +33,15 @@ export default handleActions({
       error: payload.error
     })
   },
-  SAVE_STORY_SUCCESS: (state, {payload}) => {
+  SAVE_STORY_SUCCESS: (state, {payload: {story}}) => {
     return ({
       ...state,
-      savedStories: state.savedStories.concat([payload.story])
+      savedStories: state.savedStories.concat([story])
     })
   },
-  UN_SAVE_STORY_SUCCESS: (state, {payload}) => {
+  UN_SAVE_STORY_SUCCESS: (state, {payload: {story: activeStory}}) => {
     const newStories = state.savedStories.filter((story) => {
-      return story.id !== payload.story.id
+      return story.id !== activeStory.id
     })
     return ({
       ...state,

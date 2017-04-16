@@ -25,10 +25,15 @@ const onFetchRepliesSuccess = createAction(FETCH_REPLIES_SUCCESS)
 const onFetchRepliesError = createAction(FETCH_REPLIES_ERROR)
 const onToggleComment = createAction(TOGGLE_COMMENT)
 
-export function loadComments (commentIds, head) {
-  const query = `comments=${commentIds.join(',')}`
+export function loadComments (commentIds = [], head) {
 
   return (dispatch) => {
+    if (!commentIds.length) {
+      return dispatch(onFetchCommentsSuccess({comments: []}))
+    }
+
+    const query = `comments=${commentIds.join(',')}`
+
     dispatch(onFetchCommentsRequest({head}))
     getJson('comments', null, query)
       .then((comments) => dispatch(onFetchCommentsSuccess(comments)))

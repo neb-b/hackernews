@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import List from '../generic/list'
 import Comment from './comment'
 
-
 const Comments = ({
   comments,
   refreshing,
@@ -16,7 +15,7 @@ const Comments = ({
   toggleComment
 }) => {
   return (
-    <View >
+    <View>
       <List
         style={styles.comments}
         header={renderHeader}

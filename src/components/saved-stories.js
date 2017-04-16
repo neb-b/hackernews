@@ -17,7 +17,7 @@ const Stories = ({savedStories, unSaveStory, refreshing, refreshSavedStories, na
             <Story
               saved
               story={story}
-              saveAction={story.saved ? unSaveStory : saveStory}
+              saveAction={unSaveStory}
               navigator={navigator}
               viewIndex={viewIndex}
               openSafari={openSafari} />

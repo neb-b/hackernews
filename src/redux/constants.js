@@ -1,6 +1,6 @@
-// export const ROOT_URL = 'http://localhost:5000'
+export const ROOT_URL = 'http://localhost:5000'
 // export const ROOT_URL = 'http://192.168.1.16:3000'
-export const ROOT_URL = 'https://hacker-news-server.herokuapp.com'
+// export const ROOT_URL = 'https://hacker-news-server.herokuapp.com'
 
 export const LOAD_SETTINGS_SUCCESS = 'LOAD_SETTINGS_SUCCESS'
 export const LOAD_SETTINGS_ERROR = 'LOAD_SETTINGS_ERROR'
