@@ -4,7 +4,17 @@ import List from '../generic/list'
 import Comment from './comment'
 
 
-const Comments = ({comments, refreshing, refreshThread, renderHeader}) => {
+const Comments = ({
+  comments,
+  refreshing,
+  refreshThread,
+  renderHeader,
+  loadComments,
+  fetchingReplies,
+  fetchingRepliesFor,
+  loadReplies,
+  toggleComment
+}) => {
   return (
     <View >
       <List
@@ -13,9 +23,15 @@ const Comments = ({comments, refreshing, refreshThread, renderHeader}) => {
         refreshing={refreshing}
         refresh={() => refreshThread(comments.map((comment) => comment.id))}
         items={comments}
-        renderItem={({item: comment}) => {
-          return (<Comment {...comment} />)
-        }}/>
+        renderItem={({item: comment}) => (
+          <Comment
+            {...comment}
+            loadComments={loadComments}
+            fetchingReplies={fetchingReplies}
+            fetchingRepliesFor={fetchingRepliesFor}
+            loadReplies={loadReplies}
+            toggleComment={toggleComment} />
+        )}/>
     </View>
   )
 }

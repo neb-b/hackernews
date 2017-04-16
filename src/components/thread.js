@@ -12,7 +12,12 @@ const Thread = ({
   url,
   comments,
   refreshThread,
-  refreshing
+  refreshing,
+  loadComments,
+  fetchingReplies,
+  fetchingRepliesFor,
+  loadReplies,
+  toggleComment
 }) => {
 
   const _renderHead = () => (
@@ -27,7 +32,12 @@ const Thread = ({
           comments={comments}
           renderHeader={_renderHead}
           refreshThread={refreshThread}
-          refreshing={refreshing} />
+          refreshing={refreshing}
+          loadComments={loadComments}
+          fetchingReplies={fetchingReplies}
+          fetchingRepliesFor={fetchingRepliesFor}
+          loadReplies={loadReplies}
+          toggleComment={toggleComment} />
       )}
     </View>
   )
