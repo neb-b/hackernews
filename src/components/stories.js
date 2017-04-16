@@ -1,8 +1,9 @@
 import React from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { View } from 'react-native'
 import TopicFilter from './stories/topic-filter'
 import List from './generic/list'
 import Error from './generic/error'
+import Loader from './generic/loader'
 import Story from './stories/story'
 
 const Stories = ({
@@ -39,7 +40,7 @@ const Stories = ({
               openSafari={openSafari} />
           )}/>
       )}
-      {loading && <ActivityIndicator />}
+      {loading && <Loader />}
     </View>
   )
 }

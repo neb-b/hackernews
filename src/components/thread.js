@@ -1,5 +1,6 @@
 import React from 'react'
 import { ActivityIndicator, View, Text, StyleSheet } from 'react-native'
+import Loader from './generic/loader'
 import Head from './thread/head'
 import Comments from './thread/comments'
 
@@ -43,7 +44,7 @@ const Thread = ({
   return (
     <View style={styles.thread}>
       {loading && _renderHead()}
-      {loading && <ActivityIndicator style={styles.loading} />}
+      {loading && <Loader />}
       {!loading && (
         <Comments
           comments={comments}
@@ -65,9 +66,6 @@ const styles = StyleSheet.create({
   thread: {
     flex: 1,
     backgroundColor: 'white'
-  },
-  loading: {
-    paddingTop: 50
   }
 })
 
