@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   comments: {
-    paddingTop: 10,
     paddingLeft: 10,
     paddingBottom: 10
 

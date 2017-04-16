@@ -44,7 +44,7 @@ Layout.propTypes = {
 const styles = StyleSheet.create({
   layout: {
     height: HEIGHT,
-    width: WIDTH - 20 // TODO: yikes
+    width: WIDTH
   },
   statusBar: {
     alignSelf: 'flex-start'
