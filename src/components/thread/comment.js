@@ -40,10 +40,12 @@ class Comment extends Component  {
       openSafari
     } = this.props
     return (
-      <View style={[!reply && styles.comment, reply && styles.reply]}>
+      <View>
         {!deleted && (
-            <Button onPress={this._toggleComment.bind(this)}>
-              {this.state.expanded && (
+            <Button onPress={this._toggleComment.bind(this)} underlayColor='#f1f1f1'>
+              <View style={[!reply && styles.comment, reply && styles.reply]}>
+              <Collapsible collapsed={!this.state.expanded}>
+
                 <View style={styles.commentBody}>
                   <HTMLView
                     value={text}
@@ -77,8 +79,8 @@ class Comment extends Component  {
                         fetchingRepliesFor={fetchingRepliesFor} />
                     ))
                   )}
-              </View>
-              )}
+                </View>
+            </Collapsible>
 
               {!this.state.expanded && (
                 <Text style={styles.commentInfo}>
@@ -86,9 +88,15 @@ class Comment extends Component  {
                   {moment(time * 1000).fromNow()}
                 </Text>
               )}
-            </Button>
+
+          </View>
+        </Button>
         )}
-        { deleted && <Text>deleted</Text>}
+        { deleted && (
+          <View style={[!reply && styles.comment, reply && styles.reply]}>
+            <Text>deleted</Text>
+          </View>
+        )}
       </View>
     )
   }

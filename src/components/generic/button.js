@@ -13,11 +13,12 @@ const Button = ({
   paddedBottom,
   padded,
   flex,
+  underlayColor
 }) => {
   return (
     <TouchableHighlight
       onPress={onPress}
-      underlayColor='#66dfaa'
+      underlayColor={underlayColor || '#66dfaa'}
       style={[
         padded && styles.padded,
         paddedLeft && styles.paddedLeft,
