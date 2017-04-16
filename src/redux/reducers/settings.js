@@ -39,8 +39,8 @@ export default handleActions({
   },
   LOAD_SETTINGS_ERROR: (state, {payload}) => ({
     ...state,
-    error: payload.error,
-    loading: false
+    loading: false,
+    error: payload
   }),
   CHANGE_VIEW: (state, {payload}) => {
     const { viewingStories, topics: { currentlySelected } } = state

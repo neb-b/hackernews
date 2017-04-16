@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, Navigator } from 'react-native'
 import { connect, Provider } from 'react-redux'
 import { fetchInitialData, changeView, changeTopic } from './redux/action-creators/settings'
+import { refreshStories, refreshSavedStories, saveStory, unSaveStory } from './redux/action-creators/stories'
 import SplashScreen from './components/generic/splash'
 import Layout from './layout'
 
@@ -13,7 +14,7 @@ class App extends Component {
 
   render () {
     const {loading, title} = this.props
-    
+
     return (
       <View style={{flex: 1}}>
         {loading && <SplashScreen />}
@@ -40,7 +41,16 @@ class App extends Component {
 }
 
 const mapStateToProps = ({settings, stories, savedStories}) => ({
-   ...settings, stories, savedStories
+   stories, savedStories, ...settings
  })
 
-export default connect(mapStateToProps, { fetchInitialData, changeView, changeTopic })(App)
+export default connect(mapStateToProps, {
+  fetchInitialData,
+  changeView,
+  changeTopic,
+  refreshStories,
+  saveStory,
+  unSaveStory,
+  refreshStories,
+  refreshSavedStories
+})(App)

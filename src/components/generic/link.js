@@ -14,7 +14,7 @@ const getScene = (title, linkProps) => {
   }
 }
 
-const Link = ({navigator, children, to: newView, viewIndex, linkProps }) => (
+const Link = ({navigator, children, to: newView, viewIndex, linkProps}) => (
   <TouchableHighlight
     onPress={() => navigator.push(
       Object.assign({}, getScene(newView, linkProps), { index: viewIndex + 1})

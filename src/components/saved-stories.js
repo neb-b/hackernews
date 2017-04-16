@@ -1,29 +1,26 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import TopicFilter from './stories/topic-filter'
 import List from './generic/list'
 import Story from './stories/story'
 
-const Stories = ({savedStories, unSaveStory, navigator}) => {
+const Stories = ({savedStories, unSaveStory, refreshing, refreshSavedStories, navigator, viewIndex}) => {
   return (
-    <View style={[styles.stories]}>
+    <View>
       <List
         items={savedStories}
+        refreshing={refreshing}
+        refresh={() => savedStories.length && refreshSavedStories(savedStories.map((story) => story.id))}
         renderItem={({item: story}) => (
           <Story
             saved
             story={story}
-            saveAction={unSaveStory}
-            navigator={navigator} />
+            saveAction={story.saved ? unSaveStory : saveStory}
+            navigator={navigator}
+            viewIndex={viewIndex} />
         )}/>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  stories: {
-    marginBottom: 64
-  }
-})
 
 export default Stories

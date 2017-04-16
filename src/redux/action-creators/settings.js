@@ -56,7 +56,6 @@ export function changeTopic (newTopic) {
 
     getJson('stories', newTopic)
       .then(({ stories }) => {
-        console.log('stories?', stories);
         dispatch(onChangeTopicSuccess({stories}))
       })
       .catch((err) => dispatch(onChangeTopicError(err)))

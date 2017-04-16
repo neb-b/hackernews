@@ -1,15 +1,8 @@
 import { handleActions } from 'redux-actions'
-import {
-  LOAD_SETTINGS_SUCCESS,
-  FETCH_SAVED_STORIES_REQUEST,
-  FETCH_SAVED_STORIES_SUCCESS,
-  FETCH_SAVED_STORIES_ERROR,
-  SAVE_STORY_SUCCESS,
-  UN_SAVE_STORY_SUCCESS
-} from '../constants'
 
 const initialState = {
   loading: false,
+  refreshing: false,
   error: null,
   savedStories: []
 }
@@ -54,5 +47,20 @@ export default handleActions({
       ...state,
       savedStories: newStories
     })
-  }
+  },
+  REFRESH_SAVED_STORIES_REQUEST: (state, {payload}) => ({
+    ...state,
+    loading: false,
+    refreshing: true
+  }),
+  REFRESH_SAVED_STORIES_SUCCESS: (state, {payload: {stories}}) => ({
+    ...state,
+    refreshing: false,
+    stories
+  }),
+  REFRESH_SAVED_STORIES_ERROR: (state, {payload}) => ({
+    ...state,
+    loading: false,
+    error: payload
+  })
 }, initialState)

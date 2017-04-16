@@ -10,37 +10,20 @@ const WIDTH = window.width
 
 const Layout = (props) => {
   const {
-    viewingStories,
-    changeView,
-    topics,
+    error,
     title,
     navigator,
     isHome,
     component: NewView,
-    viewIndex,
-    linkProps,
-    stories,
-    savedStories,
-    changeTopic
+    linkProps
   } = props
 
-console.log('layout', props
-);
   return (
     <View style={styles.layout}>
       <StatusBar style={styles.statusBar} title={title} navigator={navigator} isHome={isHome} />
+      {error && <Text>{error.message}</Text>}
       {isHome && (
-        <TabLayout
-          style={styles.actionBar}
-          navigator={navigator}
-          stories={stories}
-          savedStories={savedStories}
-          title={title}
-          topics={topics}
-          changeView={changeView}
-          viewingStories={viewingStories}
-          viewIndex={viewIndex}
-          changeTopic={changeTopic} />
+        <TabLayout style={styles.tabLayout} {...props} />
       )}
       {!isHome &&  (
         <NewView {...linkProps} />
@@ -51,8 +34,10 @@ console.log('layout', props
 
 Layout.propTypes = {
   children: PropTypes.node,
-  navigator: PropTypes.object,
-  route: PropTypes.object
+  route: PropTypes.object,
+  error: PropTypes.bool,
+  title: PropTypes.string,
+  linkProps: PropTypes.object
 }
 
 const styles = StyleSheet.create({
@@ -60,14 +45,10 @@ const styles = StyleSheet.create({
     height: HEIGHT,
     width: WIDTH
   },
-  content: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
   statusBar: {
     alignSelf: 'flex-start'
   },
-  actionBar: {
+  tabLayout: {
     alignSelf: 'flex-end'
   }
 })

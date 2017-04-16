@@ -4,15 +4,26 @@ import {
   SAVE_STORY_SUCCESS,
   SAVE_STORY_ERROR,
   UN_SAVE_STORY_SUCCESS,
-  UN_SAVE_STORY_ERROR
+  UN_SAVE_STORY_ERROR,
+  REFRESH_STORIES_REQUEST,
+  REFRESH_STORIES_SUCCESS,
+  REFRESH_STORIES_ERROR,
+  REFRESH_SAVED_STORIES_REQUEST,
+  REFRESH_SAVED_STORIES_SUCCESS,
+  REFRESH_SAVED_STORIES_ERROR
 } from '../constants'
 import { getJson } from './fetch-builder'
 
 const onSaveStorySuccess = createAction(SAVE_STORY_SUCCESS)
 const onSaveStoryError = createAction(SAVE_STORY_ERROR)
-
 const onUnSaveStorySuccess = createAction(UN_SAVE_STORY_SUCCESS)
 const onUnSaveStoryError = createAction(UN_SAVE_STORY_ERROR)
+const onRefreshStoriesRequest = createAction(REFRESH_STORIES_REQUEST)
+const onRefreshStoriesSuccess = createAction(REFRESH_STORIES_SUCCESS)
+const onRefreshStoriesError = createAction(REFRESH_STORIES_ERROR)
+const onRefreshSavedStoriesRequest = createAction(REFRESH_SAVED_STORIES_REQUEST)
+const onRefreshSavedStoriesSuccess = createAction(REFRESH_SAVED_STORIES_SUCCESS)
+const onRefreshSavedStoriesError = createAction(REFRESH_SAVED_STORIES_ERROR)
 
 const getSavedStories = () => {
   return AsyncStorage.getItem('savedStories')
@@ -54,4 +65,30 @@ export function unSaveStory (story) {
         return setSavedStories(dispatch, newStories, story, true)
       })
     }
+}
+
+export function refreshStories (endpoint) {
+  return (dispatch) => {
+    dispatch(onRefreshStoriesRequest())
+
+    getJson('stories', endpoint)
+      .then(({ stories }) => {
+        dispatch(onRefreshStoriesSuccess({stories}))
+      })
+      .catch((err) => dispatch(onRefreshStoriesError(err)))
+  }
+}
+
+export function refreshSavedStories (storyIds) {
+  const query = `stories=${storyIds.join(',')}`
+
+  return (dispatch) => {
+    dispatch(onRefreshSavedStoriesRequest())
+
+    getJson('saved', null, query)
+      .then(({ stories }) => {
+        dispatch(onRefreshSavedStoriesSuccess({stories}))
+      })
+      .catch((err) => dispatch(onRefreshSavedStoriesError(err)))
+  }
 }

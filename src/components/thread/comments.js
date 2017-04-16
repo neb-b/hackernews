@@ -1,13 +1,17 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import List from '../generic/list'
 import Comment from './comment'
 
-const Comments = ({comments, renderHeader}) => {
+
+const Comments = ({comments, refreshing, refreshThread, renderHeader}) => {
   return (
-    <View style={styles.comments}>
+    <View >
       <List
+        style={styles.comments}
         header={renderHeader}
+        refreshing={refreshing}
+        refresh={() => refreshThread(comments.map((comment) => comment.id))}
         items={comments}
         renderItem={({item: comment}) => {
           return (<Comment {...comment} />)
@@ -17,7 +21,10 @@ const Comments = ({comments, renderHeader}) => {
 }
 
 const styles = StyleSheet.create({
+  comments: {
 
+    // height: HEIGHT
+  }
 })
 
 export default Comments

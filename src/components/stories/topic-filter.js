@@ -3,12 +3,13 @@ import { View, Text, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../generic/button'
 import { titles } from '../../helpers/get-title'
+import Collapsible from 'react-native-collapsible';
 
 class TopicFilter extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {dropdownOpen: false}
+    this.state = {isCollapsed: true}
   }
 
   render () {
@@ -17,11 +18,11 @@ class TopicFilter extends Component {
       <View style={styles.filter}>
         <Button
           style={styles.button}
-          onPress={() => this.setState({dropdownOpen: !this.state.dropdownOpen})}>
+          onPress={() => this.setState({isCollapsed: !this.state.isCollapsed})}>
           <Text>{titles[topics.currentlySelected]}</Text>
-          <Icon name={this.state.dropdownOpen ? 'chevron-up' : 'chevron-down'} size={20} color={'black'}/>
+          <Icon name={this.state.isCollapsed ? 'chevron-up' : 'chevron-down'} size={20} color={'black'}/>
         </Button>
-        {this.state.dropdownOpen && (
+        <Collapsible collapsed={this.state.isCollapsed}>
           <View style={styles.dropdown}>
             {topics.available.map((topic) => (
               <Button key={topic} onPress={() => changeTopic(topic)}>
@@ -29,7 +30,7 @@ class TopicFilter extends Component {
               </Button>
             ))}
           </View>
-        )}
+        </Collapsible>
       </View>
     )
   }
@@ -46,7 +47,8 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     backgroundColor: 'white',
-    paddingBottom: 10
+    paddingBottom: 10,
+    // height: 300
   }
 })
 

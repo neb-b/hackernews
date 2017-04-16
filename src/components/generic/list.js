@@ -2,13 +2,17 @@ import React from 'react'
 import {
   FlatList,
   RefreshControl,
-  View
+  View,
+  StyleSheet
 } from 'react-native'
 
-const List = ({items, renderItem, header: Header}) => {
+const List = ({items, renderItem, refresh, refreshing, header: Header}) => {
   return (
     <View>
       <FlatList
+        style={styles.list}
+        onRefresh={refresh}
+        refreshing={refreshing}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={Header}
         renderItem={renderItem}
@@ -17,5 +21,11 @@ const List = ({items, renderItem, header: Header}) => {
   </View>
   )
 }
+
+const styles = StyleSheet.create({
+  list: {
+    // flex: 1
+  }
+})
 
 export default List

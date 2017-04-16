@@ -9,7 +9,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../components/generic/button'
 import Stories from '../components/stories'
 import SavedStories from '../components/saved-stories'
-import { saveStory, unSaveStory } from '../redux/action-creators/stories'
 
 const TabBarLayout = ({
   viewIndex,
@@ -21,9 +20,10 @@ const TabBarLayout = ({
   savedStories,
   saveStory,
   unSaveStory,
-  changeTopic
+  changeTopic,
+  refreshStories,
+  refreshSavedStories
 }) => {
-
   return (
     <TabBarIOS
       translucent
@@ -41,9 +41,9 @@ const TabBarLayout = ({
           navigator={navigator}
           saveStory={saveStory}
           unSaveStory={unSaveStory}
+          refreshSavedStories={refreshSavedStories}
         />
       </Icon.TabBarItemIOS>
-
       <Icon.TabBarItemIOS
         iconName='newspaper'
         title='Stories'
@@ -57,11 +57,11 @@ const TabBarLayout = ({
           unSaveStory={unSaveStory}
           topics={topics}
           changeTopic={changeTopic}
+          refreshStories={refreshStories}
         />
       </Icon.TabBarItemIOS>
     </TabBarIOS>
     );
 }
-
 
 export default TabBarLayout

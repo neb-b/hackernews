@@ -8,11 +8,15 @@ import {
   UN_SAVE_STORY_SUCCESS,
   CHANGE_TOPIC_REQUEST,
   CHANGE_TOPIC_SUCCESS,
-  CHANGE_TOPIC_ERROR
+  CHANGE_TOPIC_ERROR,
+  REFRESH_STORIES_REQUEST,
+  REFRESH_STORIES_SUCCESS,
+  REFRESH_STORIES_ERROR
 } from '../constants'
 
 const initialState = {
   loading: true,
+  refreshing: false,
   error: null,
   stories: []
 }
@@ -97,5 +101,25 @@ export default handleActions({
     ...state,
     loading: false,
     stories
+  }),
+  CHANGE_TOPIC_ERROR: (state, {payload}) => ({
+    ...state,
+    loading: false,
+    error: payload
+  }),
+  REFRESH_STORIES_REQUEST: (state, {payload}) => ({
+    ...state,
+    loading: false,
+    refreshing: true
+  }),
+  REFRESH_STORIES_SUCCESS: (state, {payload: {stories}}) => ({
+    ...state,
+    refreshing: false,
+    stories
+  }),
+  REFRESH_STORIES_ERROR: (state, {payload}) => ({
+    ...state,
+    loading: false,
+    error: payload
   })
 }, initialState)

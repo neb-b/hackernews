@@ -10,10 +10,10 @@ const Thread = ({
   time,
   descendants,
   url,
-  comments
+  comments,
+  refreshThread,
+  refreshing
 }) => {
-  console.log('thread', comments);
-  // return null
 
   const _renderHead = () => (
     <Head title={title} score={score} time={time} url={url} descendants={descendants}/>
@@ -22,7 +22,13 @@ const Thread = ({
     <View style={styles.thread}>
       {loading && _renderHead()}
       {loading && <ActivityIndicator />}
-      {!loading && <Comments comments={comments} renderHeader={_renderHead} />}
+      {!loading && (
+        <Comments
+          comments={comments}
+          renderHeader={_renderHead}
+          refreshThread={refreshThread}
+          refreshing={refreshing} />
+      )}
     </View>
   )
 }
