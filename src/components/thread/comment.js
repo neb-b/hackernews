@@ -36,21 +36,22 @@ class Comment extends Component  {
       fetchingRepliesFor,
       loadReplies,
       commentChain,
-      reply
+      reply,
+      openSafari
     } = this.props
     return (
-      <View style={[styles.comment, reply && styles.reply]}>
+      <View style={[!reply && styles.comment, reply && styles.reply]}>
         {!deleted && (
             <Button onPress={this._toggleComment.bind(this)}>
               {this.state.expanded && (
                 <View style={styles.commentBody}>
                   <HTMLView
                     value={text}
-                    onLinkPress={(url) => {}}
+                    onLinkPress={(url) => openSafari(url)}
                     stylesheet={htmlStyles}
                   />
 
-                  <View>
+                  <View style={styles.paddingTop}>
                     <Text style={[styles.commentInfo]}>
                       {`${by} `}
                       {moment(time * 1000).fromNow()}
@@ -80,12 +81,10 @@ class Comment extends Component  {
               )}
 
               {!this.state.expanded && (
-                <View>
-                  <Text style={[styles.commentInfo]}>
-                    {`${by} `}
-                    {moment(time * 1000).fromNow()}
-                  </Text>
-                </View>
+                <Text style={styles.commentInfo}>
+                  {`${by} `}
+                  {moment(time * 1000).fromNow()}
+                </Text>
               )}
             </Button>
         )}
@@ -98,17 +97,26 @@ class Comment extends Component  {
 const styles = StyleSheet.create({
   comment: {
     padding: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e2e2'
   },
   commentBody: {
     // flex: 1
   },
   reply: {
+    marginTop: 20,
+    marginLeft: 5,
+    paddingLeft: 10,
     borderLeftWidth: 1,
     borderLeftColor: '#d5d5d5',
-    marginLeft: 10
   },
   commentInfo: {
-    paddingTop: 10
+    color: '#999999'
+  },
+  paddingTop: {
+    paddingTop: 5
   }
 })
 

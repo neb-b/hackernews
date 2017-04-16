@@ -19,18 +19,16 @@ const Thread = ({
   return (
     <Button _style={styles.container} onPress={() => openSafari(url)}>
       <Text bold size={32}>{title}</Text>
+      <Text style={[styles.url]}>{url && formatUrl(url)}</Text>
       <View style={styles.row}>
         <View>
-          <Text style={[styles.url]}>{url && formatUrl(url)}</Text>
           <Text style={[styles.time]}>{fromNow(time)}</Text>
-
           <Text style={[styles.comments]}>{descendants || 0} comments</Text>
-
+          <Text size={16} style={[styles.score]}>{score} points</Text>
         </View>
         <View>
-          <Text alignRight size={16} style={[styles.score]}>{score} points</Text>
-          <Button onPress={() => saveAction(story)}>
-            <Text alignRight size={22}>{`${saved ? 'Saved for' : 'Read it'} later`}</Text>
+          <Button padded  _style={styles.save} onPress={() => saveAction(story)}>
+            <Text alignRight bold color={'white'} size={12}>{`${saved ? 'Saved for' : 'Read it'} later`}</Text>
           </Button>
         </View>
       </View>
@@ -41,14 +39,17 @@ const Thread = ({
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    paddingBottom: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0'
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 30
+    paddingTop: 20
+  },
+  save: {
+    backgroundColor: '#2d54cb',
+    borderRadius: 10
   }
 })
 

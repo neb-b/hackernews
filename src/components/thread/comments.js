@@ -12,7 +12,8 @@ const Comments = ({
   fetchingReplies,
   fetchingRepliesFor,
   loadReplies,
-  toggleComment
+  toggleComment,
+  openSafari
 }) => {
   return (
     <View>
@@ -29,7 +30,8 @@ const Comments = ({
             fetchingReplies={fetchingReplies}
             fetchingRepliesFor={fetchingRepliesFor}
             loadReplies={loadReplies}
-            toggleComment={toggleComment} />
+            toggleComment={toggleComment}
+            openSafari={openSafari} />
         )}/>
     </View>
   )

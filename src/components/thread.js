@@ -43,7 +43,7 @@ const Thread = ({
   return (
     <View style={styles.thread}>
       {loading && _renderHead()}
-      {loading && <ActivityIndicator />}
+      {loading && <ActivityIndicator style={styles.loading} />}
       {!loading && (
         <Comments
           comments={comments}
@@ -54,7 +54,8 @@ const Thread = ({
           fetchingReplies={fetchingReplies}
           fetchingRepliesFor={fetchingRepliesFor}
           loadReplies={loadReplies}
-          toggleComment={toggleComment} />
+          toggleComment={toggleComment}
+          openSafari={openSafari} />
       )}
     </View>
   )
@@ -64,6 +65,9 @@ const styles = StyleSheet.create({
   thread: {
     flex: 1,
     backgroundColor: 'white'
+  },
+  loading: {
+    paddingTop: 50
   }
 })
 

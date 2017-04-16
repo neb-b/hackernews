@@ -55,7 +55,6 @@ export function refreshThread (commentIds, head) {
 }
 
 export function loadReplies (opId, commentChain, commentIds) {
-  console.log('loadReplies', opId, commentChain, commentIds);
   const query = `comments=${commentIds.join(',')}`
 
   return (dispatch) => {

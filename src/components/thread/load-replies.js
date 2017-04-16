@@ -5,7 +5,7 @@ import Button from '../generic/button'
 const LoadReplies = (props) => {
   const {loadReplies, kids, isLoading, id, commentChain} = props
   return (
-    <View>
+    <View style={styles.container}>
       <Button _style={styles.button} onPress={() => loadReplies(id, commentChain, kids)}>
         <Text style={styles.buttonText}>
           {isLoading && 'Loading'}
@@ -17,7 +17,12 @@ const LoadReplies = (props) => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 15,
+  },
   button: {
+    paddingTop: 5,
+    paddingBottom: 5,
     borderBottomWidth: 1,
     borderTopWidth: 1,
     borderLeftWidth: 1,
@@ -25,6 +30,7 @@ const styles = StyleSheet.create({
     borderColor: '#19467a'
   },
   buttonText: {
+    textAlign: 'center',
     color: '#19467a'
   }
 })
