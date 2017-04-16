@@ -26,10 +26,11 @@ const Story = ({
     url,
     saved
   } = story
+
   return (
     <Button onPress={() => openSafari(url)}>
       <View style={styles.story}>
-        <View style={[styles.row, styles.level1]}>
+        <View style={styles.row}>
           <Text bold size={32} _style={[styles.title]}>{title}</Text>
           <Button
             height={40}
@@ -42,23 +43,22 @@ const Story = ({
           </Button>
         </View>
 
-        <View style={styles.row}>
+        <View style={[styles.row, styles.postInfo]}>
           <View>
-            <Text style={[styles.url]}>{formatUrl(url)}</Text>
+            <Text style={styles.url}>{formatUrl(url)}</Text>
             <Text style={styles.time}>{fromNow(time)}</Text>
-            <Text size={18} style={[styles.score]}>{score || 0} points</Text>
+            <Text size={18} style={styles.score}>{score || 0} points</Text>
           </View>
-          <View style={styles.commentsContainer}>
-            <Link
-              _style={styles.comments}
-              to='Thread'
-              linkProps={story}
-              navigator={navigator}
-              viewIndex={viewIndex}
-              >
-              <Text bold size={18}>{descendants || 0} comments</Text>
-            </Link>
-          </View>
+
+          <Link
+            _style={styles.comments}
+            to='Thread'
+            linkProps={story}
+            navigator={navigator}
+            viewIndex={viewIndex}
+            >
+            <Text bold size={18}>{descendants || 0} comments</Text>
+          </Link>
         </View>
       </View>
     </Button>
@@ -79,9 +79,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  level1: {
-    paddingBottom: 20
-  },
   title: {
     flex: 1,
     flexWrap: 'wrap',
@@ -89,13 +86,12 @@ const styles = StyleSheet.create({
   saveAction: {
     paddingLeft: 20
   },
-  commentsContainer: {
-    flexDirection: 'column'
+  postInfo: {
+    paddingTop: 30
   },
   comments: {
     paddingLeft: 10,
     paddingBottom: 10
-
   }
 })
 

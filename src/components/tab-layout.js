@@ -1,12 +1,6 @@
 import React from 'react'
-import {
-  Text,
-  View,
-  StyleSheet,
-  TabBarIOS
-} from 'react-native'
+import { View, TabBarIOS } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import Button from '../components/generic/button'
 import Stories from '../components/stories'
 import SavedStories from '../components/saved-stories'
 

@@ -17,7 +17,6 @@ class App extends Component {
     SafariView.isAvailable()
       .then(SafariView.show({
         url,
-        readerMode: true,
         barTintColor: "#000"
       }))
   }

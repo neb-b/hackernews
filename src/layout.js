@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Dimensions, View, Text, StyleSheet } from 'react-native'
 import StatusBar from './components/status-bar'
 import TabLayout from './components/tab-layout'
@@ -31,14 +30,6 @@ const Layout = (props) => {
       )}
     </View>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node,
-  route: PropTypes.object,
-  error: PropTypes.any,
-  title: PropTypes.string,
-  linkProps: PropTypes.object
 }
 
 const styles = StyleSheet.create({

@@ -1,15 +1,13 @@
 import React from 'react'
-import { ActivityIndicator, View, Text, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import TopicFilter from './stories/topic-filter'
 import List from './generic/list'
 import Error from './generic/error'
-import Button from './generic/button'
 import Story from './stories/story'
 
 const Stories = ({
   viewIndex,
   error,
-  isSavedView,
   stories,
   saveStory,
   unSaveStory,
@@ -21,7 +19,7 @@ const Stories = ({
   openSafari
 }) => {
   return (
-    <View style={styles.stories}>
+    <View>
       {error && (
         <Error refresh={() => refreshStories(topics.currentlySelected)}/>
       )}
@@ -41,11 +39,5 @@ const Stories = ({
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  stories: {
-    // marginRight: 25
-  }
-})
 
 export default Stories
