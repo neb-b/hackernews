@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import Text from '../generic/text'
+import Button from '../generic/button'
 import { formatUrl, fromNow } from '../../helpers/story-helpers'
 
 const Thread = ({
@@ -10,7 +11,9 @@ const Thread = ({
   time,
   url,
   descendants,
-  saved
+  saved,
+  saveAction,
+  story
 }) => {
   return (
     <View style={styles.container}>
@@ -25,7 +28,9 @@ const Thread = ({
         </View>
         <View>
           <Text alignRight size={16} style={[styles.score]}>{score} points</Text>
-          <Text alignRight size={22}>{`${saved ? 'Saved for' : 'Read it'} later`}</Text>
+          <Button onPress={() => saveAction(story)}>
+            <Text alignRight size={22}>{`${saved ? 'Saved for' : 'Read it'} later`}</Text>
+          </Button>
         </View>
       </View>
     </View>

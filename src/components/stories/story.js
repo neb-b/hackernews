@@ -53,7 +53,7 @@ const Story = ({
           <Link
             _style={styles.comments}
             to='Thread'
-            linkProps={story}
+            linkProps={{story}}
             navigator={navigator}
             viewIndex={viewIndex}
             >

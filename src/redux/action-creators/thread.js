@@ -26,7 +26,6 @@ const onFetchRepliesError = createAction(FETCH_REPLIES_ERROR)
 const onToggleComment = createAction(TOGGLE_COMMENT)
 
 export function loadComments (commentIds = [], head) {
-
   return (dispatch) => {
     if (!commentIds.length) {
       return dispatch(onFetchCommentsSuccess({comments: []}))

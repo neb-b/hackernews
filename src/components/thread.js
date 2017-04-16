@@ -5,11 +5,7 @@ import Comments from './thread/comments'
 
 const Thread = ({
   loading,
-  title,
-  score,
-  time,
-  descendants,
-  url,
+  story,
   comments,
   refreshThread,
   refreshing,
@@ -18,10 +14,17 @@ const Thread = ({
   fetchingRepliesFor,
   loadReplies,
   toggleComment,
-  saved,
   saveStory,
   unSaveStory
 }) => {
+  const {
+    saved,
+    title,
+    score,
+    time,
+    descendants,
+    url
+  } = story
 
   const _renderHead = () => (
     <Head
@@ -31,7 +34,8 @@ const Thread = ({
       url={url}
       descendants={descendants}
       saved={saved}
-      saveAction={saved ? unSaveStory : saveStory} />
+      saveAction={saved ? unSaveStory : saveStory}
+      story={story} />
   )
   return (
     <View style={styles.thread}>

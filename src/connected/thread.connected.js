@@ -7,7 +7,7 @@ import Thread from '../components/thread'
 
 class ThreadView extends Component {
   componentDidMount () {
-    const { kids, loadComments } = this.props
+    const { story: { kids }, loadComments } = this.props
     loadComments(kids)
   }
 
