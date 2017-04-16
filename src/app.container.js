@@ -5,11 +5,23 @@ import { fetchInitialData, changeView, changeTopic } from './redux/action-creato
 import { refreshStories, refreshSavedStories, saveStory, unSaveStory } from './redux/action-creators/stories'
 import SplashScreen from './components/generic/splash'
 import Layout from './layout'
+import SafariView from 'react-native-safari-view'
+console.log('safar', SafariView);
 
 class App extends Component {
   componentDidMount () {
     const {fetchInitialData, topics: { currentlySelected }} = this.props
     fetchInitialData(currentlySelected)
+  }
+
+  openSafari(url) {
+    console.log('open', url);
+    SafariView.isAvailable()
+      .then(SafariView.show({
+        url,
+        readerMode: true,
+        barTintColor: "#000"
+      }))
   }
 
   render () {
@@ -31,7 +43,8 @@ class App extends Component {
                   title={routeTitle || title}
                   viewIndex={index}
                   isHome={!index}
-                  linkProps={linkProps}/>
+                  linkProps={linkProps}
+                  openSafari={(url) => this.openSafari(url)} />
               )
             }} />
         )}

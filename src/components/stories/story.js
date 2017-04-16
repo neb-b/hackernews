@@ -15,7 +15,8 @@ const Story = ({
   isSavedView,
   saveAction,
   navigator,
-  viewIndex
+  viewIndex,
+  openSafari
 }) => {
   const {
     title,
@@ -26,6 +27,7 @@ const Story = ({
     saved
   } = story
   return (
+    <Button flex column onPress={() => openSafari(url)}>
       <View style={styles.story}>
         <View style={[styles.row, styles.level1]}>
           <Text style={[styles.title]}>{title}</Text>
@@ -58,6 +60,7 @@ const Story = ({
           </View>
         </View>
       </View>
+    </Button>
   )
 }
 

@@ -22,8 +22,10 @@ const TabBarLayout = ({
   unSaveStory,
   changeTopic,
   refreshStories,
-  refreshSavedStories
+  refreshSavedStories,
+  openSafari
 }) => {
+  console.log('openSafari', openSafari);
   return (
     <TabBarIOS
       translucent
@@ -42,6 +44,7 @@ const TabBarLayout = ({
           saveStory={saveStory}
           unSaveStory={unSaveStory}
           refreshSavedStories={refreshSavedStories}
+          openSafari={openSafari}
         />
       </Icon.TabBarItemIOS>
       <Icon.TabBarItemIOS
@@ -58,6 +61,7 @@ const TabBarLayout = ({
           topics={topics}
           changeTopic={changeTopic}
           refreshStories={refreshStories}
+          openSafari={openSafari}
         />
       </Icon.TabBarItemIOS>
     </TabBarIOS>

@@ -17,21 +17,9 @@ class Comment extends Component  {
      }
   }
 
-  _setMaxHeight (event){
-    this.setState({
-        maxHeight: event.nativeEvent.layout.height
-    })
-  }
-
-  _setMinHeight (event){
-    this.setState({
-        minHeight: event.nativeEvent.layout.height
-    })
-  }
-
   _toggleComment () {
     this.setState({
-        expanded : !this.state.expanded  //Step 2
+        expanded : !this.state.expanded
     })
   }
 
@@ -49,21 +37,26 @@ class Comment extends Component  {
       fetchingRepliesFor,
       loadReplies,
       commentChain,
-      reply,
-      toggleComment
+      reply
     } = this.props
-    // toggleComment(id, commentChain)
     return (
       <View style={[styles.comment, reply && styles.reply]}>
         {!deleted && (
             <Button onPress={this._toggleComment.bind(this)}>
               {this.state.expanded && (
-                <View style={styles.commentBody} onLayout={this._setMaxHeight.bind(this)}>
+                <View style={styles.commentBody}>
                   <HTMLView
                     value={text}
                     onLinkPress={(url) => {}}
                     stylesheet={htmlStyles}
                   />
+
+                  <View onLayout={this._setMinHeight.bind(this)}>
+                    <Text style={[styles.commentInfo]}>
+                      {`${by} `}
+                      {moment(time * 1000).fromNow()}
+                    </Text>
+                  </View>
 
                   {kids && kids.length && typeof kids[0] === 'number' && (
                     <LoadReplies
@@ -86,13 +79,15 @@ class Comment extends Component  {
                   )}
               </View>
               )}
-                
-              <View onLayout={this._setMinHeight.bind(this)}>
-                <Text style={[styles.commentInfo]}>
-                  {`${by} `}
-                  {moment(time * 1000).fromNow()}
-                </Text>
-              </View>
+
+              {!this.state.expanded && (
+                <View>
+                  <Text style={[styles.commentInfo]}>
+                    {`${by} `}
+                    {moment(time * 1000).fromNow()}
+                  </Text>
+                </View>
+              )}
             </Button>
         )}
         { deleted && <Text>deleted</Text>}

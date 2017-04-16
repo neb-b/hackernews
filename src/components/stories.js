@@ -3,6 +3,7 @@ import { ActivityIndicator, View, Text } from 'react-native'
 import TopicFilter from './stories/topic-filter'
 import List from './generic/list'
 import Error from './generic/error'
+import Button from './generic/button'
 import Story from './stories/story'
 
 const Stories = ({
@@ -16,7 +17,8 @@ const Stories = ({
   navigator,
   changeTopic,
   refreshStories,
-  refreshing
+  refreshing,
+  openSafari
 }) => {
   return (
     <View>
@@ -29,11 +31,13 @@ const Stories = ({
         refresh={() => refreshStories(topics.currentlySelected)}
         refreshing={refreshing}
         renderItem={({item: story}) => (
-          <Story
-            story={story}
-            saveAction={story.saved ? unSaveStory : saveStory}
-            navigator={navigator}
-            viewIndex={viewIndex} />
+
+            <Story
+              story={story}
+              saveAction={story.saved ? unSaveStory : saveStory}
+              navigator={navigator}
+              viewIndex={viewIndex}
+              openSafari={openSafari} />
         )}/>
     </View>
   )

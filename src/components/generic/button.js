@@ -8,7 +8,10 @@ const Button = ({
   paddedRight,
   paddedTop,
   paddedBottom,
-  padded
+  padded,
+  flex,
+  row,
+  column
 }) => {
   return (
     <TouchableHighlight
@@ -19,7 +22,10 @@ const Button = ({
         paddedLeft && styles.paddedLeft,
         paddedRight && styles.paddedRight,
         paddedTop && styles.paddedTop,
-        paddedBottom && styles.paddedBottom
+        paddedBottom && styles.paddedBottom,
+        flex && styles.flex,
+        row && styles.row,
+        column && styles.column
       ]}>
       <View style={[styles.button]}>
         {children}
@@ -28,10 +34,23 @@ const Button = ({
   )
 }
 
+Button.defaultProps = {
+  row: true
+}
+
 const styles = StyleSheet.create({
   button: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // justifyContent: 'center'
+  },
+  row: {
+    flexDirection: 'row'
+  },
+  column: {
+    flexDirection: 'column'
+  },
+  flex: {
+    flex: 1
   },
   padded: {
     padding: 10

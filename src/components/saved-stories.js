@@ -4,7 +4,7 @@ import TopicFilter from './stories/topic-filter'
 import List from './generic/list'
 import Story from './stories/story'
 
-const Stories = ({savedStories, unSaveStory, refreshing, refreshSavedStories, navigator, viewIndex}) => {
+const Stories = ({savedStories, unSaveStory, refreshing, refreshSavedStories, navigator, viewIndex, openSafari}) => {
   return (
     <View>
       <List
@@ -17,7 +17,8 @@ const Stories = ({savedStories, unSaveStory, refreshing, refreshSavedStories, na
             story={story}
             saveAction={story.saved ? unSaveStory : saveStory}
             navigator={navigator}
-            viewIndex={viewIndex} />
+            viewIndex={viewIndex}
+            openSafari={openSafari} />
         )}/>
     </View>
   )
