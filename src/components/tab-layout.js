@@ -25,7 +25,7 @@ const TabBarLayout = ({
       translucent
       unselectedTintColor='#d1d1d1'
       tintColor='white'
-      barTintColor='#1e4858'>
+      barTintColor='#2c3e50'>
       <Icon.TabBarItemIOS
         iconName='clock'
         title='Read it later'

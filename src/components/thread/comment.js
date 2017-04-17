@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { Animated, View, Text, StyleSheet } from 'react-native'
+import { Animated, View, StyleSheet } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import moment from 'moment'
 import Button from '../generic/button'
+import Text from '../generic/text'
 import LoadReplies from './load-replies'
 import { fromNow } from '../../helpers/story-helpers'
+import CollapsibleComment from './collapsible-comment'
 import Collapsible from 'react-native-collapsible';
 
 class Comment extends Component  {
@@ -42,59 +44,27 @@ class Comment extends Component  {
     return (
       <View>
         {!deleted && (
-            <Button onPress={this._toggleComment.bind(this)} underlayColor='#f1f1f1'>
-              <View style={[!reply && styles.comment, reply && styles.reply]}>
-              <Collapsible collapsed={!this.state.expanded}>
-
-                <View style={styles.commentBody}>
-                  <HTMLView
-                    value={text}
-                    onLinkPress={(url) => openSafari(url)}
-                    stylesheet={htmlStyles}
-                  />
-
-                  <View style={styles.paddingTop}>
-                    <Text style={[styles.commentInfo]}>
-                      {`${by} `}
-                      {moment(time * 1000).fromNow()}
-                    </Text>
-                  </View>
-
-                  {kids && kids.length && typeof kids[0] === 'number' && (
-                    <LoadReplies
-                      isLoading={fetchingRepliesFor === id}
-                      loadReplies={loadReplies}
-                      kids={kids}
-                      commentChain={commentChain}
-                      id={id} />
-                  )}
-
-                  {kids && kids.length && typeof kids[0] === 'object' && (
-                    kids.map((comment) => (
-                      <Comment
-                        key={comment.id}
-                        reply
-                        {...comment}
-                        loadReplies={loadReplies}
-                        fetchingRepliesFor={fetchingRepliesFor} />
-                    ))
-                  )}
-                </View>
-            </Collapsible>
-
-              {!this.state.expanded && (
-                <Text style={styles.commentInfo}>
-                  {`${by} `}
-                  {moment(time * 1000).fromNow()}
-                </Text>
-              )}
-
+          <Button onPress={this._toggleComment.bind(this)}>
+            <View style={[!reply && styles.comment, reply && styles.reply]}>
+            <Text color='#999'>
+              {`${by} `}
+              {moment(time * 1000).fromNow()}
+              {` [${this.state.expanded ? '-' : '+'}]`}
+            </Text>
+            <CollapsibleComment
+              expanded={this.state.expanded}
+              text={text}
+              kids={kids}
+              fetchingRepliesFor={fetchingRepliesFor}
+              id={id}
+              commentChain={commentChain}
+              loadReplies={loadReplies} />
           </View>
         </Button>
         )}
-        { deleted && (
+        {deleted && (
           <View style={[!reply && styles.comment, reply && styles.reply]}>
-            <Text>deleted</Text>
+            <Text>{moment(time * 1000).fromNow()} - deleted</Text>
           </View>
         )}
       </View>
@@ -105,8 +75,6 @@ class Comment extends Component  {
 const styles = StyleSheet.create({
   comment: {
     padding: 10,
-    paddingTop: 20,
-    paddingBottom: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#e2e2e2'
   },
@@ -119,9 +87,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     borderLeftWidth: 1,
     borderLeftColor: '#d5d5d5',
-  },
-  commentInfo: {
-    color: '#999999'
   },
   paddingTop: {
     paddingTop: 5

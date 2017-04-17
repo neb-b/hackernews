@@ -29,13 +29,16 @@ class TopicFilter extends Component {
         </Button>
         <Collapsible collapsed={this.state.isCollapsed}>
           <View>
-            {topics.available.map((topic) => (
-              <View key={topic}>
-                <Button padded onPress={() => topic !== currentlySelected ?  changeTopic(topic) : this.setState({isCollapsed: true})}>
-                  <Text _style={[styles.topic, topic === currentlySelected && styles.selected]} size={20} bold>{titles[topic]}</Text>
-                </Button>
-              </View>
-            ))}
+            {topics.available.map((topic) => {
+              const isSelected = topic === currentlySelected
+              return (
+                <View key={topic}>
+                  <Button _style={{padding: 20}} onPress={() => !isSelected ?  changeTopic(topic) : this.setState({isCollapsed: true})}>
+                    <Text bold={isSelected} _style={[styles.topic, isSelected && styles.selected]} size={20}>{titles[topic]}</Text>
+                  </Button>
+                </View>
+              )
+            })}
           </View>
         </Collapsible>
       </View>
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
   selected: {
-    color: '#e24820'
+    color: '#16a085'
   }
 })
 

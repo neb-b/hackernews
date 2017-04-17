@@ -50,7 +50,7 @@ const Story = ({
             <Icon
               name={saved ? 'folder-remove' : 'clock' }
               size={20}
-              color={saved ? '#ff6b6b' : 'black'} />
+              color={saved ? '#ff6b6b' : '#2980b9'} />
           </Button>
         </View>
 
@@ -58,7 +58,7 @@ const Story = ({
           <View>
             <Text style={styles.url}>{formatUrl(url)}</Text>
             <Text style={styles.time}>{fromNow(time)}</Text>
-            <Text size={18} style={styles.score}>{score || 0} points</Text>
+            <Text paddedTop size={18} style={styles.score}>{score || 0} points</Text>
           </View>
 
           <Link
@@ -68,7 +68,7 @@ const Story = ({
             navigator={navigator}
             viewIndex={viewIndex}
             >
-            <Text bold size={18}>{descendants || 0} comments</Text>
+            <Text color='#2980b9' bold size={18}>{descendants || 0} comments</Text>
           </Link>
         </View>
       </View>

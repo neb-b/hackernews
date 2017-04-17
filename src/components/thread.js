@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, View, Text, StyleSheet } from 'react-native'
+import { ActivityIndicator, View, StyleSheet } from 'react-native'
 import Loader from './generic/loader'
 import Head from './thread/head'
 import Comments from './thread/comments'

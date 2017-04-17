@@ -1,13 +1,22 @@
 import React from 'react'
 import { Text as NativeText, StyleSheet } from 'react-native'
 
-const Text = ({children, bold, size, _style, alignRight, color}) => (
+const Text = ({
+  children,
+  bold,
+  size,
+  _style,
+  alignRight,
+  color,
+  paddedTop
+}) => (
   <NativeText style={[
       styles.font,
       bold && styles.bold,
       alignRight && {textAlign: 'right'},
       color && {color},
       {fontSize: size},
+      paddedTop && {paddingTop: 10},
       _style
     ]}
   >

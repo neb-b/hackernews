@@ -14,8 +14,10 @@ const getScene = (title, linkProps) => {
   }
 }
 
-const Link = ({navigator, children, to: newView, viewIndex, linkProps, _style}) => (
+const Link = ({navigator, children, to: newView, viewIndex, linkProps, _style, underlayColor}) => (
   <TouchableHighlight
+    activeOpacity={.2}
+    underlayColor={underlayColor || '#fff'}
     onPress={() => navigator.push(
       Object.assign({}, getScene(newView, linkProps), { index: viewIndex + 1})
     )}>
@@ -26,10 +28,7 @@ const Link = ({navigator, children, to: newView, viewIndex, linkProps, _style}) 
 )
 
 const styles = StyleSheet.create({
-  splash: {
-    flex: 1,
-    backgroundColor: 'black'
-  }
+
 })
 
 export default Link

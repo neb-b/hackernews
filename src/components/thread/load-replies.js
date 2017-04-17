@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import Text from '../generic/text'
 import Button from '../generic/button'
 
 const LoadReplies = (props) => {
@@ -7,7 +8,7 @@ const LoadReplies = (props) => {
   return (
     <View style={styles.container}>
       <Button _style={styles.button} onPress={() => loadReplies(id, commentChain, kids)}>
-        <Text style={styles.buttonText}>
+        <Text _style={styles.buttonText} size={12}>
           {isLoading && 'Loading'}
           {!isLoading && `${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`}
         </Text>
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderLeftWidth: 1,
     borderRightWidth: 1,
+    borderRadius: 5,
     borderColor: '#19467a'
   },
   buttonText: {

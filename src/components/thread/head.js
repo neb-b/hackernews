@@ -28,11 +28,11 @@ const Thread = ({
 
       <View style={[styles.row, styles.space]}>
         <View>
-          <Text style={[styles.comments]}>{descendants || 0} comments</Text>
+          <Text style={[styles.comments]}>{descendants || 0} comment{descendants === 1 ? '' : 's' }</Text>
           <Text size={16} style={[styles.score]}>{score} points</Text>
         </View>
         <View>
-          <Button padded  _style={styles.save} onPress={() => saveAction(story)}>
+          <Button padded underlayColor='#5e5e5e' _style={[styles.save, saved && styles.blue]} onPress={() => saveAction(story)}>
             <Text alignRight bold color={'white'} size={12}>{`${saved ? 'Saved for' : 'Read it'} later`}</Text>
           </Button>
         </View>
@@ -55,8 +55,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   save: {
-    backgroundColor: '#2d54cb',
+    backgroundColor: '#8e44ad',
     borderRadius: 10
+  },
+  blue: {
+    backgroundColor: '#2980b9'
   },
   time: {
     paddingLeft: 10

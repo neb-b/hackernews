@@ -15,7 +15,7 @@ const StatusBarWrapper = ({title, showBackArrow, navigator, isHome}) => {
       <View style={styles.row}>
         <View style={styles.item}>
           {!isHome && (
-            <Button paddedLeft _style={styles.icon} onPress={() => navigator.pop()}>
+            <Button paddedLeft underlayColor='#009688' _style={styles.icon} onPress={() => navigator.pop()}>
               <Icon
                 name={'arrow-left'}
                 size={20}
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   statusBar: {
     height: 64,
     paddingTop: 25,
-    backgroundColor: 'black',
+    backgroundColor: '#009688',
   },
   row: {
     flexDirection: 'row'
