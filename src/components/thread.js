@@ -17,7 +17,8 @@ const Thread = ({
   toggleComment,
   saveStory,
   unSaveStory,
-  openSafari
+  openSafari,
+  height
 }) => {
   const {
     saved,
@@ -56,7 +57,8 @@ const Thread = ({
           fetchingRepliesFor={fetchingRepliesFor}
           loadReplies={loadReplies}
           toggleComment={toggleComment}
-          openSafari={openSafari} />
+          openSafari={openSafari}
+          height={height} />
       )}
     </View>
   )

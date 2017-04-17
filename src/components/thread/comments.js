@@ -13,12 +13,13 @@ const Comments = ({
   fetchingRepliesFor,
   loadReplies,
   toggleComment,
-  openSafari
+  openSafari,
+  height
 }) => {
   return (
     <View>
       <List
-        style={styles.comments}
+        _style={{height}}
         header={renderHeader}
         refreshing={refreshing}
         refresh={() => refreshThread(comments.map((comment) => comment.id))}

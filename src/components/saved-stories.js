@@ -5,11 +5,21 @@ import List from './generic/list'
 import Story from './stories/story'
 import NoSavedStories from './stories/no-saved-stories'
 
-const Stories = ({savedStories, unSaveStory, refreshing, refreshSavedStories, navigator, viewIndex, openSafari}) => {
+const Stories = ({
+  savedStories,
+  unSaveStory,
+  refreshing,
+  refreshSavedStories,
+  navigator,
+  viewIndex,
+  openSafari,
+  height
+}) => {
   return (
     <View>
       {!!savedStories.length && (
         <List
+          _style={{height: height, paddingBottom: 60}}
           items={savedStories}
           refreshing={refreshing}
           refresh={() => savedStories.length && refreshSavedStories(savedStories.map((story) => story.id))}

@@ -18,7 +18,8 @@ const Stories = ({
   changeTopic,
   refreshStories,
   refreshing,
-  openSafari
+  openSafari,
+  height
 }) => {
   return (
     <View>
@@ -27,6 +28,7 @@ const Stories = ({
       )}
       {!loading && (
         <List
+          _style={{height, paddingBottom: 60}}
           header={() => <TopicFilter topics={topics} changeTopic={changeTopic} />}
           items={stories}
           refresh={() => refreshStories(topics.currentlySelected)}
@@ -37,7 +39,8 @@ const Stories = ({
               saveAction={story.saved ? unSaveStory : saveStory}
               navigator={navigator}
               viewIndex={viewIndex}
-              openSafari={openSafari} />
+              openSafari={openSafari}
+              height={height} />
           )}/>
       )}
       {loading && <Loader />}

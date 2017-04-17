@@ -17,7 +17,8 @@ const TabBarLayout = ({
   changeTopic,
   refreshStories,
   refreshSavedStories,
-  openSafari
+  openSafari,
+  height
 }) => {
   return (
     <TabBarIOS
@@ -38,6 +39,7 @@ const TabBarLayout = ({
           unSaveStory={unSaveStory}
           refreshSavedStories={refreshSavedStories}
           openSafari={openSafari}
+          height={height}
         />
       </Icon.TabBarItemIOS>
       <Icon.TabBarItemIOS
@@ -55,6 +57,7 @@ const TabBarLayout = ({
           changeTopic={changeTopic}
           refreshStories={refreshStories}
           openSafari={openSafari}
+          height={height}
         />
       </Icon.TabBarItemIOS>
     </TabBarIOS>

@@ -16,7 +16,8 @@ const Story = ({
   saveAction,
   navigator,
   viewIndex,
-  openSafari
+  openSafari,
+  height
 }) => {
   const {
     title,
@@ -33,7 +34,7 @@ const Story = ({
     <WrapperEl
       onPress={() => url && openSafari(url)}
       to='Thread'
-      linkProps={{story}}
+      linkProps={{story, height}}
       navigator={navigator}
       viewIndex={viewIndex}
       >
@@ -61,7 +62,7 @@ const Story = ({
           <Link
             _style={styles.comments}
             to='Thread'
-            linkProps={{story}}
+            linkProps={{story, height}}
             navigator={navigator}
             viewIndex={viewIndex}
             >

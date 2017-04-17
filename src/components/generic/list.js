@@ -6,9 +6,16 @@ import {
   StyleSheet
 } from 'react-native'
 
-const List = ({items, renderItem, refresh, refreshing, header: Header}) => {
+const List = ({
+  items,
+  renderItem,
+  refresh,
+  refreshing,
+  header: Header,
+  _style
+}) => {
   return (
-    <View style={styles.list}>
+    <View style={[styles.list, _style && _style]}>
       <FlatList
         onRefresh={refresh}
         refreshing={refreshing}

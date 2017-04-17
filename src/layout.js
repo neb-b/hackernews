@@ -25,7 +25,7 @@ const Layout = (props) => {
       <StatusBar style={styles.statusBar} title={title} navigator={navigator} isHome={isHome} />
       {error && <Text>{error.message}</Text>}
       {isHome && (
-        <TabLayout style={styles.tabLayout} {...props} />
+        <TabLayout style={styles.tabLayout} {...props} height={HEIGHT} />
       )}
       {!isHome &&  (
         <NewView {...linkProps} openSafari={openSafari} unSaveStory={unSaveStory} saveStory={saveStory} />
