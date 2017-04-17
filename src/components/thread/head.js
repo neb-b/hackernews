@@ -19,10 +19,15 @@ const Thread = ({
   return (
     <Button _style={styles.container} onPress={() => openSafari(url)}>
       <Text bold size={32}>{title}</Text>
-      <Text style={[styles.url]}>{url && formatUrl(url)}</Text>
       <View style={styles.row}>
+        <Text style={[styles.url]}>{url && formatUrl(url)}</Text>
+        <View style={[styles.time]}>
+          <Text>{fromNow(time)}</Text>
+        </View>
+      </View>
+
+      <View style={[styles.row, styles.space]}>
         <View>
-          <Text style={[styles.time]}>{fromNow(time)}</Text>
           <Text style={[styles.comments]}>{descendants || 0} comments</Text>
           <Text size={16} style={[styles.score]}>{score} points</Text>
         </View>
@@ -44,12 +49,17 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    paddingTop: 10
+  },
+  space: {
     justifyContent: 'space-between',
-    paddingTop: 20
   },
   save: {
     backgroundColor: '#2d54cb',
     borderRadius: 10
+  },
+  time: {
+    paddingLeft: 10
   }
 })
 

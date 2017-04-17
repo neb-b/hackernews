@@ -44,6 +44,8 @@ const Story = ({
           <Button
             height={40}
             paddedLeft
+            paddedBottom
+            _style={{paddingBottom: 20, paddingLeft: 20}}
             onPress={() => saveAction(story)}>
             <Icon
               name={saved ? 'folder-remove' : 'clock' }
