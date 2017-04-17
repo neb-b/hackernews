@@ -34,9 +34,12 @@ export default handleActions({
     })
   },
   SAVE_STORY_SUCCESS: (state, {payload: {story}}) => {
+    let newStories = state.savedStories.slice()
+    newStories.unshift(story)
+
     return ({
       ...state,
-      savedStories: state.savedStories.concat([story])
+      savedStories: newStories
     })
   },
   UN_SAVE_STORY_SUCCESS: (state, {payload: {story: activeStory}}) => {

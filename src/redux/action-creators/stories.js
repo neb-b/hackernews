@@ -49,7 +49,8 @@ export function saveStory (story) {
           return setSavedStories(dispatch, [story.id], story)
         }
 
-        const newStories = stories.concat([story.id])
+        const newStories = stories.slice()
+        newStories.unshift(story.id)
         setSavedStories(dispatch, newStories, story)
       })
     }
