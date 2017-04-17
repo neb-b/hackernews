@@ -21,8 +21,9 @@ const CollapsibleComment = (props) => {
         <Collapsible collapsed={!expanded}>
           <View style={styles.commentBody}>
             <HTMLView
-              value={text}
+              value={`<p>${text}</p>`}
               onLinkPress={(url) => openSafari(url)}
+              stylesheet={styles}
             />
             {kids && kids.length && typeof kids[0] === 'number' && (
               <LoadReplies
@@ -49,11 +50,9 @@ const CollapsibleComment = (props) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    // paddingTop: 10
-  },
-  commentBody: {
-    // flex: 1
+  p: {
+    lineHeight: 18,
+    fontSize: 14
   }
 })
 

@@ -19,7 +19,7 @@ const Comments = ({
   return (
     <View>
       <List
-        _style={{height}}
+        _style={{height, paddingBottom: 60}}
         header={renderHeader}
         refreshing={refreshing}
         refresh={() => refreshThread(comments.map((comment) => comment.id))}

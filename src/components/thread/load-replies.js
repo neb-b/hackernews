@@ -8,7 +8,7 @@ const LoadReplies = (props) => {
   return (
     <View style={styles.container}>
       <Button _style={styles.button} onPress={() => loadReplies(id, commentChain, kids)}>
-        <Text _style={styles.buttonText} size={12}>
+        <Text bold _style={styles.buttonText} size={12}>
           {isLoading && 'Loading'}
           {!isLoading && `${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`}
         </Text>
