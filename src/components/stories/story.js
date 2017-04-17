@@ -27,8 +27,16 @@ const Story = ({
     saved
   } = story
 
+  const WrapperEl = url ? Button : Link
+
   return (
-    <Button onPress={() => openSafari(url)}>
+    <WrapperEl
+      onPress={() => url && openSafari(url)}
+      to='Thread'
+      linkProps={{story}}
+      navigator={navigator}
+      viewIndex={viewIndex}
+      >
       <View style={styles.story}>
         <View style={styles.row}>
           <Text bold size={32} _style={[styles.title]}>{title}</Text>
@@ -61,7 +69,7 @@ const Story = ({
           </Link>
         </View>
       </View>
-    </Button>
+    </WrapperEl>
   )
 }
 
