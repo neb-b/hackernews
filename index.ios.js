@@ -1,22 +1,4 @@
-import React, { Component } from 'react'
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native'
-import Router from './src/router'
+import { AppRegistry } from 'react-native'
+import App from './src'
 
-const hackernews = () => (
-  <View style={styles.container}>
-    <Router />
-  </View>
-)
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-})
-
-AppRegistry.registerComponent('hackernews', () => hackernews)
+AppRegistry.registerComponent('hackernews', () => App)

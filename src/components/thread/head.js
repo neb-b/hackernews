@@ -1,105 +1,69 @@
 import React from 'react'
-import {
-  Text,
-  StyleSheet,
-  TouchableHighlight,
-  View
-} from 'react-native'
-import { formatUrl, fromNow } from '../../helpers/stories-helpers'
-import { globalStyles } from '../../styles.js'
-const { darkBlue, lightBlack, blackUnderlay, darkBlueUnderlay, blue, black, mediumGrey, orange, white, darkBackground, veryLightGrey } = globalStyles
+import { View, StyleSheet } from 'react-native'
+import Text from '../generic/text'
+import Button from '../generic/button'
+import { formatUrl, fromNow } from '../../helpers/story-helpers'
 
-const Head = ({
+const Thread = ({
+  loading,
   title,
   score,
-  kids,
   time,
   url,
   descendants,
-  openSafari,
-  isDark
+  saved,
+  saveAction,
+  story,
+  openSafari
 }) => {
   return (
-    <View style={styles.headWrapper}>
-      <TouchableHighlight
-        style={[styles.head, isDark && styles.darkHead]}
-        underlayColor={isDark ? blackUnderlay : darkBlueUnderlay}
-        onPress={() => openSafari(url)}>
-        <View>
-          <Text style={[styles.title, isDark && styles.darkTitle]}>{title}</Text>
-
-          <View style={styles.siteTime}>
-            <Text style={[styles.url, isDark && styles.darkUrl]}>{url && formatUrl(url)}</Text>
-            <Text style={[styles.time, url && styles.leftPad]}>{fromNow(time)}</Text>
-          </View>
-
-          <View style={styles.belowTitle}>
-            <Text style={[styles.score]}>{score} points</Text>
-            <Text style={[styles.comments, isDark && styles.darkComments]}>{descendants} comments</Text>
-          </View>
+    <Button _style={styles.container} onPress={() => openSafari(url)}>
+      <Text bold size={32}>{title}</Text>
+      <View style={styles.row}>
+        <Text style={[styles.url]}>{url && formatUrl(url)}</Text>
+        <View style={[styles.time]}>
+          <Text>{fromNow(time)}</Text>
         </View>
-      </TouchableHighlight>
-    </View>
+      </View>
+
+      <View style={[styles.row, styles.space]}>
+        <View>
+          <Text style={[styles.comments]}>{descendants || 0} comment{descendants === 1 ? '' : 's' }</Text>
+          <Text size={16} style={[styles.score]}>{score} points</Text>
+        </View>
+        <View>
+          <Button padded underlayColor='#5e5e5e' _style={[styles.save, saved && styles.blue]} onPress={() => saveAction(story)}>
+            <Text alignRight bold color={'white'} size={12}>{`${saved ? 'Saved for' : 'Read it'} later`}</Text>
+          </Button>
+        </View>
+      </View>
+    </Button>
   )
 }
 
 const styles = StyleSheet.create({
-  headWrapper: {
-    minHeight: 150
-  },
-  head: {
+  container: {
     padding: 10,
-    paddingBottom: 20,
-    backgroundColor: white
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0'
   },
-  darkHead: {
-    backgroundColor: lightBlack
-  },
-  siteTime: {
+  row: {
     flexDirection: 'row',
-  },
-  url: {
-    fontSize: 18
-  },
-  darkUrl: {
-    color: blue
-  },
-  time: {
-    paddingTop: 2,
-    fontSize: 16,
-    color: mediumGrey
-  },
-  leftPad: {
-    paddingLeft: 10,
-  },
-  title: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    fontSize: 30,
-    color: black,
-    fontWeight: '900'
-  },
-  darkTitle: {
-    color: veryLightGrey
-  },
-  belowTitle: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     paddingTop: 10
   },
-  score: {
-    fontSize: 18,
-    color: orange,
-    fontWeight: '700'
+  space: {
+    justifyContent: 'space-between',
   },
-  darkComments: {
-    color: veryLightGrey
+  save: {
+    backgroundColor: '#8e44ad',
+    borderRadius: 10
   },
-  comments: {
-    color: darkBlue,
-    fontSize: 18,
-    fontWeight: '700'
+  blue: {
+    backgroundColor: '#2980b9'
   },
+  time: {
+    paddingLeft: 10
+  }
 })
 
-export default Head
+export default Thread

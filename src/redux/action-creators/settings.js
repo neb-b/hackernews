@@ -1,40 +1,63 @@
 import { AsyncStorage } from 'react-native'
 import { createAction } from 'redux-actions'
 import {
-  LOAD_SETTINGS,
-  UPDATE_SETTINGS_SUCCESS,
-  UPDATE_SETTINGS_ERROR
+  LOAD_SETTINGS_SUCCESS,
+  LOAD_SETTINGS_ERROR,
+  CHANGE_VIEW,
+  CHANGE_TOPIC_REQUEST,
+  CHANGE_TOPIC_SUCCESS,
+  CHANGE_TOPIC_ERROR
 } from '../constants'
+import { getJson } from './fetch-builder'
 
-const onLoadSettings = createAction(LOAD_SETTINGS)
-const onUpdateSettingsSuccess = createAction(UPDATE_SETTINGS_SUCCESS)
-const onUpdateSettingsError = createAction(UPDATE_SETTINGS_ERROR)
+const onLoadSettingsSuccess = createAction(LOAD_SETTINGS_SUCCESS)
+const onLoadSettingsError = createAction(LOAD_SETTINGS_ERROR)
+const onChangeView = createAction(CHANGE_VIEW)
 
-export function loadSettings () {
+const onChangeTopicRequest = createAction(CHANGE_TOPIC_REQUEST)
+const onChangeTopicSuccess = createAction(CHANGE_TOPIC_SUCCESS)
+const onChangeTopicError = createAction(CHANGE_TOPIC_ERROR)
+
+export const fetchInitialData = (selectedTopic) => {
   return (dispatch) => {
-    AsyncStorage.getItem('darkmode')
+    AsyncStorage.multiGet(['settings', 'savedStories'])
       .then((res) => {
-        const darkMode = res && JSON.parse(res)
-        const settings = [{
-            id: "darkmode",
-            active: darkMode,
-            name: "Dark mode"
-          }]
+        const settingsRes = res[0][1]
+        const settings = settingsRes && JSON.parse(settingsRes) || {}
+        const savedStoriesRes = res[1][1]
+        const savedStoryIds = savedStoriesRes && JSON.parse(savedStoriesRes) || []
 
-        return settings
+        let query = ''
+        if (savedStoryIds.length) {
+          query += `savedStories=${savedStoryIds.join(',')}`
+        }
+
+        getJson('stories', selectedTopic, query)
+          .then((initialStories = []) => {
+            dispatch(onLoadSettingsSuccess({ settings, initialStories }))
+          })
+          .catch((err) => {
+            dispatch(onLoadSettingsError(err))
+          })
       })
-      .then((settings) => dispatch(onLoadSettings(settings)))
+      .catch((err) => {
+        dispatch(onLoadSettingsError(err))
+      })
   }
 }
 
-export function updateSettings (setting, active) {
-  console.log('setItem', setting, JSON.stringify(!active));
+export function changeView () {
+  return (dispatch) => dispatch(onChangeView())
+}
+
+export function changeTopic (newTopic) {
   return (dispatch) => {
-    AsyncStorage.setItem(setting, JSON.stringify(!active))
-      .then((res) => {
-        console.log('res', res)
-        dispatch(onUpdateSettingsSuccess({setting}))
+    dispatch(onChangeTopicRequest({newTopic}))
+
+    getJson('stories', newTopic)
+      .then(({ stories }) => {
+        dispatch(onChangeTopicSuccess({stories}))
       })
-      .catch((err) => dispatch(onUpdateSettingsError(err)))
-    }
+      .catch((err) => dispatch(onChangeTopicError(err)))
+  }
 }

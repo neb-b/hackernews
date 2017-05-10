@@ -1,117 +1,78 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {
-  ActivityIndicator,
-  Dimensions,
-  ListView,
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native'
+import React from 'react'
+import { ActivityIndicator, View, StyleSheet } from 'react-native'
+import Loader from './generic/loader'
 import Head from './thread/head'
-import Comment from './thread/comment'
-import { globalStyles } from '../styles'
-const { mediumBlack, mediumGrey, darkBlue } = globalStyles
-const SCREEN_HEIGHT = Dimensions.get('window').height
+import Comments from './thread/comments'
+import Error from './generic/error'
 
 const Thread = ({
   loading,
+  story,
   comments,
-  // Below are passed from Stories view in view change
-  title,
-  time,
-  score,
-  descendants,
-  url,
-  navigator,
-  loadSubComments,
-  commentThatsLoading,
-  toggleComment,
   refreshThread,
   refreshing,
+  loadComments,
+  fetchingReplies,
+  fetchingRepliesFor,
+  loadReplies,
+  toggleComment,
+  saveStory,
+  unSaveStory,
   openSafari,
-  isDark
+  height,
+  error
 }) => {
-  const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-  const threadItems = [{title, score, time, descendants, url}].concat(comments)
+  const {
+    saved,
+    title,
+    score,
+    time,
+    descendants,
+    url
+  } = story
 
-  const renderHead = () => (
+  const _renderHead = () => (
     <Head
-      navigator={navigator}
-      key={0}
       title={title}
       score={score}
       time={time}
-      descendants={descendants}
       url={url}
-      openSafari={openSafari}
-      isDark={isDark} />
+      descendants={descendants}
+      saved={saved}
+      saveAction={saved ? unSaveStory : saveStory}
+      story={story}
+      openSafari={openSafari} />
   )
 
-  const renderThreadRow = (threadItem) => {
-    return (
-      threadItem.title
-      ? renderHead()
-      : <Comment
-          key={threadItem.id}
-          {...threadItem}
-          loadSubComments={loadSubComments}
-          commentThatsLoading={commentThatsLoading}
+  return (
+    <View style={styles.thread}>
+      {error && (
+        <Error refresh={() => refreshThread(comments.map((comment) => comment.id))}/>
+      )}
+      {loading && _renderHead()}
+      {loading && <Loader />}
+      {!loading && (
+        <Comments
+          comments={comments}
+          renderHeader={_renderHead}
+          refreshThread={refreshThread}
+          refreshing={refreshing}
+          loadComments={loadComments}
+          fetchingReplies={fetchingReplies}
+          fetchingRepliesFor={fetchingRepliesFor}
+          loadReplies={loadReplies}
           toggleComment={toggleComment}
           openSafari={openSafari}
-          isDark={isDark} />
-    )
-  }
-
-  return (
-    <View style={[styles.threadWrapper, isDark && styles.darkBackground]}>
-      {loading && (
-        <View style={[styles.loadingThread, isDark && styles.darkLoading]}>
-          {renderHead()}
-          <ActivityIndicator
-              key={1}
-              style={styles.spinner}
-              color={isDark ? mediumGrey : darkBlue}
-              size='large' />
-        </View>
-      )}
-      {!loading && (
-        <View>
-          <ListView
-            style={styles.listView}
-            dataSource={ds.cloneWithRows(threadItems)}
-            renderRow={renderThreadRow}refreshControl={
-              <RefreshControl
-                onRefresh={() => refreshThread(comments)}
-                refreshing={refreshing}
-                tintColor={isDark ? mediumGrey : darkBlue} />
-              } />
-        </View>
+          height={height} />
       )}
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  loadingThread: {
-    flex: 1
-  },
-  darkLoading: {
-    backgroundColor: mediumBlack
-  },
-  spinner: {
-    paddingTop: 40
-  },
-  threadWrapper: {
-    height: SCREEN_HEIGHT
-  },
-  darkBackground: {
-    backgroundColor: mediumBlack
-  },
-  listView: {
-    marginBottom: 64
+  thread: {
+    flex: 1,
+    backgroundColor: 'white'
   }
 })
 

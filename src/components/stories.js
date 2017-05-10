@@ -1,77 +1,51 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {
-  ActivityIndicator,
-  Dimensions,
-  ListView,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native'
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
+import TopicFilter from './stories/topic-filter'
+import List from './generic/list'
+import Error from './generic/error'
+import Loader from './generic/loader'
 import Story from './stories/story'
-import { globalStyles } from '../styles'
-const { mediumGrey, darkBlue, darkBlueUnderlay, whiteUnderlay, mediumBlack } = globalStyles
-
-const HEIGHT = Dimensions.get('window').height
 
 const Stories = ({
+  viewIndex,
+  error,
   loading,
   stories,
-  loadStories,
-  refreshing,
-  refreshStories,
+  saveStory,
+  unSaveStory,
+  topics,
   navigator,
+  changeTopic,
+  refreshStories,
+  refreshing,
   openSafari,
-  isDark
+  height
 }) => {
-  const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-
   return (
-    <View style={[styles.storiesWrapper, isDark && styles.darkBackground]}>
-      {
-        loading
-        ? <ActivityIndicator
-            style={styles.spinner}
-            color={isDark ? mediumGrey : darkBlue}
-            size='large'/>
-        :  <ListView
-            style={styles.listView}
-            dataSource={ds.cloneWithRows(stories)}
-            renderRow={(story) => (
-              <Story
-                key={story.id}
-                {...story}
-                navigator={navigator}
-                openSafari={openSafari}
-                isDark={isDark}/>
-            )}
-            refreshControl={
-              <RefreshControl
-                onRefresh={refreshStories}
-                refreshing={refreshing}
-                tintColor={isDark ? mediumGrey : darkBlue} />
-              }>
-          </ListView>
-      }
+    <View>
+      {error && (
+        <Error refresh={() => refreshStories(topics.currentlySelected)}/>
+      )}
+      {!loading && (
+        <List
+          _style={{height, paddingBottom: 60}}
+          header={() => <TopicFilter topics={topics} changeTopic={changeTopic} />}
+          items={stories}
+          refresh={() => refreshStories(topics.currentlySelected)}
+          refreshing={refreshing}
+          renderItem={({item: story}) => (
+            <Story
+              story={story}
+              saveAction={story.saved ? unSaveStory : saveStory}
+              navigator={navigator}
+              viewIndex={viewIndex}
+              openSafari={openSafari}
+              height={height} />
+          )}/>
+      )}
+      {loading && <Loader />}
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  storiesWrapper: {
-    zIndex: 0,
-    height: HEIGHT,
-  },
-  darkBackground: {
-    backgroundColor: mediumBlack
-  },
-  spinner: {
-    paddingTop: 40,
-  },
-  listView: {
-    marginBottom: 64 //IOS statusBar height
-  }
-})
 
 export default Stories

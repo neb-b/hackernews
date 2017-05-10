@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import stories from './stories'
-import thread from './thread'
-import statusBar from './status-bar'
 import settings from './settings'
+import stories from './stories'
+import savedStories from './saved-stories'
+import thread from './thread'
 
 export default combineReducers({
+  settings,
   stories,
-  thread,
-  statusBar,
-  settings
+  savedStories,
+  thread
 })

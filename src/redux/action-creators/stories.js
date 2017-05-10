@@ -1,42 +1,95 @@
+import { AsyncStorage } from 'react-native'
 import { createAction } from 'redux-actions'
 import {
-  LOAD_STORIES_REQUEST,
-  LOAD_STORIES_SUCCESS,
-  LOAD_STORIES_ERROR,
+  SAVE_STORY_SUCCESS,
+  SAVE_STORY_ERROR,
+  UN_SAVE_STORY_SUCCESS,
+  UN_SAVE_STORY_ERROR,
   REFRESH_STORIES_REQUEST,
   REFRESH_STORIES_SUCCESS,
   REFRESH_STORIES_ERROR,
-  ROOT_URL
+  REFRESH_SAVED_STORIES_REQUEST,
+  REFRESH_SAVED_STORIES_SUCCESS,
+  REFRESH_SAVED_STORIES_ERROR
 } from '../constants'
+import { getJson } from './fetch-builder'
 
-const onLoadStoriesRequest = createAction(LOAD_STORIES_REQUEST)
-const onLoadStoriesSuccess = createAction(LOAD_STORIES_SUCCESS)
-const onLoadStoriesError = createAction(LOAD_STORIES_ERROR)
-
+const onSaveStorySuccess = createAction(SAVE_STORY_SUCCESS)
+const onSaveStoryError = createAction(SAVE_STORY_ERROR)
+const onUnSaveStorySuccess = createAction(UN_SAVE_STORY_SUCCESS)
+const onUnSaveStoryError = createAction(UN_SAVE_STORY_ERROR)
 const onRefreshStoriesRequest = createAction(REFRESH_STORIES_REQUEST)
 const onRefreshStoriesSuccess = createAction(REFRESH_STORIES_SUCCESS)
 const onRefreshStoriesError = createAction(REFRESH_STORIES_ERROR)
+const onRefreshSavedStoriesRequest = createAction(REFRESH_SAVED_STORIES_REQUEST)
+const onRefreshSavedStoriesSuccess = createAction(REFRESH_SAVED_STORIES_SUCCESS)
+const onRefreshSavedStoriesError = createAction(REFRESH_SAVED_STORIES_ERROR)
 
-export function loadStories (endpoint) {
-  // console.log('load stories action', endpoint);
+const getSavedStories = () => {
+  return AsyncStorage.getItem('savedStories')
+    .then((savedStoriesRes) => {
+      const savedStories = savedStoriesRes && JSON.parse(savedStoriesRes) || []
+      return savedStories
+    })
+}
+
+const setSavedStories = (dispatch, stories, story, unSaving) => {
+  const toggleSaveAction = unSaving ? onUnSaveStorySuccess : onSaveStorySuccess
+  const toggleSaveActionErr = unSaving ? onUnSaveStoryError : onSaveStoryError
+  AsyncStorage.setItem('savedStories', JSON.stringify(stories))
+    .then(() => dispatch(toggleSaveAction({storyIds: stories, story})))
+    .catch((err) => dispatch(toggleSaveActionErr(err)))
+}
+
+export function saveStory (story) {
   return (dispatch) => {
-    // console.log('about to start');
-    dispatch(onLoadStoriesRequest())
+    getSavedStories()
+      .then((stories) => {
+        if (!stories.length) {
+          return setSavedStories(dispatch, [story.id], story)
+        }
 
-    fetch(`${ROOT_URL}/stories/${endpoint}`)
-      .then((res) => res.json())
-      .then((stories) => dispatch(onLoadStoriesSuccess(stories)))
-      .catch((err) => dispatch(onLoadStoriesError(err)))
-  }
+        const newStories = stories.slice()
+        newStories.unshift(story.id)
+        setSavedStories(dispatch, newStories, story)
+      })
+    }
+}
+
+export function unSaveStory (story) {
+  return (dispatch) => {
+    getSavedStories()
+      .then((stories) => {
+        const newStories = stories.filter((storyId) => {
+          return storyId !== story.id
+        })
+        return setSavedStories(dispatch, newStories, story, true)
+      })
+    }
 }
 
 export function refreshStories (endpoint) {
   return (dispatch) => {
     dispatch(onRefreshStoriesRequest())
 
-    fetch(`${ROOT_URL}/stories/${endpoint}`)
-      .then((res) => res.json())
-      .then((stories) => dispatch(onRefreshStoriesSuccess(stories)))
+    getJson('stories', endpoint)
+      .then(({ stories }) => {
+        dispatch(onRefreshStoriesSuccess({stories}))
+      })
       .catch((err) => dispatch(onRefreshStoriesError(err)))
+  }
+}
+
+export function refreshSavedStories (storyIds) {
+  const query = `stories=${storyIds.join(',')}`
+
+  return (dispatch) => {
+    dispatch(onRefreshSavedStoriesRequest())
+
+    getJson('saved', null, query)
+      .then(({ stories }) => {
+        dispatch(onRefreshSavedStoriesSuccess({stories}))
+      })
+      .catch((err) => dispatch(onRefreshSavedStoriesError(err)))
   }
 }

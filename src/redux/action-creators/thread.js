@@ -1,63 +1,70 @@
+import { AsyncStorage } from 'react-native'
 import { createAction } from 'redux-actions'
 import {
-  LOAD_COMMENTS_REQUEST,
-  LOAD_COMMENTS_SUCCESS,
-  LOAD_COMMENTS_ERROR,
-  LOAD_SUB_COMMENTS_REQUEST,
-  LOAD_SUB_COMMENTS_SUCCESS,
-  LOAD_SUB_COMMENTS_ERROR,
+  FETCH_COMMENTS_REQUEST,
+  FETCH_COMMENTS_SUCCESS,
+  FETCH_COMMENTS_ERROR,
   REFRESH_THREAD_REQUEST,
   REFRESH_THREAD_SUCCESS,
   REFRESH_THREAD_ERROR,
-  TOGGLE_COMMENT,
-  ROOT_URL
+  FETCH_REPLIES_REQUEST,
+  FETCH_REPLIES_SUCCESS,
+  FETCH_REPLIES_ERROR,
+  TOGGLE_COMMENT
 } from '../constants'
-import { postJson } from '../../helpers/fetch-builder'
-const URL = `${ROOT_URL}/comments`
+import { getJson } from './fetch-builder'
 
-const onLoadCommentsRequest = createAction(LOAD_COMMENTS_REQUEST)
-const onLoadCommentsSuccess = createAction(LOAD_COMMENTS_SUCCESS)
-const onLoadCommentsError = createAction(LOAD_COMMENTS_ERROR)
-
-const onLoadSubCommentsRequest = createAction(LOAD_SUB_COMMENTS_REQUEST)
-const onLoadSubCommentsSuccess = createAction(LOAD_SUB_COMMENTS_SUCCESS)
-const onLoadSubCommentsError = createAction(LOAD_SUB_COMMENTS_ERROR)
-
+const onFetchCommentsRequest = createAction(FETCH_COMMENTS_REQUEST)
+const onFetchCommentsSuccess = createAction(FETCH_COMMENTS_SUCCESS)
+const onFetchCommentsError = createAction(FETCH_COMMENTS_ERROR)
 const onRefreshThreadRequest = createAction(REFRESH_THREAD_REQUEST)
 const onRefreshThreadSuccess = createAction(REFRESH_THREAD_SUCCESS)
 const onRefreshThreadError = createAction(REFRESH_THREAD_ERROR)
-
+const onFetchRepliesRequest = createAction(FETCH_REPLIES_REQUEST)
+const onFetchRepliesSuccess = createAction(FETCH_REPLIES_SUCCESS)
+const onFetchRepliesError = createAction(FETCH_REPLIES_ERROR)
 const onToggleComment = createAction(TOGGLE_COMMENT)
 
-export function loadComments (commentIds) {
+export function loadComments (commentIds = [], head) {
   return (dispatch) => {
-    dispatch(onLoadCommentsRequest())
+    if (!commentIds.length) {
+      return dispatch(onFetchCommentsSuccess({comments: []}))
+    }
 
-    postJson(URL, commentIds)
-      .then(({ comments }) => dispatch(onLoadCommentsSuccess(comments)))
-      .catch((err) => dispatch(onLoadCommentsError(err)))
+    const query = `comments=${commentIds.join(',')}`
+
+    dispatch(onFetchCommentsRequest({head}))
+    getJson('comments', null, query)
+      .then((comments) => dispatch(onFetchCommentsSuccess(comments)))
+      .catch((err) => dispatch(onFetchCommentsError({err})))
   }
 }
 
-export function loadSubComments (id, commentChain, kids) {
-  return (dispatch) => {
-    dispatch(onLoadSubCommentsRequest(id))
-
-    postJson(URL, kids)
-      .then(({ comments }) => dispatch(onLoadSubCommentsSuccess({commentChain, comments: comments.map((comment) => Object.assign(comment, { commentChain }))})))
-      .catch((err) => dispatch(onLoadSubCommentsError(err)))
-  }
-}
-
-export function refreshThread (comments) {
-  const trimmedComments = comments.map((comment) => comment.id)
+export function refreshThread (commentIds, head) {
+  const query = `comments=${commentIds.join(',')}`
 
   return (dispatch) => {
-    dispatch(onRefreshThreadRequest())
+    dispatch(onRefreshThreadRequest({head}))
 
-    postJson(URL, trimmedComments)
-      .then(({ comments }) => dispatch(onRefreshThreadSuccess(comments)))
+    getJson('comments', null, query)
+      .then(({ comments }) => {
+        dispatch(onRefreshThreadSuccess({comments}))
+      })
       .catch((err) => dispatch(onRefreshThreadError(err)))
+  }
+}
+
+export function loadReplies (opId, commentChain, commentIds) {
+  const query = `comments=${commentIds.join(',')}`
+
+  return (dispatch) => {
+    dispatch(onFetchRepliesRequest({opId}))
+
+    getJson('comments', null, query)
+      .then(({ comments }) => {
+        dispatch(onFetchRepliesSuccess({comments, commentChain, opId}))
+      })
+      .catch((err) => dispatch(onFetchRepliesError(err)))
   }
 }
 

@@ -34,12 +34,11 @@ local.properties
 #
 node_modules/
 npm-debug.log
-.env
+yarn-error.log
 
 # BUCK
 buck-out/
 \.buckd/
-android/app/libs
 *.keystore
 
 # fastlane
