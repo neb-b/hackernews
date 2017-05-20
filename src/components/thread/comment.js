@@ -58,7 +58,8 @@ class Comment extends Component  {
               fetchingRepliesFor={fetchingRepliesFor}
               id={id}
               commentChain={commentChain}
-              loadReplies={loadReplies} />
+              loadReplies={loadReplies}
+              openSafari={openSafari} />
           </View>
         </Button>
         )}
