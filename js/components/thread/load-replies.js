@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 		borderLeftWidth: 1,
 		borderRightWidth: 1,
 		borderRadius: 5,
-		borderColor: '#19467a'
+		borderColor: '#c3c3c3'
 	},
 	buttonText: {
 		textAlign: 'center',
