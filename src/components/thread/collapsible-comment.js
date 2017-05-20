@@ -17,11 +17,11 @@ const CollapsibleComment = (props) => {
     loadReplies
   } = props
   return (
-    <View style={styles.container}>
+    <View style={expanded && styles.container}>
         <Collapsible collapsed={!expanded}>
           <View style={styles.commentBody}>
             <HTMLView
-              value={`<p>${text}</p>`}
+              value={text}
               onLinkPress={(url) => openSafari(url)}
               stylesheet={styles}
             />
@@ -50,6 +50,9 @@ const CollapsibleComment = (props) => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom: 10
+  },
   p: {
     lineHeight: 18,
     fontSize: 14

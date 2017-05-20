@@ -15,7 +15,7 @@
   "dependencies": {
     "lint-staged": "^3.4.1",
     "prop-types": "^15.5.8",
-    "react": "16.0.0-alpha.12",
+    "react": "16.0.0-alpha.6",
     "react-native": "0.43",
     "react-native-browser": "^0.6.2",
     "react-native-collapsible": "^0.8.0",
