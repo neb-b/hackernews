@@ -114,11 +114,13 @@ export default handleActions({
     loading: false,
     refreshing: true
   }),
-  REFRESH_STORIES_SUCCESS: (state, {payload: {stories}}) => ({
-    ...state,
-    refreshing: false,
-    stories
-  }),
+  REFRESH_STORIES_SUCCESS: (state, {payload: {newStories}}) => {
+    return {
+      ...state,
+      refreshing: false,
+      stories: newStories
+    }
+  },
   REFRESH_STORIES_ERROR: (state, {payload}) => ({
     ...state,
     loading: false,

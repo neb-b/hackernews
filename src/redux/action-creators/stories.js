@@ -69,12 +69,18 @@ export function unSaveStory (story) {
 }
 
 export function refreshStories (endpoint) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const state = getState()
+    // hmm...
+    const { savedStories: { savedStories} } = state
+    const slimSavedStories = savedStories.map((s) => s.id)
+
     dispatch(onRefreshStoriesRequest())
 
     getJson('stories', endpoint)
       .then(({ stories }) => {
-        dispatch(onRefreshStoriesSuccess({stories}))
+        const newStories = stories.map((story) => slimSavedStories.indexOf(story.id) === -1 ? story : Object.assign(story, { saved: true }))
+        dispatch(onRefreshStoriesSuccess({ newStories }))
       })
       .catch((err) => dispatch(onRefreshStoriesError(err)))
   }
