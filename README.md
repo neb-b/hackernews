@@ -4,7 +4,7 @@ A Hacker News reader built with React Native
 
 Checkout the Node.js server [here](https://github.com/seanyesmunt/hackernews-server)
 
-Download the iOS app ~~here~~ (Apple took down my app for not having enough native functionality. I'm working on adding the ability to save stories. Hopefully that will get it back in.)
+~~Download the iOS app here~~ (Currently trying to get v2 published.)
 
 
 ### Installation
