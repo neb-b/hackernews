@@ -1,10 +1,12 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Text from '../generic/text'
 
 const NoSavedStories = () => (
 	<View style={styles.container}>
-		<Text size={20}>No saved stories...</Text>
+		<Icon name="clock" color="#2980b9" size={30} />
+		<Text paddedTop size={20}>No saved stories...</Text>
 	</View>
 )
 
