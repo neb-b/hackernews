@@ -33,13 +33,7 @@ const Story = ({
 			<View style={styles.story}>
 				<View style={styles.row}>
 					<Text bold size={32} _style={[styles.title]}>{title}</Text>
-					<Button
-						height={40}
-						paddedLeft
-						paddedBottom
-						_style={{ paddingBottom: 20, paddingLeft: 20 }}
-						onPress={() => saveAction(story)}
-					>
+					<Button height={40} padded onPress={() => saveAction(story)}>
 						<Icon
 							name={saved ? 'folder-remove' : 'clock'}
 							size={20}
@@ -77,7 +71,6 @@ const Story = ({
 const styles = StyleSheet.create({
 	story: {
 		paddingLeft: 10,
-		paddingRight: 10,
 		paddingTop: 15,
 		paddingBottom: 15,
 		minHeight: 150,
@@ -99,8 +92,7 @@ const styles = StyleSheet.create({
 		paddingTop: 30
 	},
 	comments: {
-		paddingLeft: 10,
-		paddingBottom: 10
+		padding: 10
 	}
 })
 
