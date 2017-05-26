@@ -21,10 +21,7 @@ const Story = ({
 
 	return (
 		<WrapperEl
-			onPress={() => {
-				console.log('attempting to load safari')
-				return url && openSafari(url)
-			}}
+			onPress={() => url && openSafari(url)}
 			to="Thread"
 			linkProps={{ story, height }}
 			navigator={navigator}
@@ -33,10 +30,15 @@ const Story = ({
 			<View style={styles.story}>
 				<View style={styles.row}>
 					<Text bold size={32} _style={[styles.title]}>{title}</Text>
-					<Button height={40} padded onPress={() => saveAction(story)}>
+					<Button
+						height={40}
+						padded
+						_style={{ marginTop: -10 }}
+						onPress={() => saveAction(story)}
+					>
 						<Icon
 							name={saved ? 'folder-remove' : 'clock'}
-							size={20}
+							size={24}
 							color={saved ? '#ff6b6b' : '#2980b9'}
 						/>
 					</Button>
@@ -86,13 +88,15 @@ const styles = StyleSheet.create({
 		flexWrap: 'wrap'
 	},
 	saveAction: {
-		paddingLeft: 20
+		paddingLeft: 20,
+		marginTop: -10
 	},
 	postInfo: {
 		paddingTop: 30
 	},
 	comments: {
-		padding: 10
+		padding: 10,
+		marginTop: -10
 	}
 })
 
