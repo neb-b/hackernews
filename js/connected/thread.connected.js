@@ -11,8 +11,10 @@ import Thread from '../components/thread'
 
 class ThreadView extends Component {
 	componentDidMount() {
-		const { story: { kids }, loadComments } = this.props
-		loadComments(kids)
+		const { comments, story: { id, kids }, loadComments } = this.props
+		if (!comments.length || comments[0].parent !== id) {
+			loadComments(kids)
+		}
 	}
 
 	render() {
