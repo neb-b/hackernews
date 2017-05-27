@@ -26,11 +26,13 @@ class TopicFilter extends Component {
 				>
 					<View style={styles.buttonText}>
 						<Text>{titles[topics.currentlySelected]}</Text>
-						<Icon
-							name={this.state.isCollapsed ? 'chevron-down' : 'chevron-up'}
-							size={20}
-							color={'black'}
-						/>
+						<View style={styles.dropDownIcon}>
+							<Icon
+								name={this.state.isCollapsed ? 'chevron-down' : 'chevron-up'}
+								size={20}
+								color={'black'}
+							/>
+						</View>
 					</View>
 				</Button>
 				<Collapsible collapsed={this.state.isCollapsed}>
@@ -38,8 +40,12 @@ class TopicFilter extends Component {
 						{topics.available.map(topic => {
 							const isSelected = topic === currentlySelected
 							return (
-								<View key={topic}>
+								<View
+									key={topic}
+									style={isSelected && styles.selectedContainer}
+								>
 									<Button
+										underlayColor="#169f8430"
 										_style={{ padding: 20 }}
 										onPress={() =>
 											!isSelected
@@ -71,10 +77,16 @@ const styles = StyleSheet.create({
 	buttonText: {
 		alignSelf: 'flex-end',
 		flexDirection: 'row',
-		padding: 5
+		paddingTop: 5
+	},
+	dropDownIcon: {
+		marginTop: -1
 	},
 	topic: {
 		textAlign: 'right'
+	},
+	selectedContainer: {
+		backgroundColor: '#169f8430'
 	},
 	selected: {
 		color: '#16a085'
