@@ -39,6 +39,7 @@ const Stories = ({
 							navigator={navigator}
 							viewIndex={viewIndex}
 							openSafari={openSafari}
+							height={height}
 						/>
 					)}
 				/>}
