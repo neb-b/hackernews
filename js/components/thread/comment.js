@@ -100,6 +100,4 @@ const styles = StyleSheet.create({
 	}
 })
 
-const htmlStyles = StyleSheet.create({})
-
 export default Comment
