@@ -45,13 +45,7 @@ class Comment extends Component {
 			<View>
 				{!deleted &&
 					<Button onPress={this._toggleComment.bind(this)}>
-						<View
-							style={[
-								!reply && styles.comment,
-								reply && styles.reply,
-								this.state.expanded && styles.extraPadding
-							]}
-						>
+						<View style={[!reply && styles.comment, reply && styles.reply]}>
 							<Text color="#999">
 								{`${by} `}
 								{moment(time * 1000).fromNow()}
@@ -84,12 +78,9 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderBottomColor: '#e2e2e2'
 	},
-	extraPadding: {
-		paddingBottom: 2
-	},
 	reply: {
-		marginTop: 20,
-		marginBottom: 10,
+		paddingTop: 10,
+		paddingBottom: 10,
 		marginLeft: 5,
 		paddingLeft: 10,
 		borderLeftWidth: 1,

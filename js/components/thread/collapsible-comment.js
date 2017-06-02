@@ -15,45 +15,51 @@ const CollapsibleComment = ({
 	commentChain,
 	loadReplies,
 	openSafari
-}) => (
-	<View style={expanded && styles.container}>
-		<Collapsible collapsed={!expanded}>
-			<View style={styles.commentBody}>
-				<HTMLView
-					value={text}
-					onLinkPress={url => openSafari(url)}
-					stylesheet={styles}
-				/>
-				{kids &&
-					kids.length &&
-					typeof kids[0] === 'number' &&
-					<LoadReplies
-						isLoading={fetchingRepliesFor === id}
-						loadReplies={loadReplies}
-						kids={kids}
-						commentChain={commentChain}
-						id={id}
-					/>}
-				{kids &&
-					kids.length &&
-					typeof kids[0] === 'object' &&
-					kids.map(comment => (
-						<Comment
-							key={comment.id}
-							reply
-							{...comment}
+}) => {
+	const replies = kids && kids.length
+	return (
+		<View style={expanded && styles.container}>
+			<Collapsible collapsed={!expanded}>
+				<View style={styles.commentBody}>
+					<HTMLView
+						value={text}
+						onLinkPress={url => openSafari(url)}
+						stylesheet={styles}
+					/>
+					{replies &&
+						typeof kids[0] === 'number' &&
+						<LoadReplies
+							isLoading={fetchingRepliesFor === id}
 							loadReplies={loadReplies}
-							fetchingRepliesFor={fetchingRepliesFor}
-						/>
-					))}
-			</View>
-		</Collapsible>
-	</View>
-)
+							kids={kids}
+							commentChain={commentChain}
+							id={id}
+						/>}
+					{replies &&
+						typeof kids[0] === 'object' &&
+						<View style={styles.repliesContainer}>
+							{kids.map(comment => (
+								<Comment
+									key={comment.id}
+									reply
+									{...comment}
+									loadReplies={loadReplies}
+									fetchingRepliesFor={fetchingRepliesFor}
+								/>
+							))}
+						</View>}
+				</View>
+			</Collapsible>
+		</View>
+	)
+}
 
 const styles = StyleSheet.create({
 	container: {
-		paddingBottom: 10
+		// paddingBottom: 10
+	},
+	repliesContainer: {
+		marginTop: 10
 	},
 	p: {
 		lineHeight: 18,
