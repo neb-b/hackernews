@@ -12,7 +12,7 @@ const LoadReplies = props => {
 				onPress={() => loadReplies(id, commentChain, kids)}
 			>
 				<Text bold _style={styles.buttonText} size={12}>
-					{isLoading && 'Loading'}
+					{isLoading && 'Loading...'}
 					{!isLoading && `${kids.length} repl${kids.length > 1 ? 'ies' : 'y'}`}
 				</Text>
 			</Button>
@@ -26,13 +26,7 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		paddingTop: 5,
-		paddingBottom: 5,
-		borderBottomWidth: 1,
-		borderTopWidth: 1,
-		borderLeftWidth: 1,
-		borderRightWidth: 1,
-		borderRadius: 5,
-		borderColor: '#c3c3c3'
+		paddingBottom: 5
 	},
 	buttonText: {
 		textAlign: 'center',
