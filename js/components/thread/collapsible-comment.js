@@ -22,7 +22,7 @@ const CollapsibleComment = ({
 			<Collapsible collapsed={!expanded}>
 				<View style={styles.commentBody}>
 					<HTMLView
-						value={text}
+						value={`<custom>${text}</custom>`}
 						onLinkPress={url => openSafari(url)}
 						stylesheet={styles}
 					/>
@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
 	},
 	repliesContainer: {
 		marginTop: 10
+	},
+	custom: {
+		// lineHeight: 1
 	},
 	p: {
 		lineHeight: 18,
