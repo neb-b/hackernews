@@ -64,7 +64,7 @@ const Story = ({
 							{descendants || 0} comments
 						</Text>
 						<View style={styles.chevronRight}>
-							<Icon name="chevron-right" size={64} color="#2980b9" />
+							<Icon name="chevron-right" size={24} color="#2980b9" />
 						</View>
 					</Link>
 				</View>
@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
 		flexDirection: 'row'
 	},
 	chevronRight: {
-		marginTop: -21,
-		marginRight: -15,
-		marginLeft: -20
+		marginTop: -1
+		// marginRight: -15,
+		// marginLeft: -20
 	}
 })
 
