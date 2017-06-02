@@ -65,7 +65,7 @@ class Comment extends Component {
 					</Button>}
 				{deleted &&
 					<View style={[!reply && styles.comment, reply && styles.reply]}>
-						<Text>{moment(time * 1000).fromNow()} - deleted</Text>
+						<Text color="#999">deleted - {moment(time * 1000).fromNow()}</Text>
 					</View>}
 			</View>
 		)
