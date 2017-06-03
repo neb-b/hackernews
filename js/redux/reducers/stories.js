@@ -23,7 +23,7 @@ const initialState = {
 
 export default handleActions(
 	{
-		LOAD_SETTINGS_SUCCESS: (state, { payload }) => {
+		[LOAD_SETTINGS_SUCCESS]: (state, { payload }) => {
 			const stories = payload.initialStories.stories || []
 			const savedStories = payload.initialStories.savedStories || []
 
@@ -49,11 +49,11 @@ export default handleActions(
 				stories: storiesWithAttrs
 			}
 		},
-		FETCH_TOPIC_STORIES_REQUEST: (state, { payload }) => ({
+		[FETCH_TOPIC_STORIES_REQUEST]: (state, { payload }) => ({
 			...state,
 			error: null
 		}),
-		FETCH_TOPIC_STORIES_SUCCESS: (state, { payload }) => {
+		[FETCH_TOPIC_STORIES_SUCCESS]: (state, { payload }) => {
 			return {
 				...state,
 				loading: false,
@@ -65,14 +65,14 @@ export default handleActions(
 				})
 			}
 		},
-		FETCH_TOPIC_STORIES_ERROR: (state, { payload }) => {
+		[FETCH_TOPIC_STORIES_ERROR]: (state, { payload }) => {
 			return {
 				...state,
 				loading: false,
 				error: payload.err
 			}
 		},
-		SAVE_STORY_SUCCESS: (state, { payload }) => {
+		[SAVE_STORY_SUCCESS]: (state, { payload }) => {
 			// load new storeis with correct "saved" attr
 			const savedStories = payload.savedStoryIds
 			const newStories = state.stories.map(story => {
@@ -85,7 +85,7 @@ export default handleActions(
 				stories: newStories
 			}
 		},
-		UN_SAVE_STORY_SUCCESS: (state, { payload }) => {
+		[UN_SAVE_STORY_SUCCESS]: (state, { payload }) => {
 			const savedStories = payload.savedStoryIds
 			const newStories = state.stories.map(story => {
 				return story.id === payload.story.id
@@ -97,35 +97,35 @@ export default handleActions(
 				stories: newStories
 			}
 		},
-		CHANGE_TOPIC_REQUEST: state => ({
+		[CHANGE_TOPIC_REQUEST]: state => ({
 			...state,
 			loading: true,
 			stories: []
 		}),
-		CHANGE_TOPIC_SUCCESS: (state, { payload: { stories } }) => ({
+		[CHANGE_TOPIC_SUCCESS]: (state, { payload: { stories } }) => ({
 			...state,
 			loading: false,
 			stories
 		}),
-		CHANGE_TOPIC_ERROR: (state, { payload }) => ({
+		[CHANGE_TOPIC_ERROR]: (state, { payload }) => ({
 			...state,
 			loading: false,
 			error: payload
 		}),
-		REFRESH_STORIES_REQUEST: (state, { payload }) => ({
+		[REFRESH_STORIES_REQUEST]: (state, { payload }) => ({
 			...state,
 			error: null,
 			loading: false,
 			refreshing: true
 		}),
-		REFRESH_STORIES_SUCCESS: (state, { payload: { newStories } }) => {
+		[REFRESH_STORIES_SUCCESS]: (state, { payload: { newStories } }) => {
 			return {
 				...state,
 				refreshing: false,
 				stories: newStories
 			}
 		},
-		REFRESH_STORIES_ERROR: (state, { payload }) => ({
+		[REFRESH_STORIES_ERROR]: (state, { payload }) => ({
 			...state,
 			loading: false,
 			error: payload

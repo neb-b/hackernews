@@ -1,4 +1,15 @@
 import { handleActions } from 'redux-actions'
+import {
+	LOAD_SETTINGS_SUCCESS,
+	FETCH_SAVED_STORIES_REQUEST,
+	FETCH_SAVED_STORIES_SUCCESS,
+	FETCH_SAVED_STORIES_ERROR,
+	SAVE_STORY_SUCCESS,
+	UN_SAVE_STORY_SUCCESS,
+	REFRESH_SAVED_STORIES_REQUEST,
+	REFRESH_SAVED_STORIES_SUCCESS,
+	REFRESH_SAVED_STORIES_ERROR
+} from '../constants'
 
 const initialState = {
 	loading: false,
@@ -9,7 +20,7 @@ const initialState = {
 
 export default handleActions(
 	{
-		LOAD_SETTINGS_SUCCESS: (state, { payload }) => {
+		[LOAD_SETTINGS_SUCCESS]: (state, { payload }) => {
 			const savedStories = payload.initialStories.savedStories || []
 			const newStories = savedStories.map(story =>
 				Object.assign(story, { saved: true })
@@ -21,12 +32,12 @@ export default handleActions(
 				savedStories: newStories
 			}
 		},
-		FETCH_SAVED_STORIES_REQUEST: (state, { payload }) => ({
+		[FETCH_SAVED_STORIES_REQUEST]: (state, { payload }) => ({
 			...state,
 			error: null,
 			loading: true
 		}),
-		FETCH_SAVED_STORIES_SUCCESS: (state, { payload }) => {
+		[FETCH_SAVED_STORIES_SUCCESS]: (state, { payload }) => {
 			return {
 				...state,
 				loading: false,
@@ -35,14 +46,14 @@ export default handleActions(
 				)
 			}
 		},
-		FETCH_SAVED_STORIES_ERROR: (state, { payload }) => {
+		[FETCH_SAVED_STORIES_ERROR]: (state, { payload }) => {
 			return {
 				...state,
 				loading: false,
 				error: payload.error
 			}
 		},
-		SAVE_STORY_SUCCESS: (state, { payload: { story } }) => {
+		[SAVE_STORY_SUCCESS]: (state, { payload: { story } }) => {
 			let newStories = state.savedStories.slice()
 			newStories.unshift(story)
 
@@ -51,7 +62,7 @@ export default handleActions(
 				savedStories: newStories
 			}
 		},
-		UN_SAVE_STORY_SUCCESS: (state, { payload: { story: activeStory } }) => {
+		[UN_SAVE_STORY_SUCCESS]: (state, { payload: { story: activeStory } }) => {
 			const newStories = state.savedStories.filter(story => {
 				return story.id !== activeStory.id
 			})
@@ -60,17 +71,17 @@ export default handleActions(
 				savedStories: newStories
 			}
 		},
-		REFRESH_SAVED_STORIES_REQUEST: (state, { payload }) => ({
+		[REFRESH_SAVED_STORIES_REQUEST]: (state, { payload }) => ({
 			...state,
 			loading: false,
 			refreshing: true
 		}),
-		REFRESH_SAVED_STORIES_SUCCESS: (state, { payload: { stories } }) => ({
+		[REFRESH_SAVED_STORIES_SUCCESS]: (state, { payload: { stories } }) => ({
 			...state,
 			refreshing: false,
 			stories
 		}),
-		REFRESH_SAVED_STORIES_ERROR: (state, { payload }) => ({
+		[REFRESH_SAVED_STORIES_ERROR]: (state, { payload }) => ({
 			...state,
 			loading: false,
 			error: payload

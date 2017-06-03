@@ -36,7 +36,7 @@ const initialState = {
 
 export default handleActions(
 	{
-		LOAD_SETTINGS_SUCCESS: (
+		[LOAD_SETTINGS_SUCCESS]: (
 			state,
 			{ payload: { settings, savedStoryIds = [] } }
 		) => {
@@ -47,12 +47,12 @@ export default handleActions(
 				savedStoryIds: savedStoryIds
 			}
 		},
-		LOAD_SETTINGS_ERROR: (state, { payload }) => ({
+		[LOAD_SETTINGS_ERROR]: (state, { payload }) => ({
 			...state,
 			loading: false,
 			error: payload
 		}),
-		CHANGE_VIEW: (state, { payload }) => {
+		[CHANGE_VIEW]: (state, { payload }) => {
 			const { viewingStories, topics: { currentlySelected } } = state
 			const newViewingStoriesBool = !state.viewingStories
 
@@ -65,19 +65,19 @@ export default handleActions(
 				title
 			}
 		},
-		SAVE_STORY_SUCCESS: (state, { payload }) => {
+		[SAVE_STORY_SUCCESS]: (state, { payload }) => {
 			return {
 				...state,
 				savedStoryIds: payload.savedStoryIds
 			}
 		},
-		UN_SAVE_STORY_SUCCESS: (state, { payload }) => {
+		[UN_SAVE_STORY_SUCCESS]: (state, { payload }) => {
 			return {
 				...state,
 				savedStoryIds: payload.savedStoryIds
 			}
 		},
-		CHANGE_TOPIC_REQUEST: (state, { payload: { newTopic } }) => ({
+		[CHANGE_TOPIC_REQUEST]: (state, { payload: { newTopic } }) => ({
 			...state,
 			title: getTitle(newTopic),
 			topics: { available: state.topics.available, currentlySelected: newTopic }
