@@ -13,7 +13,7 @@ Checkout the Node.js server [here](https://github.com/seanyesmunt/hackernews-ser
 
 2. `npm i`
 
-3. `react-native-link`
+3. `react-native link`
 
 4. `react-native run-ios`
 
