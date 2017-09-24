@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "hackernews.app"
-               BlueprintName = "hackernews"
-               ReferencedContainer = "container:hackernews.xcodeproj">
+               BuildableName = "hnews.app"
+               BlueprintName = "hnews"
+               ReferencedContainer = "container:hnews.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "hackernewsTests.xctest"
-               BlueprintName = "hackernewsTests"
-               ReferencedContainer = "container:hackernews.xcodeproj">
+               BuildableName = "hnewsTests.xctest"
+               BlueprintName = "hnewsTests"
+               ReferencedContainer = "container:hnews.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "hackernewsTests.xctest"
-               BlueprintName = "hackernewsTests"
-               ReferencedContainer = "container:hackernews.xcodeproj">
+               BuildableName = "hnewsTests.xctest"
+               BlueprintName = "hnewsTests"
+               ReferencedContainer = "container:hnews.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,16 +71,16 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "hackernews.app"
-            BlueprintName = "hackernews"
-            ReferencedContainer = "container:hackernews.xcodeproj">
+            BuildableName = "hnews.app"
+            BlueprintName = "hnews"
+            ReferencedContainer = "container:hnews.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "hackernews.app"
-            BlueprintName = "hackernews"
-            ReferencedContainer = "container:hackernews.xcodeproj">
+            BuildableName = "hnews.app"
+            BlueprintName = "hnews"
+            ReferencedContainer = "container:hnews.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "hackernews.app"
-            BlueprintName = "hackernews"
-            ReferencedContainer = "container:hackernews.xcodeproj">
+            BuildableName = "hnews.app"
+            BlueprintName = "hnews"
+            ReferencedContainer = "container:hnews.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
