@@ -1,47 +1,47 @@
-import React from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import List from '../generic/list'
-import Comment from './comment'
+import React from "react";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
+import List from "../generic/list";
+import Comment from "./comment";
 
 const Comments = ({
-	comments,
-	refreshing,
-	refreshThread,
-	renderHeader,
-	loadComments,
-	fetchingReplies,
-	fetchingRepliesFor,
-	loadReplies,
-	toggleComment,
-	openSafari,
-	height
+  comments,
+  refreshing,
+  refreshThread,
+  renderHeader,
+  loadComments,
+  fetchingReplies,
+  fetchingRepliesFor,
+  loadReplies,
+  toggleComment,
+  openSafari,
+  height
 }) => {
-	return (
-		<View>
-			<List
-				_style={{ height, paddingBottom: 60 }}
-				header={renderHeader}
-				refreshing={refreshing}
-				refresh={() => refreshThread(comments.map(comment => comment.id))}
-				items={comments}
-				renderItem={({ item: comment }) => (
-					<Comment
-						{...comment}
-						loadComments={loadComments}
-						fetchingReplies={fetchingReplies}
-						fetchingRepliesFor={fetchingRepliesFor}
-						loadReplies={loadReplies}
-						toggleComment={toggleComment}
-						openSafari={openSafari}
-					/>
-				)}
-			/>
-		</View>
-	)
-}
+  return (
+    <View>
+      <List
+        _style={{ height, paddingBottom: 60 }}
+        header={renderHeader}
+        refreshing={refreshing}
+        refresh={() => refreshThread(comments.map(comment => comment.id))}
+        items={comments}
+        renderItem={({ item: comment }) => (
+          <Comment
+            {...comment}
+            loadComments={loadComments}
+            fetchingReplies={fetchingReplies}
+            fetchingRepliesFor={fetchingRepliesFor}
+            loadReplies={loadReplies}
+            toggleComment={toggleComment}
+            openSafari={openSafari}
+          />
+        )}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-	comments: {}
-})
+  comments: {}
+});
 
-export default Comments
+export default Comments;
